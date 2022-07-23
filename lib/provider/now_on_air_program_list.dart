@@ -32,14 +32,8 @@ final nowOnAirProgramListProvider =
         .toList();
 
     final program = programs.firstWhereOrNull((element) {
-      final startTimeWithT =
-          '${element.startTime.substring(0, 8)}T${element.startTime.substring(8)}';
-      final endTimeWithT =
-          '${element.endTime.substring(0, 8)}T${element.endTime.substring(8)}';
-      final startDate = DateTime.parse(startTimeWithT);
-      final endDate = DateTime.parse(endTimeWithT);
-      return startDate.isAtSameMomentAs(now) ||
-          (startDate.isBefore(now) && endDate.isAfter(now));
+      return element.startDate.isAtSameMomentAs(now) ||
+          (element.startDate.isBefore(now) && element.endDate.isAfter(now));
     });
     if (program != null) {
       result[stationId] = program;

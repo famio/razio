@@ -23,4 +23,11 @@ class Program {
   String endTime;
   String title;
   String img;
+
+  late String startTimeWithT =
+      '${startTime.substring(0, 8)}T${startTime.substring(8)}';
+  late String endTimeWithT =
+      '${endTime.substring(0, 8)}T${endTime.substring(8)}';
+  late final startDate = DateTime.parse(startTimeWithT);
+  late final endDate = DateTime.parse(endTimeWithT);
 }
