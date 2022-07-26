@@ -23,11 +23,13 @@ class _ProgramList extends ConsumerWidget {
         final index = programs
             .indexWhere((element) => element.startTime == program.startTime);
         if (index == -1) return;
+        final resultIndex =
+            index + 1 >= programs.length - 1 ? index : index + 1;
         if (_controller.isAttached) {
-          _controller.jumpTo(index: index);
+          _controller.jumpTo(index: resultIndex);
           ref.read(_isReadyProvider.notifier).state = true;
         } else {
-          _pendingIndex = index;
+          _pendingIndex = resultIndex;
         }
       });
     });
