@@ -8,13 +8,24 @@ import 'package:xml/xml.dart';
 final selectedStationTodaysProgramListProvider =
     FutureProvider<List<Program>?>((ref) async {
   final selectedStationId = ref.watch(selectedStationIdProvider);
+  if (selectedStationId == null) return null;
+
   final now = DateTime.now();
   final outputFormat = DateFormat('yyyyMMdd');
-  String today = outputFormat
+  final today = outputFormat
       .format(now.hour < 5 ? now.subtract(const Duration(days: 1)) : now);
-  if (selectedStationId == null) return null;
+  final tomorrow = outputFormat.format(now.hour < 5
+      ? now.subtract(const Duration(days: 2))
+      : now.subtract(const Duration(days: 1)));
+  final todaysProgramList = await _fetchProgramList(today, selectedStationId);
+  final tomorrowsProgramList =
+      await _fetchProgramList(tomorrow, selectedStationId);
+  return todaysProgramList + tomorrowsProgramList;
+});
+
+Future<List<Program>> _fetchProgramList(String day, String stationId) async {
   final url = Uri.parse(
-      'https://radiko.jp/v3/program/station/date/$today/$selectedStationId.xml');
+      'https://radiko.jp/v3/program/station/date/$day/$stationId.xml');
   final request = http.Request('get', url);
   final response = await request.send();
   if (response.statusCode != 200) {
@@ -26,4 +37,4 @@ final selectedStationTodaysProgramListProvider =
       .findElements('prog')
       .map<Program>((e) => Program.fromElement(e))
       .toList();
-});
+}
