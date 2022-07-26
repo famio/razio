@@ -28,16 +28,20 @@ class MainPage extends ConsumerWidget {
     final stations = ref.watch(stationListProvider);
 
     return Scaffold(
-      appBar: AppBar(title: const Text(title)),
       body: stations.when(
         data: (data) {
-          return Column(
-            children: [
-              const _ProgramThumbnail(),
-              _StationList(data),
-              const Expanded(child: _ProgramList()),
-              const _PlayController(),
-            ],
+          return SafeArea(
+            child: Column(
+              children: [
+                const _ProgramThumbnail(),
+                const SizedBox(
+                  height: 8,
+                ),
+                const Expanded(child: _ProgramList()),
+                _StationList(data),
+                const _PlayController(),
+              ],
+            ),
           );
         },
         error: (error, stack) => Text('$error'),
