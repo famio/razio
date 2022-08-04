@@ -1,9 +1,13 @@
+import 'dart:async';
+
 import 'package:collection/collection.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fudiko/entity/program.dart';
 import 'package:fudiko/provider/auth_provider.dart';
 import 'package:http/http.dart' as http;
 import 'package:xml/xml.dart';
+
+Timer? _timer;
 
 final nowOnAirProgramListProvider =
     FutureProvider<Map<String, Program>>((ref) async {
@@ -39,5 +43,35 @@ final nowOnAirProgramListProvider =
       result[stationId] = program;
     }
   });
+
+  _setRefreshTimer(ref, result.values.toList());
+
   return result;
 });
+
+void _setRefreshTimer(Ref ref, List<Program> programs) {
+  final now = DateTime.now();
+  final program = programs.sortedBy((element) => element.endTime).first;
+  if (program.endDate.isAfter(now)) {
+    final diff = program.endDate.difference(now);
+    print('diff: ${diff.inSeconds}');
+    if (_timer != null && _timer!.isActive) {
+      _timer!.cancel();
+    }
+    _timer = Timer(diff, () => ref.refresh(nowOnAirProgramListProvider));
+  } else {
+    ref.refresh(nowOnAirProgramListProvider);
+  }
+}
+
+final nowOnAirProgramProvider = FutureProvider.family<Program?, String>(
+  (ref, stationId) {
+    final programlist = ref.watch(nowOnAirProgramListProvider);
+    return programlist.maybeWhen(
+        data: (data) {
+          print('title: ${data[stationId]?.title}');
+          return data[stationId];
+        },
+        orElse: () => null);
+  },
+);

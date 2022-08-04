@@ -1,11 +1,7 @@
-import 'dart:async';
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fudiko/entity/program.dart';
 import 'package:fudiko/provider/now_on_air_program_list.dart';
 import 'package:fudiko/provider/selected_station_provider.dart';
-
-Timer? _timer;
 
 final selectedStationOnAirProgramProvider =
     FutureProvider<Program?>((ref) async {
@@ -30,18 +26,5 @@ final selectedStationOnAirProgramProvider =
   final selectedStationId = ref.watch(selectedStationIdProvider);
   if (selectedStationId == null) return null;
   final programs = await ref.watch(nowOnAirProgramListProvider.future);
-  final program = programs[selectedStationId];
-  if (program == null) return null;
-
-  final now = DateTime.now();
-  if (program.endDate.isAfter(now)) {
-    final diff = program.endDate.difference(now);
-    if (_timer != null && _timer!.isActive) {
-      _timer!.cancel();
-    }
-    _timer = Timer(diff, () => ref.refresh(nowOnAirProgramListProvider));
-  } else {
-    ref.refresh(nowOnAirProgramListProvider);
-  }
-  return program;
+  return programs[selectedStationId];
 });

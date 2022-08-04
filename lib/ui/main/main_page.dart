@@ -2,17 +2,20 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fudiko/entity/program.dart';
-import 'package:fudiko/entity/station.dart';
 import 'package:fudiko/provider/audio_player_provider.dart';
+import 'package:fudiko/provider/now_on_air_program_list.dart';
+import 'package:fudiko/provider/pageview_controller_provider.dart';
 import 'package:fudiko/provider/play_controller_provider.dart';
+import 'package:fudiko/provider/program_list_provider.dart';
 import 'package:fudiko/provider/selected_station_on_air_program_provider.dart';
 import 'package:fudiko/provider/selected_station_provider.dart';
-import 'package:fudiko/provider/selected_station_todays_program_list_provider.dart';
 import 'package:fudiko/provider/station_list_provider.dart';
 import 'package:intl/intl.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
+import 'dart:ui' as ui;
 
 part 'play_controller.dart';
+part 'station_page_view.dart';
 part 'program_thumbnail.dart';
 part 'program_list.dart';
 part 'station_list.dart';
@@ -26,20 +29,17 @@ class MainPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final stations = ref.watch(stationListProvider);
-
     return Scaffold(
       body: stations.when(
         data: (data) {
           return SafeArea(
             child: Column(
-              children: [
-                const _ProgramThumbnail(),
-                const SizedBox(
-                  height: 8,
+              children: const [
+                Expanded(
+                  child: _StationPageView(),
                 ),
-                const Expanded(child: _ProgramList()),
-                _StationList(data),
-                const _PlayController(),
+                _StationList(),
+                _PlayController(),
               ],
             ),
           );

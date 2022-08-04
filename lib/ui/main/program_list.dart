@@ -1,128 +1,136 @@
 part of 'main_page.dart';
 
-final _controller = ItemScrollController();
-final _itemPositionsListener = ItemPositionsListener.create();
-int? _pendingIndex;
-
-final _isReadyProvider = StateProvider<bool>(((ref) => false));
+final _isReadyProvider = StateProvider.autoDispose.family<bool, String>(
+  (ref, arg) => false,
+);
 
 class _ProgramList extends ConsumerWidget {
-  const _ProgramList({Key? key}) : super(key: key);
+  const _ProgramList({Key? key, required this.stationId}) : super(key: key);
   static final dateFormat = DateFormat.Hm();
+  final String stationId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.listen<AsyncValue<Program?>>(selectedStationOnAirProgramProvider,
+    final programList = ref.watch(programListProvider(stationId));
+    final controller = ItemScrollController();
+    final isReady = ref.watch(_isReadyProvider(stationId));
+
+    final itemPositionsListener = ItemPositionsListener.create();
+
+    ref.listen<AsyncValue<Program?>>(nowOnAirProgramProvider(stationId),
         (previous, next) async {
-      next.whenData((program) async {
-        ref.read(_isReadyProvider.notifier).state = false;
+      if (!isReady) return;
+      next.whenData((program) {
         if (program == null) return;
-        final programs =
-            await ref.read(selectedStationTodaysProgramListProvider.future);
+        if (previous?.value?.id == program.id) return;
+        final programs = programList.value;
         if (programs == null) return;
         final index = programs
-            .indexWhere((element) => element.startTime == program.startTime);
+            .map((e) => e.startTime)
+            .toList()
+            .indexOf(program.startTime);
         if (index == -1) return;
         final resultIndex =
             index + 1 >= programs.length - 1 ? index : index + 1;
-        if (_controller.isAttached) {
-          _controller.jumpTo(index: resultIndex);
-          ref.read(_isReadyProvider.notifier).state = true;
-        } else {
-          _pendingIndex = resultIndex;
-        }
+        controller.scrollTo(
+          index: resultIndex,
+          duration: const Duration(milliseconds: 200),
+        );
       });
     });
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (!_controller.isAttached) return;
-      if (_pendingIndex == null) return;
-      _controller.jumpTo(index: _pendingIndex!);
-      _pendingIndex = null;
-      ref.read(_isReadyProvider.notifier).state = true;
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      if (!controller.isAttached) return;
+      final program = await ref.read(nowOnAirProgramProvider(stationId).future);
+      if (program == null) {
+        ref.read(_isReadyProvider(stationId).notifier).state = true;
+        return;
+      }
+      final programs = await ref.read(programListProvider(stationId).future);
+      final index = programs
+          .indexWhere((element) => element.startTime == program.startTime);
+      if (index == -1) return;
+      final resultIndex = index + 1 >= programs.length - 1 ? index : index + 1;
+      controller.jumpTo(index: resultIndex);
+      ref.read(_isReadyProvider(stationId).notifier).state = true;
     });
 
-    final programList = ref.watch(selectedStationTodaysProgramListProvider);
     return programList.when(
         data: (data) {
-          if (data == null) {
-            return const Text('null');
-          } else {
-            return Opacity(
-              opacity: ref.watch(_isReadyProvider) ? 1 : 0,
-              child: ScrollablePositionedList.separated(
-                  itemScrollController: _controller,
-                  itemPositionsListener: _itemPositionsListener,
-                  separatorBuilder: (context, index) => const SizedBox(
-                        height: 8,
-                      ),
-                  itemCount: data.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return SizedBox(
-                      height: 126 / 48 * 30,
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(
-                            width: 8,
-                          ),
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(8),
-                            child: SizedBox(
-                              width: 126,
-                              child: AspectRatio(
-                                aspectRatio: 48 / 30,
-                                child: CachedNetworkImage(
-                                  imageUrl: data[index].img,
-                                  errorWidget: (context, url, error) =>
-                                      const Icon(Icons.error),
-                                  fadeOutDuration: const Duration(seconds: 0),
-                                  fadeInDuration: const Duration(seconds: 0),
-                                ),
+          return Opacity(
+            opacity: isReady ? 1 : 0,
+            child: ScrollablePositionedList.separated(
+                itemScrollController: controller,
+                itemPositionsListener: itemPositionsListener,
+                separatorBuilder: (context, index) => const SizedBox(
+                      height: 8,
+                    ),
+                itemCount: data.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return SizedBox(
+                    height: 126 / 48 * 30,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(
+                          width: 8,
+                        ),
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: SizedBox(
+                            width: 126,
+                            child: AspectRatio(
+                              aspectRatio: 48 / 30,
+                              child: CachedNetworkImage(
+                                imageUrl: data[index].img,
+                                errorWidget: (context, url, error) =>
+                                    const Icon(Icons.error),
+                                fadeOutDuration: const Duration(seconds: 0),
+                                fadeInDuration: const Duration(seconds: 0),
                               ),
                             ),
                           ),
-                          const SizedBox(
-                            width: 8,
-                          ),
-                          Flexible(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  '${dateFormat.format(data[index].startDate)} ~',
+                        ),
+                        const SizedBox(
+                          width: 8,
+                        ),
+                        Flexible(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                '${dateFormat.format(data[index].startDate)} ~',
+                                style: const TextStyle(
+                                  color: Colors.black87,
+                                  height: 1,
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 8,
+                              ),
+                              Expanded(
+                                child: Text(
+                                  data[index].title,
                                   style: const TextStyle(
-                                    color: Colors.black87,
+                                    fontSize: 17,
                                     height: 1,
                                   ),
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 3,
                                 ),
-                                const SizedBox(
-                                  height: 8,
-                                ),
-                                Expanded(
-                                  child: Text(
-                                    data[index].title,
-                                    style: const TextStyle(
-                                      fontSize: 17,
-                                      height: 1,
-                                    ),
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 3,
-                                  ),
-                                ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
-                          const SizedBox(
-                            width: 8,
-                          ),
-                        ],
-                      ),
-                    );
-                  }),
-            );
-          }
+                        ),
+                        const SizedBox(
+                          width: 8,
+                        ),
+                      ],
+                    ),
+                  );
+                }),
+          );
         },
         error: (error, trace) => const Text('error'),
         loading: () => const Text(''));

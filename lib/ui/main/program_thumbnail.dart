@@ -1,22 +1,25 @@
 part of 'main_page.dart';
 
 class _ProgramThumbnail extends ConsumerWidget {
-  const _ProgramThumbnail({Key? key}) : super(key: key);
+  const _ProgramThumbnail({Key? key, required this.stationId})
+      : super(key: key);
+
+  final String stationId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final onAirProgram = ref.watch(selectedStationOnAirProgramProvider);
+    final program = ref.watch(nowOnAirProgramProvider(stationId));
     return AspectRatio(
       aspectRatio: 48 / 30,
-      child: onAirProgram.when(
-        data: (data) {
-          if (data == null) {
+      child: program.when(
+        data: (program) {
+          if (program == null) {
             return const ColoredBox(
               color: Colors.transparent,
             );
           } else {
             return CachedNetworkImage(
-              imageUrl: data.img,
+              imageUrl: program.img,
               errorWidget: (context, url, error) => const Icon(Icons.error),
               fadeOutDuration: const Duration(seconds: 0),
               fadeInDuration: const Duration(seconds: 0),
