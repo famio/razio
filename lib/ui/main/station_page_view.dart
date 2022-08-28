@@ -1,7 +1,7 @@
 part of 'main_page.dart';
 
 class _StationPageView extends ConsumerWidget {
-  const _StationPageView({Key? key}) : super(key: key);
+  const _StationPageView();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

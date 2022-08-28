@@ -8,14 +8,18 @@ const _textStyle = TextStyle(
 );
 
 class _StationList extends ConsumerWidget {
-  const _StationList({Key? key}) : super(key: key);
+  const _StationList();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ref.listen<String?>(selectedStationIdProvider, (previous, next) {
-      if (next == null) return;
+      if (next == null) {
+        return;
+      }
       final stations = ref.read(stationListProvider).value;
-      if (stations == null) return;
+      if (stations == null) {
+        return;
+      }
       final index = stations.map((e) => e.id).toList().indexOf(next);
       final textSize = _textSize(stations[index].name, _textStyle);
       final screenSize = MediaQuery.of(context).size;
@@ -69,10 +73,10 @@ class _StationList extends ConsumerWidget {
 }
 
 Size _textSize(String text, TextStyle style) {
-  final TextPainter textPainter = TextPainter(
+  final textPainter = TextPainter(
     text: TextSpan(text: text, style: style),
     maxLines: 1,
     textDirection: ui.TextDirection.ltr,
-  )..layout(minWidth: 0, maxWidth: double.infinity);
+  )..layout();
   return textPainter.size;
 }

@@ -1,11 +1,13 @@
 # This is a generated file; do not edit or check into version control.
-audio_session=/Users/famio/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/audio_session-0.1.8/
+audio_service=/Users/famio/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/audio_service-0.18.7/
+audio_service_web=/Users/famio/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/audio_service_web-0.1.1/
+audio_session=/Users/famio/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/audio_session-0.1.10/
 just_audio=/Users/famio/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/just_audio-0.9.28/
 just_audio_web=/Users/famio/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/just_audio_web-0.4.7/
 path_provider=/Users/famio/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-2.0.11/
-path_provider_android=/Users/famio/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_android-2.0.16/
-path_provider_ios=/Users/famio/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_ios-2.0.10/
+path_provider_android=/Users/famio/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_android-2.0.20/
+path_provider_ios=/Users/famio/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_ios-2.0.11/
 path_provider_linux=/Users/famio/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_linux-2.1.7/
 path_provider_macos=/Users/famio/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_macos-2.0.6/
-path_provider_windows=/Users/famio/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_windows-2.1.0/
-sqflite=/Users/famio/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/sqflite-2.0.2+1/
+path_provider_windows=/Users/famio/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_windows-2.1.2/
+sqflite=/Users/famio/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/sqflite-2.0.3+1/

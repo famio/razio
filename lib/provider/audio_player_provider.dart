@@ -7,40 +7,38 @@ import 'package:just_audio/just_audio.dart';
 final audioPlayerProvier = Provider((ref) {
   final audioPlayer = AudioPlayer();
 
-  ref.listen<AsyncValue<String?>>(selectedStationStreamUrlProvider,
-      (previous, next) {
-    next.when(
+  ref
+    ..listen<AsyncValue<String?>>(selectedStationStreamUrlProvider,
+        (previous, next) {
+      next.when(
         data: (data) async {
-          if (data == null) return;
+          if (data == null) {
+            return;
+          }
           ref.read(authProvider).whenData((authInfo) async {
-            final Map<String, String> header = {
-              "X-Radiko-Authtoken": authInfo.authToken,
+            final header = <String, String>{
+              'X-Radiko-Authtoken': authInfo.authToken,
             };
-            try {
-              await audioPlayer.setUrl(data, headers: header);
-            } catch (_) {}
+            await audioPlayer.setUrl(data, headers: header);
             if (ref.read(isPlayingProvider) && !audioPlayer.playing) {
-              try {
-                await audioPlayer.play();
-              } catch (_) {}
+              await audioPlayer.play();
             }
           });
         },
         error: (error, trace) {},
-        loading: () {});
-  });
-  ref.listen<bool>(isPlayingProvider, (previous, next) async {
-    if (next) {
-      ref.read(selectedStationStreamUrlProvider).whenData((value) async {
-        if (value == null) return;
-        try {
+        loading: () {},
+      );
+    })
+    ..listen<bool>(isPlayingProvider, (previous, next) async {
+      if (next) {
+        ref.read(selectedStationStreamUrlProvider).whenData((value) async {
+          if (value == null) {
+            return;
+          }
           await audioPlayer.play();
-        } catch (_) {}
-      });
-    } else {
-      try {
+        });
+      } else {
         await audioPlayer.stop();
-      } catch (_) {}
-    }
-  });
+      }
+    });
 });

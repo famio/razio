@@ -20,6 +20,6 @@ final stationListProvider = FutureProvider<List<Station>>((ref) async {
   }
   return root
       .findElements('station')
-      .map<Station>((e) => Station.fromElement(e))
+      .map<Station>(Station.fromElement)
       .toList();
 });

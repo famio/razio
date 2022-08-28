@@ -1,3 +1,5 @@
+import 'dart:ui' as ui;
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -12,16 +14,15 @@ import 'package:fudiko/provider/selected_station_provider.dart';
 import 'package:fudiko/provider/station_list_provider.dart';
 import 'package:intl/intl.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
-import 'dart:ui' as ui;
 
 part 'play_controller.dart';
-part 'station_page_view.dart';
-part 'program_thumbnail.dart';
 part 'program_list.dart';
+part 'program_thumbnail.dart';
 part 'station_list.dart';
+part 'station_page_view.dart';
 
 class MainPage extends ConsumerWidget {
-  const MainPage({Key? key}) : super(key: key);
+  const MainPage({super.key});
 
   static const String title = 'fudiko';
   static const String routeName = 'station_list_page';

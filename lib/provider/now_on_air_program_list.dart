@@ -23,7 +23,7 @@ final nowOnAirProgramListProvider =
   final root = XmlDocument.parse(body).findAllElements('stations').first;
 
   final now = DateTime.now();
-  var result = <String, Program>{};
+  final result = <String, Program>{};
   root.findElements('station').forEach((element) {
     final stationId =
         element.attributes.firstWhere((p0) => p0.name == XmlName('id')).value;
@@ -32,7 +32,7 @@ final nowOnAirProgramListProvider =
         .findElements('progs')
         .first
         .findElements('prog')
-        .map<Program>((e) => Program.fromElement(e))
+        .map<Program>(Program.fromElement)
         .toList();
 
     final program = programs.firstWhereOrNull((element) {
@@ -54,7 +54,6 @@ void _setRefreshTimer(Ref ref, List<Program> programs) {
   final program = programs.sortedBy((element) => element.endTime).first;
   if (program.endDate.isAfter(now)) {
     final diff = program.endDate.difference(now);
-    print('diff: ${diff.inSeconds}');
     if (_timer != null && _timer!.isActive) {
       _timer!.cancel();
     }
@@ -68,10 +67,10 @@ final nowOnAirProgramProvider = FutureProvider.family<Program?, String>(
   (ref, stationId) {
     final programlist = ref.watch(nowOnAirProgramListProvider);
     return programlist.maybeWhen(
-        data: (data) {
-          print('title: ${data[stationId]?.title}');
-          return data[stationId];
-        },
-        orElse: () => null);
+      data: (data) {
+        return data[stationId];
+      },
+      orElse: () => null,
+    );
   },
 );

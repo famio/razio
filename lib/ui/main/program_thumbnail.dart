@@ -1,8 +1,7 @@
 part of 'main_page.dart';
 
 class _ProgramThumbnail extends ConsumerWidget {
-  const _ProgramThumbnail({Key? key, required this.stationId})
-      : super(key: key);
+  const _ProgramThumbnail({required this.stationId});
 
   final String stationId;
 
@@ -20,9 +19,10 @@ class _ProgramThumbnail extends ConsumerWidget {
           } else {
             return CachedNetworkImage(
               imageUrl: program.img,
-              errorWidget: (context, url, error) => const Icon(Icons.error),
-              fadeOutDuration: const Duration(seconds: 0),
-              fadeInDuration: const Duration(seconds: 0),
+              errorWidget: (context, url, dynamic error) =>
+                  const Icon(Icons.error),
+              fadeOutDuration: Duration.zero,
+              fadeInDuration: Duration.zero,
             );
           }
         },

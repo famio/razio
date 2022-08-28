@@ -5,15 +5,20 @@ import 'package:http/http.dart' as http;
 
 final selectedStationStreamUrlProvider = FutureProvider<String?>((ref) async {
   final selectedStationId = ref.watch(selectedStationIdProvider);
-  if (selectedStationId == null) return null;
+  if (selectedStationId == null) {
+    return null;
+  }
   final authinfo = ref.watch(authProvider);
   final authinfoData = authinfo.asData;
-  if (authinfoData == null) return null;
+  if (authinfoData == null) {
+    return null;
+  }
   final url = Uri.parse(
-      'http://f-radiko.smartstream.ne.jp/$selectedStationId/_definst_/simul-stream.stream/playlist.m3u8');
+    'http://f-radiko.smartstream.ne.jp/$selectedStationId/_definst_/simul-stream.stream/playlist.m3u8',
+  );
   final request = http.Request('get', url);
   final header = {
-    "X-Radiko-AuthToken": authinfoData.value.authToken,
+    'X-Radiko-AuthToken': authinfoData.value.authToken,
   };
   request.headers.clear();
   request.headers.addAll(header);

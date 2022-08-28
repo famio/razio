@@ -20,7 +20,7 @@ class Auth2Api {
     final auth2Header = {
       'content-type': 'application/json',
       'X-Radiko-AuthToken': authToken,
-      "X-Radiko-PartialKey": partialKey,
+      'X-Radiko-PartialKey': partialKey,
       'X-Radiko-User': 'dummy_user',
       'X-Radiko-Device': 'pc'
     };
