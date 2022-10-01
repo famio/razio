@@ -22,3 +22,6 @@ doc/api/
 
 # macOS
 .DS_Store
+
+# FVM
+.fvm/flutter_sdk
