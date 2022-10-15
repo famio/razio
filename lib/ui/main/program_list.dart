@@ -114,10 +114,7 @@ class _ProgramList extends ConsumerWidget {
                         children: [
                           Text(
                             '${dateFormat.format(data[index].startDate)} ~',
-                            style: const TextStyle(
-                              color: Colors.black87,
-                              height: 1,
-                            ),
+                            style: AppTextStyle.bodySmall(context),
                           ),
                           const SizedBox(
                             height: 8,
@@ -125,10 +122,7 @@ class _ProgramList extends ConsumerWidget {
                           Expanded(
                             child: Text(
                               data[index].title,
-                              style: const TextStyle(
-                                fontSize: 17,
-                                height: 1,
-                              ),
+                              style: AppTextStyle.bodyMedium(context),
                               overflow: TextOverflow.ellipsis,
                               maxLines: 3,
                             ),

@@ -14,7 +14,6 @@ class _PlayController extends ConsumerWidget {
         children: [
           const Divider(
             height: 1,
-            color: Colors.black,
           ),
           Row(
             children: [
@@ -35,7 +34,7 @@ class _PlayController extends ConsumerWidget {
                     data: (data) => data == null ? '' : data.title,
                     orElse: () => '',
                   ),
-                  style: const TextStyle(fontSize: 20),
+                  style: AppTextStyle.titleMedium(context),
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
                 ),

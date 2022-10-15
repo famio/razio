@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fudiko/app_text_style.dart';
 import 'package:fudiko/ui/main/main_page.dart';
 
 void main() {
@@ -17,9 +18,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Fudiko',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: AppThemeData.light(),
+      darkTheme: AppThemeData.dark(),
       home: const MainPage(),
     );
   }

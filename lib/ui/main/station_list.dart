@@ -50,8 +50,8 @@ class _StationList extends ConsumerWidget {
                   style: _textStyle.copyWith(
                     color:
                         data[index].id == ref.watch(selectedStationIdProvider)
-                            ? Colors.black
-                            : Colors.grey,
+                            ? AppColor.textPrimary(context)
+                            : AppColor.textSecondary(context),
                   ),
                 ),
                 onTap: () {

@@ -3,6 +3,8 @@ import 'dart:ui' as ui;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fudiko/app_color.dart';
+import 'package:fudiko/app_text_style.dart';
 import 'package:fudiko/entity/program.dart';
 import 'package:fudiko/provider/audio_player_provider.dart';
 import 'package:fudiko/provider/now_on_air_program_list.dart';
