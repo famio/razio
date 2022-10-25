@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fudiko/provider/auth_provider.dart';
-import 'package:fudiko/provider/selected_station_provider.dart';
+import 'package:fudiko/provider/selected_station_id_provider.dart';
 import 'package:http/http.dart' as http;
 
 final selectedStationStreamUrlProvider = FutureProvider<String?>((ref) async {

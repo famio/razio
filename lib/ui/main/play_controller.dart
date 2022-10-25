@@ -30,10 +30,7 @@ class _PlayController extends ConsumerWidget {
               const SizedBox(width: 8),
               Flexible(
                 child: Text(
-                  selectedProgram.maybeWhen(
-                    data: (data) => data == null ? '' : data.title,
-                    orElse: () => '',
-                  ),
+                  selectedProgram == null ? '' : selectedProgram.title,
                   style: AppTextStyle.titleMedium(context),
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,

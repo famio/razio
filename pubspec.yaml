@@ -20,6 +20,7 @@ dependencies:
   http:
   intl:
   just_audio:
+  just_audio_background:
   pedantic_mono:
   scrollable_positioned_list:
   xml:
