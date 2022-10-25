@@ -26,7 +26,6 @@ part 'station_page_view.dart';
 class MainPage extends ConsumerWidget {
   const MainPage({super.key});
 
-  static const String title = 'fudiko';
   static const String routeName = 'station_list_page';
 
   @override
