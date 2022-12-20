@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'auth1.dart';
 
@@ -27,38 +27,42 @@ mixin _$Auth1 {
 /// @nodoc
 abstract class $Auth1CopyWith<$Res> {
   factory $Auth1CopyWith(Auth1 value, $Res Function(Auth1) then) =
-      _$Auth1CopyWithImpl<$Res>;
+      _$Auth1CopyWithImpl<$Res, Auth1>;
+  @useResult
   $Res call({String authToken, int keyOffset, int keyLength});
 }
 
 /// @nodoc
-class _$Auth1CopyWithImpl<$Res> implements $Auth1CopyWith<$Res> {
+class _$Auth1CopyWithImpl<$Res, $Val extends Auth1>
+    implements $Auth1CopyWith<$Res> {
   _$Auth1CopyWithImpl(this._value, this._then);
 
-  final Auth1 _value;
   // ignore: unused_field
-  final $Res Function(Auth1) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? authToken = freezed,
-    Object? keyOffset = freezed,
-    Object? keyLength = freezed,
+    Object? authToken = null,
+    Object? keyOffset = null,
+    Object? keyLength = null,
   }) {
     return _then(_value.copyWith(
-      authToken: authToken == freezed
+      authToken: null == authToken
           ? _value.authToken
           : authToken // ignore: cast_nullable_to_non_nullable
               as String,
-      keyOffset: keyOffset == freezed
+      keyOffset: null == keyOffset
           ? _value.keyOffset
           : keyOffset // ignore: cast_nullable_to_non_nullable
               as int,
-      keyLength: keyLength == freezed
+      keyLength: null == keyLength
           ? _value.keyLength
           : keyLength // ignore: cast_nullable_to_non_nullable
               as int,
-    ));
+    ) as $Val);
   }
 }
 
@@ -67,34 +71,33 @@ abstract class _$$_Auth1CopyWith<$Res> implements $Auth1CopyWith<$Res> {
   factory _$$_Auth1CopyWith(_$_Auth1 value, $Res Function(_$_Auth1) then) =
       __$$_Auth1CopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String authToken, int keyOffset, int keyLength});
 }
 
 /// @nodoc
-class __$$_Auth1CopyWithImpl<$Res> extends _$Auth1CopyWithImpl<$Res>
+class __$$_Auth1CopyWithImpl<$Res> extends _$Auth1CopyWithImpl<$Res, _$_Auth1>
     implements _$$_Auth1CopyWith<$Res> {
   __$$_Auth1CopyWithImpl(_$_Auth1 _value, $Res Function(_$_Auth1) _then)
-      : super(_value, (v) => _then(v as _$_Auth1));
+      : super(_value, _then);
 
-  @override
-  _$_Auth1 get _value => super._value as _$_Auth1;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? authToken = freezed,
-    Object? keyOffset = freezed,
-    Object? keyLength = freezed,
+    Object? authToken = null,
+    Object? keyOffset = null,
+    Object? keyLength = null,
   }) {
     return _then(_$_Auth1(
-      authToken: authToken == freezed
+      authToken: null == authToken
           ? _value.authToken
           : authToken // ignore: cast_nullable_to_non_nullable
               as String,
-      keyOffset: keyOffset == freezed
+      keyOffset: null == keyOffset
           ? _value.keyOffset
           : keyOffset // ignore: cast_nullable_to_non_nullable
               as int,
-      keyLength: keyLength == freezed
+      keyLength: null == keyLength
           ? _value.keyLength
           : keyLength // ignore: cast_nullable_to_non_nullable
               as int,
@@ -127,20 +130,20 @@ class _$_Auth1 implements _Auth1 {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Auth1 &&
-            const DeepCollectionEquality().equals(other.authToken, authToken) &&
-            const DeepCollectionEquality().equals(other.keyOffset, keyOffset) &&
-            const DeepCollectionEquality().equals(other.keyLength, keyLength));
+            (identical(other.authToken, authToken) ||
+                other.authToken == authToken) &&
+            (identical(other.keyOffset, keyOffset) ||
+                other.keyOffset == keyOffset) &&
+            (identical(other.keyLength, keyLength) ||
+                other.keyLength == keyLength));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(authToken),
-      const DeepCollectionEquality().hash(keyOffset),
-      const DeepCollectionEquality().hash(keyLength));
+  int get hashCode => Object.hash(runtimeType, authToken, keyOffset, keyLength);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_Auth1CopyWith<_$_Auth1> get copyWith =>
       __$$_Auth1CopyWithImpl<_$_Auth1>(this, _$identity);
 }
@@ -152,11 +155,11 @@ abstract class _Auth1 implements Auth1 {
       required final int keyLength}) = _$_Auth1;
 
   @override
-  String get authToken => throw _privateConstructorUsedError;
+  String get authToken;
   @override
-  int get keyOffset => throw _privateConstructorUsedError;
+  int get keyOffset;
   @override
-  int get keyLength => throw _privateConstructorUsedError;
+  int get keyLength;
   @override
   @JsonKey(ignore: true)
   _$$_Auth1CopyWith<_$_Auth1> get copyWith =>

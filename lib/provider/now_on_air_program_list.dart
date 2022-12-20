@@ -4,6 +4,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fudiko/entity/program.dart';
 import 'package:fudiko/provider/auth_provider.dart';
+import 'package:fudiko/provider/selected_station_id_provider.dart';
 import 'package:http/http.dart' as http;
 import 'package:xml/xml.dart';
 
@@ -44,6 +45,10 @@ final nowOnAirProgramListProvider =
     }
   });
 
+  if (ref.read(selectedStationIdProvider.notifier).state == null) {
+    ref.read(selectedStationIdProvider.notifier).state = result.keys.first;
+  }
+
   _setRefreshTimer(ref, result.values.toList());
 
   return result;
@@ -59,18 +64,6 @@ void _setRefreshTimer(Ref ref, List<Program> programs) {
     }
     _timer = Timer(diff, () => ref.refresh(nowOnAirProgramListProvider));
   } else {
-    ref.refresh(nowOnAirProgramListProvider);
+    ref.invalidate(nowOnAirProgramListProvider);
   }
 }
-
-final nowOnAirProgramProvider = FutureProvider.family<Program?, String>(
-  (ref, stationId) {
-    final programlist = ref.watch(nowOnAirProgramListProvider);
-    return programlist.maybeWhen(
-      data: (data) {
-        return data[stationId];
-      },
-      orElse: () => null,
-    );
-  },
-);

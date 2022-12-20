@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fudiko/app_color.dart';
+import 'package:fudiko/gen/fonts.gen.dart';
 
 extension AppThemeData on ThemeData {
   static ThemeData light() {
@@ -34,12 +35,17 @@ extension AppThemeData on ThemeData {
 }
 
 extension AppTextStyle on TextStyle {
-  static const base = TextStyle(height: 1);
+  static const base = TextStyle(
+    fontFamily: FontFamily.lINESeed,
+    height: 1,
+  );
 
   static final TextStyle _bodySmallBase =
-      AppTextStyle.base.copyWith(fontSize: 15);
+      AppTextStyle.base.copyWith(fontSize: 14);
+
   static final TextStyle _bodyMediumBase =
-      AppTextStyle.base.copyWith(fontSize: 17);
+      AppTextStyle.base.copyWith(fontSize: 16);
+
   static final TextStyle _titleMediumBase =
       AppTextStyle.base.copyWith(fontSize: 20);
 
@@ -47,11 +53,29 @@ extension AppTextStyle on TextStyle {
     return Theme.of(context).textTheme.bodySmall!;
   }
 
-  static TextStyle bodyMedium(BuildContext context) {
+  static TextStyle body(BuildContext context) {
     return Theme.of(context).textTheme.bodyMedium!;
   }
 
   static TextStyle titleMedium(BuildContext context) {
     return Theme.of(context).textTheme.titleMedium!;
+  }
+}
+
+extension TextStyleExtension on TextStyle {
+  TextStyle get regular {
+    return copyWith(fontWeight: FontWeight.w400);
+  }
+
+  TextStyle get bold {
+    return copyWith(fontWeight: FontWeight.w700);
+  }
+
+  TextStyle get extraBold {
+    return copyWith(fontWeight: FontWeight.w800);
+  }
+
+  TextStyle secondary(BuildContext context) {
+    return copyWith(color: AppColor.textSecondary(context));
   }
 }

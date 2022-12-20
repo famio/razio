@@ -1,102 +1,59 @@
 part of 'main_page.dart';
 
-final _isReadyProvider = StateProvider.autoDispose.family<bool, String>(
-  (ref, arg) => false,
-);
-
 class _ProgramList extends ConsumerWidget {
-  const _ProgramList({required this.stationId});
+  const _ProgramList({
+    required this.stationIds,
+    required this.programs,
+    required this.itemHeight,
+  });
+
+  final List<String> stationIds;
+  final List<Program> programs;
+  final double itemHeight;
+
   static final dateFormat = DateFormat.Hm();
-  final String stationId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final programList = ref.watch(programListProvider(stationId));
-    final controller = ItemScrollController();
-    final isReady = ref.watch(_isReadyProvider(stationId));
+    const itemInnerPadding = 8.0;
+    final scrollController = FixedExtentScrollController();
 
-    final itemPositionsListener = ItemPositionsListener.create();
-
-    ref.listen<AsyncValue<Program?>>(nowOnAirProgramProvider(stationId),
-        (previous, next) async {
-      if (!isReady) {
-        return;
-      }
-      next.whenData((program) {
-        if (program == null) {
-          return;
-        }
-        if (previous?.value?.id == program.id) {
-          return;
-        }
-        final programs = programList.value;
-        if (programs == null) {
-          return;
-        }
-        final index = programs
-            .map((e) => e.startTime)
-            .toList()
-            .indexOf(program.startTime);
-        if (index == -1) {
-          return;
-        }
-        final resultIndex =
-            index + 1 >= programs.length - 1 ? index : index + 1;
-        controller.scrollTo(
-          index: resultIndex,
-          duration: const Duration(milliseconds: 200),
-        );
-      });
-    });
-
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      if (!controller.isAttached) {
-        return;
-      }
-      final program = await ref.read(nowOnAirProgramProvider(stationId).future);
-      if (program == null) {
-        ref.read(_isReadyProvider(stationId).notifier).state = true;
-        return;
-      }
-      final programs = await ref.read(programListProvider(stationId).future);
-      final index = programs
-          .indexWhere((element) => element.startTime == program.startTime);
-      if (index == -1) {
-        return;
-      }
-      final resultIndex = index + 1 >= programs.length - 1 ? index : index + 1;
-      controller.jumpTo(index: resultIndex);
-      ref.read(_isReadyProvider(stationId).notifier).state = true;
-    });
-
-    return programList.when(
-      data: (data) {
-        return Opacity(
-          opacity: isReady ? 1 : 0,
-          child: ScrollablePositionedList.separated(
-            itemScrollController: controller,
-            itemPositionsListener: itemPositionsListener,
-            separatorBuilder: (context, index) => const SizedBox(
-              height: 8,
-            ),
-            itemCount: data.length,
-            itemBuilder: (BuildContext context, int index) {
-              return SizedBox(
-                height: 126 / 48 * 30,
+    return NotificationListener<ScrollNotification>(
+      child: ClickableListWheelScrollView(
+        scrollController: scrollController,
+        itemHeight: itemHeight,
+        itemCount: programs.length,
+        onItemTapCallback: (index) {
+          ref.read(mainPageActionProvider.notifier).onItemTapCallback(index);
+        },
+        child: ListWheelScrollView.useDelegate(
+          controller: scrollController,
+          itemExtent: itemHeight,
+          physics: const FixedExtentScrollPhysics(),
+          // overAndUnderCenterOpacity: 0.8,
+          diameterRatio: 100,
+          onSelectedItemChanged: (value) {
+            ref
+                .read(mainPageActionProvider.notifier)
+                .onSelectedItemChanged(stationIds[value]);
+          },
+          childDelegate: ListWheelChildBuilderDelegate(
+            builder: (context, index) {
+              final program = programs[index];
+              return Padding(
+                padding: const EdgeInsets.all(itemInnerPadding),
                 child: Row(
+                  key: ValueKey(program.id),
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(
-                      width: 8,
-                    ),
                     ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(10),
                       child: SizedBox(
-                        width: 126,
+                        height: double.infinity,
                         child: AspectRatio(
                           aspectRatio: 48 / 30,
                           child: CachedNetworkImage(
-                            imageUrl: data[index].img,
+                            imageUrl: program.img,
                             errorWidget: (context, url, dynamic error) =>
                                 const Icon(Icons.error),
                             fadeOutDuration: Duration.zero,
@@ -111,37 +68,50 @@ class _ProgramList extends ConsumerWidget {
                     Flexible(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            '${dateFormat.format(data[index].startDate)} ~',
-                            style: AppTextStyle.bodySmall(context),
+                            ref.read(stationListProvider).value![index].name,
+                            style: AppTextStyle.bodySmall(context)
+                                .secondary(context)
+                                .regular
+                                .copyWith(height: 1.3),
+                            maxLines: 1,
+                          ),
+                          Text(
+                            // ignore: lines_longer_than_80_chars
+                            '${dateFormat.format(program.startDate)} ~ ${dateFormat.format(program.endDate)}',
+                            style: AppTextStyle.bodySmall(context)
+                                .secondary(context)
+                                .copyWith(height: 1.3),
+                            maxLines: 1,
                           ),
                           const SizedBox(
-                            height: 8,
+                            height: 2,
                           ),
-                          Expanded(
+                          Flexible(
+                            // flex: 2,
+                            fit: FlexFit.tight,
                             child: Text(
-                              data[index].title,
-                              style: AppTextStyle.bodyMedium(context),
+                              program.title,
+                              style: AppTextStyle.body(context)
+                                  .bold
+                                  .copyWith(height: 1.5),
                               overflow: TextOverflow.ellipsis,
-                              maxLines: 3,
+                              maxLines: 2,
                             ),
                           ),
                         ],
                       ),
                     ),
-                    const SizedBox(
-                      width: 8,
-                    ),
                   ],
                 ),
               );
             },
+            childCount: programs.length,
           ),
-        );
-      },
-      error: (error, trace) => const Text('error'),
-      loading: () => const Text(''),
+        ),
+      ),
     );
   }
 }

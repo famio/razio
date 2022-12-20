@@ -18,6 +18,7 @@ final stationListProvider = FutureProvider<List<Station>>((ref) async {
   if (root == null) {
     throw Exception('Stations did not exist in xml');
   }
+
   return root
       .findElements('station')
       .map<Station>(Station.fromElement)

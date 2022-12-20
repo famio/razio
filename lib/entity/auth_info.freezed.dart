@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'auth_info.dart';
 
@@ -27,33 +27,37 @@ mixin _$AuthInfo {
 /// @nodoc
 abstract class $AuthInfoCopyWith<$Res> {
   factory $AuthInfoCopyWith(AuthInfo value, $Res Function(AuthInfo) then) =
-      _$AuthInfoCopyWithImpl<$Res>;
+      _$AuthInfoCopyWithImpl<$Res, AuthInfo>;
+  @useResult
   $Res call({String authToken, String areaId});
 }
 
 /// @nodoc
-class _$AuthInfoCopyWithImpl<$Res> implements $AuthInfoCopyWith<$Res> {
+class _$AuthInfoCopyWithImpl<$Res, $Val extends AuthInfo>
+    implements $AuthInfoCopyWith<$Res> {
   _$AuthInfoCopyWithImpl(this._value, this._then);
 
-  final AuthInfo _value;
   // ignore: unused_field
-  final $Res Function(AuthInfo) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? authToken = freezed,
-    Object? areaId = freezed,
+    Object? authToken = null,
+    Object? areaId = null,
   }) {
     return _then(_value.copyWith(
-      authToken: authToken == freezed
+      authToken: null == authToken
           ? _value.authToken
           : authToken // ignore: cast_nullable_to_non_nullable
               as String,
-      areaId: areaId == freezed
+      areaId: null == areaId
           ? _value.areaId
           : areaId // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -63,30 +67,30 @@ abstract class _$$_AuthInfoCopyWith<$Res> implements $AuthInfoCopyWith<$Res> {
           _$_AuthInfo value, $Res Function(_$_AuthInfo) then) =
       __$$_AuthInfoCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String authToken, String areaId});
 }
 
 /// @nodoc
-class __$$_AuthInfoCopyWithImpl<$Res> extends _$AuthInfoCopyWithImpl<$Res>
+class __$$_AuthInfoCopyWithImpl<$Res>
+    extends _$AuthInfoCopyWithImpl<$Res, _$_AuthInfo>
     implements _$$_AuthInfoCopyWith<$Res> {
   __$$_AuthInfoCopyWithImpl(
       _$_AuthInfo _value, $Res Function(_$_AuthInfo) _then)
-      : super(_value, (v) => _then(v as _$_AuthInfo));
+      : super(_value, _then);
 
-  @override
-  _$_AuthInfo get _value => super._value as _$_AuthInfo;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? authToken = freezed,
-    Object? areaId = freezed,
+    Object? authToken = null,
+    Object? areaId = null,
   }) {
     return _then(_$_AuthInfo(
-      authToken: authToken == freezed
+      authToken: null == authToken
           ? _value.authToken
           : authToken // ignore: cast_nullable_to_non_nullable
               as String,
-      areaId: areaId == freezed
+      areaId: null == areaId
           ? _value.areaId
           : areaId // ignore: cast_nullable_to_non_nullable
               as String,
@@ -114,18 +118,17 @@ class _$_AuthInfo implements _AuthInfo {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AuthInfo &&
-            const DeepCollectionEquality().equals(other.authToken, authToken) &&
-            const DeepCollectionEquality().equals(other.areaId, areaId));
+            (identical(other.authToken, authToken) ||
+                other.authToken == authToken) &&
+            (identical(other.areaId, areaId) || other.areaId == areaId));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(authToken),
-      const DeepCollectionEquality().hash(areaId));
+  int get hashCode => Object.hash(runtimeType, authToken, areaId);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_AuthInfoCopyWith<_$_AuthInfo> get copyWith =>
       __$$_AuthInfoCopyWithImpl<_$_AuthInfo>(this, _$identity);
 }
@@ -136,9 +139,9 @@ abstract class _AuthInfo implements AuthInfo {
       required final String areaId}) = _$_AuthInfo;
 
   @override
-  String get authToken => throw _privateConstructorUsedError;
+  String get authToken;
   @override
-  String get areaId => throw _privateConstructorUsedError;
+  String get areaId;
   @override
   @JsonKey(ignore: true)
   _$$_AuthInfoCopyWith<_$_AuthInfo> get copyWith =>

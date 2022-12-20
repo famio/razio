@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fudiko/app_text_style.dart';
-import 'package:fudiko/ui/main/main_page.dart';
+import 'package:fudiko/router.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 
 void main() async {
+  debugPaintSizeEnabled = false;
   await JustAudioBackground.init(
     androidNotificationChannelId: 'dev.famio.fudiko.channel.audio',
     androidNotificationChannelName: 'Audio playback',
@@ -17,16 +19,17 @@ void main() async {
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Fudiko',
+  Widget build(BuildContext context, WidgetRef ref) {
+    final router = ref.watch(routerProvider);
+
+    return MaterialApp.router(
       theme: AppThemeData.light(),
       darkTheme: AppThemeData.dark(),
-      home: const MainPage(),
+      routerConfig: router,
     );
   }
 }
