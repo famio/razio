@@ -17,10 +17,13 @@ class _PlayButton extends ConsumerWidget {
             const SizedBox(
               width: 60,
               height: 60,
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  shape: BoxShape.circle,
+              child: Padding(
+                padding: EdgeInsets.all(4),
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.circle,
+                  ),
                 ),
               ),
             ),
