@@ -10,6 +10,7 @@ import 'package:fudiko/provider/audio_player_provider.dart';
 import 'package:fudiko/provider/is_playing_provider.dart';
 import 'package:fudiko/provider/now_on_air_program_list.dart';
 import 'package:fudiko/provider/station_list_provider.dart';
+import 'package:fudiko/ui/component/bouncing.dart';
 import 'package:fudiko/ui/main/main_page_action.dart';
 import 'package:intl/intl.dart';
 import 'package:simple_shadow/simple_shadow.dart';

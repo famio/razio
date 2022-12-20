@@ -6,7 +6,7 @@ class _PlayButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isPlaying = ref.watch(isPlayingProvider);
-    return GestureDetector(
+    return Bouncing(
       child: SimpleShadow(
         opacity: 0.3,
         color: AppColor.accent,
@@ -30,7 +30,7 @@ class _PlayButton extends ConsumerWidget {
           ],
         ),
       ),
-      onTap: () => ref.read(isPlayingProvider.notifier).state ^= true,
+      onPress: () => ref.read(isPlayingProvider.notifier).state ^= true,
     );
   }
 }
