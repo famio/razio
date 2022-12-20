@@ -16,9 +16,9 @@ class SplashPage extends ConsumerWidget {
                 WidgetsBinding.instance.addPostFrameCallback((_) {
                   context.replaceNamed(MainPage.routeName);
                 });
-                return const Text('Ready');
+                return const Text('');
               },
-              loading: () => const Text('Loading...'),
+              loading: () => const Text(''),
               error: (error, stack) => const Text('error :('),
             ),
       ),
