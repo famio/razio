@@ -48,6 +48,7 @@ class _BouncingState extends State<Bouncing>
         _controller.reverse();
         widget.onPress();
       },
+      behavior: HitTestBehavior.translucent,
       child: Transform.scale(
         scale: 1.0 - _controller.value,
         child: widget.child,

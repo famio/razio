@@ -7,6 +7,8 @@ extension AppThemeData on ThemeData {
     return ThemeData.light().copyWith(
       scaffoldBackgroundColor: AppColor.backgroundLight,
       dividerColor: AppColor.dividerLight,
+      iconTheme:
+          ThemeData.light().iconTheme.copyWith(color: AppColor.iconLight),
       textTheme: ThemeData.light().textTheme.copyWith(
             bodySmall: AppTextStyle._bodySmallBase
                 .copyWith(color: AppColor.textPrimaryLight),
@@ -22,6 +24,7 @@ extension AppThemeData on ThemeData {
     return ThemeData.dark().copyWith(
       scaffoldBackgroundColor: AppColor.backgroundDark,
       dividerColor: AppColor.dividerDark,
+      iconTheme: ThemeData.dark().iconTheme.copyWith(color: AppColor.iconDark),
       textTheme: ThemeData.dark().textTheme.copyWith(
             bodySmall: AppTextStyle._bodySmallBase
                 .copyWith(color: AppColor.textPrimaryDark),
