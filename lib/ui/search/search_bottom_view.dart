@@ -1,4 +1,4 @@
-part of 'main_page.dart';
+part of 'search_page.dart';
 
 class _BottomView extends ConsumerWidget {
   const _BottomView();
@@ -16,9 +16,9 @@ class _BottomView extends ConsumerWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: const [
-            _SearchButton(size: iconSize),
-            _PlayButton(size: iconSize),
-            _SearchButton(size: iconSize),
+            _CloseButton(size: iconSize),
+            SizedBox(width: iconSize),
+            SizedBox(width: iconSize),
           ],
         ),
       ),

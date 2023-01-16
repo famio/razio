@@ -1,7 +1,7 @@
-part of 'main_page.dart';
+part of 'search_page.dart';
 
-class _SearchButton extends ConsumerWidget {
-  const _SearchButton({required this.size});
+class _CloseButton extends ConsumerWidget {
+  const _CloseButton({required this.size});
 
   final double size;
 
@@ -12,11 +12,11 @@ class _SearchButton extends ConsumerWidget {
         width: size,
         height: size,
         child: const Icon(
-          Icons.search,
+          Icons.close,
           size: 28,
         ),
       ),
-      onPress: () => context.goNamed(SearchPage.routeName),
+      onPress: () => context.pop(),
     );
   }
 }

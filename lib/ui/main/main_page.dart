@@ -11,6 +11,8 @@ import 'package:fudiko/provider/now_on_air_program_list.dart';
 import 'package:fudiko/provider/station_list_provider.dart';
 import 'package:fudiko/ui/component/bouncing.dart';
 import 'package:fudiko/ui/main/main_page_action.dart';
+import 'package:fudiko/ui/search/search_page.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 part 'bottom_view.dart';
@@ -36,7 +38,7 @@ class MainPage extends ConsumerWidget {
         data: (v) {
           return Column(
             children: [
-              Flexible(
+              Expanded(
                 child: Stack(
                   children: [
                     const Center(
