@@ -1,7 +1,7 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fudiko/entity/station.dart';
 import 'package:fudiko/provider/selected_station_id_provider.dart';
 import 'package:fudiko/provider/station_list_provider.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final selectedStationProvider = Provider<Station?>(
   (ref) {

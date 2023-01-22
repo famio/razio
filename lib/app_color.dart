@@ -44,8 +44,14 @@ extension AppColor on Color {
   }
 
   static const iconLight = Color(0xff222222);
-  static const iconDark = Color(0xffFFFFFF);
+  static const iconDark = Color(0xffDCDCDC);
   static Color icon(BuildContext context) {
     return isLightMode(context) ? iconLight : iconDark;
+  }
+
+  static const _frostLight = Color(0xffEEEEEF);
+  static const _frostDark = Color(0xff1C1C1E);
+  static Color frost(BuildContext context) {
+    return isLightMode(context) ? _frostLight : _frostDark;
   }
 }

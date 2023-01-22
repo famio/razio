@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fudiko/app_text_style.dart';
 import 'package:fudiko/router.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 
 void main() async {

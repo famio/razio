@@ -1,10 +1,10 @@
 import 'package:audio_service/audio_service.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fudiko/provider/auth_provider.dart';
 import 'package:fudiko/provider/is_playing_provider.dart';
 import 'package:fudiko/provider/selected_station_on_air_program_provider.dart';
 import 'package:fudiko/provider/selected_station_provider.dart';
 import 'package:fudiko/provider/selected_station_stream_url_provider.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:just_audio/just_audio.dart';
 
 final audioPlayer = AudioPlayer();

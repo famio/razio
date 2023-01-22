@@ -20,6 +20,7 @@ class _ProgramList extends ConsumerWidget {
 
     return NotificationListener<ScrollNotification>(
       child: ClickableListWheelScrollView(
+        key: const PageStorageKey('live_program_list'),
         scrollController: scrollController,
         itemHeight: itemHeight,
         itemCount: programs.length,

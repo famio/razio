@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/services.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fudiko/logger.dart';
 import 'package:fudiko/provider/selected_station_id_provider.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final mainPageActionProvider =
     StateNotifierProvider<MainPageAction, void>((ref) {

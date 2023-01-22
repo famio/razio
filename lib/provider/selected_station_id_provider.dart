@@ -1,5 +1,5 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fudiko/provider/station_list_provider.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final selectedStationIdProvider = StateProvider<String?>(
   (ref) => ref.read(stationListProvider).maybeWhen(

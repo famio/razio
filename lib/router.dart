@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fudiko/ui/main/main_page.dart';
-import 'package:fudiko/ui/search/search_page.dart';
 import 'package:fudiko/ui/splash/splash_page.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final routerProvider = Provider(
   (ref) => GoRouter(
@@ -30,15 +29,6 @@ final routerProvider = Provider(
             },
           );
         },
-        routes: [
-          GoRoute(
-            path: SearchPage.routeName,
-            name: SearchPage.routeName,
-            pageBuilder: (context, state) =>
-                const NoTransitionPage<void>(child: SearchPage()),
-            // builder: (context, state) => const SearchPage(),
-          )
-        ],
       ),
       // GoRoute(
       //   path: '/${SearchPage.routeName}',
