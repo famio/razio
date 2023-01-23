@@ -1,11 +1,31 @@
 part of 'main_page.dart';
 
-class _SearchBar extends ConsumerWidget {
-  static final controller = TextEditingController();
-  static final focusNode = FocusNode();
+class _SearchBar extends ConsumerStatefulWidget {
+  const _SearchBar();
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  _SearchBarState createState() => _SearchBarState();
+}
+
+class _SearchBarState extends ConsumerState<_SearchBar> {
+  static final controller = TextEditingController();
+  static final focusNode = FocusNode();
+  @override
+  void initState() {
+    super.initState();
+    focusNode.addListener(_onFocusChange);
+  }
+
+  void _onFocusChange() {
+    if (mounted) {
+      setState(() {
+        ref.read(searchEditingProvider.notifier).state = focusNode.hasFocus;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final border = OutlineInputBorder(
       borderSide: const BorderSide(color: Colors.transparent),
       borderRadius: BorderRadius.circular(8),
@@ -39,6 +59,10 @@ class _SearchBar extends ConsumerWidget {
             cursorColor: AppColor.textSecondary(context),
             onChanged: (text) {
               ref.read(editingSearchTextProvider.notifier).state = text;
+            },
+            onSubmitted: (value) {
+              log.info('saruki onSubmitted:$value');
+              if (value.isEmpty) return;
             },
             decoration: InputDecoration(
               enabledBorder: border,

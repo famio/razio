@@ -5,11 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:fudiko/app_color.dart';
 import 'package:fudiko/app_text_style.dart';
 import 'package:fudiko/entity/program.dart';
+import 'package:fudiko/logger.dart';
 import 'package:fudiko/provider/audio_player_provider.dart';
 import 'package:fudiko/provider/editing_search_text_provider.dart';
 import 'package:fudiko/provider/is_playing_provider.dart';
 import 'package:fudiko/provider/now_on_air_program_list.dart';
 import 'package:fudiko/provider/safearea_provider.dart';
+import 'package:fudiko/provider/search_editing_provider.dart';
 import 'package:fudiko/provider/station_list_provider.dart';
 import 'package:fudiko/ui/component/bouncing.dart';
 import 'package:fudiko/ui/main/main_page_action.dart';
@@ -22,6 +24,7 @@ part 'highlight_bar.dart';
 part 'play_button.dart';
 part 'program_list.dart';
 part 'search_bar.dart';
+part 'search_result_list.dart';
 
 class MainPage extends HookConsumerWidget {
   const MainPage({super.key});
@@ -75,7 +78,24 @@ class MainPage extends HookConsumerWidget {
                 right: false,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: _SearchBar(),
+                  child: Row(
+                    children: [
+                      const Flexible(child: _SearchBar()),
+                      SizedBox(width: ref.watch(searchEditingProvider) ? 8 : 0),
+                      GestureDetector(
+                        behavior: HitTestBehavior.opaque,
+                        onTap: () => primaryFocus?.unfocus(),
+                        child: SizedBox(
+                          height: 48,
+                          child: Center(
+                            child: Text(
+                              ref.watch(searchEditingProvider) ? 'Cancel' : '',
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ],
