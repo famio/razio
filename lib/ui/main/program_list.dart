@@ -2,16 +2,12 @@ part of 'main_page.dart';
 
 class _ProgramList extends ConsumerWidget {
   const _ProgramList({
-    required this.stationIds,
     required this.programs,
     required this.itemHeight,
   });
 
-  final List<String> stationIds;
-  final List<Program> programs;
+  final List<MainPageListItem> programs;
   final double itemHeight;
-
-  static final dateFormat = DateFormat.Hm();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -36,7 +32,7 @@ class _ProgramList extends ConsumerWidget {
           onSelectedItemChanged: (value) {
             ref
                 .read(mainPageActionProvider.notifier)
-                .onSelectedItemChanged(stationIds[value]);
+                .onSelectedItemChanged(value);
           },
           childDelegate: ListWheelChildBuilderDelegate(
             builder: (context, index) {
@@ -44,7 +40,7 @@ class _ProgramList extends ConsumerWidget {
               return Padding(
                 padding: const EdgeInsets.all(itemInnerPadding),
                 child: Row(
-                  key: ValueKey(program.id),
+                  // key: ValueKey(program.id),
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     ClipRRect(
@@ -54,7 +50,7 @@ class _ProgramList extends ConsumerWidget {
                         child: AspectRatio(
                           aspectRatio: 48 / 30,
                           child: CachedNetworkImage(
-                            imageUrl: program.img,
+                            imageUrl: program.imageUrl,
                             errorWidget: (context, url, dynamic error) =>
                                 const Icon(Icons.error),
                             fadeOutDuration: Duration.zero,
@@ -81,7 +77,7 @@ class _ProgramList extends ConsumerWidget {
                           ),
                           Text(
                             // ignore: lines_longer_than_80_chars
-                            '${dateFormat.format(program.startDate)} ~ ${dateFormat.format(program.endDate)}',
+                            program.programDate,
                             style: AppTextStyle.bodySmall(context)
                                 .secondary(context)
                                 .copyWith(height: 1.3),

@@ -6,7 +6,10 @@ import 'package:fudiko/entity/search.dart';
 import 'package:http/http.dart' as http;
 
 class SearchApi {
-  Future<Search> fetch(String keyword, String areaId) async {
+  Future<Search> fetch({
+    required String keyword,
+    required String areaId,
+  }) async {
     final queryParams = <String, dynamic>{
       'key': keyword,
       'filter': '',
@@ -48,8 +51,4 @@ class SearchApi {
         .convert(utf8.encode((random.toInt() + diff).toString()))
         .toString();
   }
-}
-
-String generateMd5(String input) {
-  return md5.convert(utf8.encode(input)).toString();
 }

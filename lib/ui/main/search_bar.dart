@@ -8,7 +8,6 @@ class _SearchBar extends ConsumerStatefulWidget {
 }
 
 class _SearchBarState extends ConsumerState<_SearchBar> {
-  static final controller = TextEditingController();
   static final focusNode = FocusNode();
   @override
   void initState() {
@@ -52,7 +51,7 @@ class _SearchBarState extends ConsumerState<_SearchBar> {
                 ),
           ),
           child: TextField(
-            controller: controller,
+            controller: ref.read(searchBarControllerProvider),
             focusNode: focusNode,
             textAlignVertical: TextAlignVertical.center,
             style: const TextStyle(fontSize: 16, height: 1.8),
@@ -61,8 +60,9 @@ class _SearchBarState extends ConsumerState<_SearchBar> {
               ref.read(editingSearchTextProvider.notifier).state = text;
             },
             onSubmitted: (value) {
-              log.info('saruki onSubmitted:$value');
-              if (value.isEmpty) return;
+              ref
+                  .read(mainPageActionProvider.notifier)
+                  .onSearchSubmitted(value);
             },
             decoration: InputDecoration(
               enabledBorder: border,
@@ -78,7 +78,7 @@ class _SearchBarState extends ConsumerState<_SearchBar> {
                   ? null
                   : IconButton(
                       onPressed: () {
-                        controller.clear();
+                        ref.read(searchBarControllerProvider).clear();
                         ref.read(editingSearchTextProvider.notifier).state = '';
                         focusNode.requestFocus();
                       },
