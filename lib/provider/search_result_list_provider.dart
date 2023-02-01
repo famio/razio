@@ -13,11 +13,10 @@ final searchResultListProvider =
   final searchResult = await SearchApi().fetch(
     keyword: keyword,
     areaId: authInfo.areaId,
+    filter: SearchFilter.past,
   );
   log.info(searchResult.data);
-  final pastPrograms =
-      searchResult.data.where((element) => element.status == 'past').toList();
-  return pastPrograms.sorted((a, b) {
+  return searchResult.data.sorted((a, b) {
     final title = a.title.compareTo(b.title);
     if (title != 0) {
       return title;

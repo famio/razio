@@ -8,12 +8,9 @@ final mainPageListItemProvider = FutureProvider<List<MainPageListItem>>((ref) {
   switch (ref.watch(mainPageListModeProvider)) {
     case MainPageListMode.live:
       return ref.watch(nowOnAirProgramListProvider.future).then(
-            (value) => value.entries
+            (value) => value
                 .map(
-                  (e) => MainPageListItem.fromElement(
-                    stationName: e.key,
-                    program: e.value,
-                  ),
+                  (e) => MainPageListItem.fromProgram(program: e),
                 )
                 .toList(),
           );

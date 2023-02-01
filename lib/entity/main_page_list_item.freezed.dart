@@ -16,10 +16,10 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$MainPageListItem {
-  String get stationName => throw _privateConstructorUsedError;
   String get imageUrl => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
-  String get programDate => throw _privateConstructorUsedError;
+  String get info1 => throw _privateConstructorUsedError;
+  String get info2 => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MainPageListItemCopyWith<MainPageListItem> get copyWith =>
@@ -32,8 +32,7 @@ abstract class $MainPageListItemCopyWith<$Res> {
           MainPageListItem value, $Res Function(MainPageListItem) then) =
       _$MainPageListItemCopyWithImpl<$Res, MainPageListItem>;
   @useResult
-  $Res call(
-      {String stationName, String imageUrl, String title, String programDate});
+  $Res call({String imageUrl, String title, String info1, String info2});
 }
 
 /// @nodoc
@@ -49,16 +48,12 @@ class _$MainPageListItemCopyWithImpl<$Res, $Val extends MainPageListItem>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? stationName = null,
     Object? imageUrl = null,
     Object? title = null,
-    Object? programDate = null,
+    Object? info1 = null,
+    Object? info2 = null,
   }) {
     return _then(_value.copyWith(
-      stationName: null == stationName
-          ? _value.stationName
-          : stationName // ignore: cast_nullable_to_non_nullable
-              as String,
       imageUrl: null == imageUrl
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
@@ -67,9 +62,13 @@ class _$MainPageListItemCopyWithImpl<$Res, $Val extends MainPageListItem>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      programDate: null == programDate
-          ? _value.programDate
-          : programDate // ignore: cast_nullable_to_non_nullable
+      info1: null == info1
+          ? _value.info1
+          : info1 // ignore: cast_nullable_to_non_nullable
+              as String,
+      info2: null == info2
+          ? _value.info2
+          : info2 // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -83,8 +82,7 @@ abstract class _$$_MainPageListItemCopyWith<$Res>
       __$$_MainPageListItemCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String stationName, String imageUrl, String title, String programDate});
+  $Res call({String imageUrl, String title, String info1, String info2});
 }
 
 /// @nodoc
@@ -98,16 +96,12 @@ class __$$_MainPageListItemCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? stationName = null,
     Object? imageUrl = null,
     Object? title = null,
-    Object? programDate = null,
+    Object? info1 = null,
+    Object? info2 = null,
   }) {
     return _then(_$_MainPageListItem(
-      stationName: null == stationName
-          ? _value.stationName
-          : stationName // ignore: cast_nullable_to_non_nullable
-              as String,
       imageUrl: null == imageUrl
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
@@ -116,9 +110,13 @@ class __$$_MainPageListItemCopyWithImpl<$Res>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      programDate: null == programDate
-          ? _value.programDate
-          : programDate // ignore: cast_nullable_to_non_nullable
+      info1: null == info1
+          ? _value.info1
+          : info1 // ignore: cast_nullable_to_non_nullable
+              as String,
+      info2: null == info2
+          ? _value.info2
+          : info2 // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -128,23 +126,23 @@ class __$$_MainPageListItemCopyWithImpl<$Res>
 
 class _$_MainPageListItem implements _MainPageListItem {
   _$_MainPageListItem(
-      {required this.stationName,
-      required this.imageUrl,
+      {required this.imageUrl,
       required this.title,
-      required this.programDate});
+      required this.info1,
+      required this.info2});
 
-  @override
-  final String stationName;
   @override
   final String imageUrl;
   @override
   final String title;
   @override
-  final String programDate;
+  final String info1;
+  @override
+  final String info2;
 
   @override
   String toString() {
-    return 'MainPageListItem(stationName: $stationName, imageUrl: $imageUrl, title: $title, programDate: $programDate)';
+    return 'MainPageListItem(imageUrl: $imageUrl, title: $title, info1: $info1, info2: $info2)';
   }
 
   @override
@@ -152,18 +150,15 @@ class _$_MainPageListItem implements _MainPageListItem {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_MainPageListItem &&
-            (identical(other.stationName, stationName) ||
-                other.stationName == stationName) &&
             (identical(other.imageUrl, imageUrl) ||
                 other.imageUrl == imageUrl) &&
             (identical(other.title, title) || other.title == title) &&
-            (identical(other.programDate, programDate) ||
-                other.programDate == programDate));
+            (identical(other.info1, info1) || other.info1 == info1) &&
+            (identical(other.info2, info2) || other.info2 == info2));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, stationName, imageUrl, title, programDate);
+  int get hashCode => Object.hash(runtimeType, imageUrl, title, info1, info2);
 
   @JsonKey(ignore: true)
   @override
@@ -174,19 +169,19 @@ class _$_MainPageListItem implements _MainPageListItem {
 
 abstract class _MainPageListItem implements MainPageListItem {
   factory _MainPageListItem(
-      {required final String stationName,
-      required final String imageUrl,
+      {required final String imageUrl,
       required final String title,
-      required final String programDate}) = _$_MainPageListItem;
+      required final String info1,
+      required final String info2}) = _$_MainPageListItem;
 
-  @override
-  String get stationName;
   @override
   String get imageUrl;
   @override
   String get title;
   @override
-  String get programDate;
+  String get info1;
+  @override
+  String get info2;
   @override
   @JsonKey(ignore: true)
   _$$_MainPageListItemCopyWith<_$_MainPageListItem> get copyWith =>

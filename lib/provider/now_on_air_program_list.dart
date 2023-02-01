@@ -10,8 +10,7 @@ import 'package:xml/xml.dart';
 
 Timer? _timer;
 
-final nowOnAirProgramListProvider =
-    FutureProvider<Map<String, Program>>((ref) async {
+final nowOnAirProgramListProvider = FutureProvider<List<Program>>((ref) async {
   final authInfo = await ref.watch(authProvider.future);
   final url =
       Uri.parse('https://radiko.jp/v3/program/now/${authInfo.areaId}.xml');
@@ -24,16 +23,23 @@ final nowOnAirProgramListProvider =
   final root = XmlDocument.parse(body).findAllElements('stations').first;
 
   final now = DateTime.now();
-  final result = <String, Program>{};
+  final result = <Program>[];
   root.findElements('station').forEach((element) {
     final stationId =
         element.attributes.firstWhere((p0) => p0.name == XmlName('id')).value;
+    final stationName = element.findElements('name').first.text;
 
     final programs = element
         .findElements('progs')
         .first
         .findElements('prog')
-        .map<Program>(Program.fromElement)
+        .map<Program>(
+          (element) => Program.from(
+            stationId: stationId,
+            stationName: stationName,
+            programElement: element,
+          ),
+        )
         .toList();
 
     final program = programs.firstWhereOrNull((element) {
@@ -41,15 +47,15 @@ final nowOnAirProgramListProvider =
           (element.startDate.isBefore(now) && element.endDate.isAfter(now));
     });
     if (program != null) {
-      result[stationId] = program;
+      result.add(program);
     }
   });
 
   if (ref.read(selectedStationIdProvider.notifier).state == null) {
-    ref.read(selectedStationIdProvider.notifier).state = result.keys.first;
+    ref.read(selectedStationIdProvider.notifier).state = result.first.stationId;
   }
 
-  _setRefreshTimer(ref, result.values.toList());
+  _setRefreshTimer(ref, result.toList());
 
   return result;
 });

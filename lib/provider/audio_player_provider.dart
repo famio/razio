@@ -2,7 +2,6 @@ import 'package:audio_service/audio_service.dart';
 import 'package:fudiko/provider/auth_provider.dart';
 import 'package:fudiko/provider/is_playing_provider.dart';
 import 'package:fudiko/provider/selected_station_on_air_program_provider.dart';
-import 'package:fudiko/provider/selected_station_provider.dart';
 import 'package:fudiko/provider/selected_station_stream_url_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:just_audio/just_audio.dart';
@@ -23,14 +22,15 @@ final audioPlayerProvier = Provider((ref) {
             };
             final selectedProgram =
                 ref.read(selectedStationOnAirProgramProvider);
-            final selectedStation = ref.read(selectedStationProvider);
             await audioPlayer.setAudioSource(
               AudioSource.uri(
                 Uri.parse(data),
                 headers: header,
                 tag: MediaItem(
                   id: selectedProgram == null ? '' : selectedProgram.id,
-                  album: selectedStation == null ? '' : selectedStation.name,
+                  album: selectedProgram == null
+                      ? ''
+                      : selectedProgram.stationName,
                   title: selectedProgram == null ? '' : selectedProgram.title,
                   artUri: selectedProgram == null
                       ? null

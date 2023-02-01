@@ -14,9 +14,18 @@ class _ProgramList extends ConsumerWidget {
     const itemInnerPadding = 8.0;
     final scrollController = FixedExtentScrollController();
 
+    PageStorageKey<String>? pageStorageKey(MainPageListMode listMode) {
+      switch (listMode) {
+        case MainPageListMode.live:
+          return const PageStorageKey('live_program_list');
+        case MainPageListMode.search:
+          return null;
+      }
+    }
+
     return NotificationListener<ScrollNotification>(
       child: ClickableListWheelScrollView(
-        key: const PageStorageKey('live_program_list'),
+        key: pageStorageKey(ref.read(mainPageListModeProvider)),
         scrollController: scrollController,
         itemHeight: itemHeight,
         itemCount: programs.length,
@@ -68,7 +77,7 @@ class _ProgramList extends ConsumerWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            ref.read(stationListProvider).value![index].name,
+                            program.info1,
                             style: AppTextStyle.bodySmall(context)
                                 .secondary(context)
                                 .regular
@@ -77,7 +86,7 @@ class _ProgramList extends ConsumerWidget {
                           ),
                           Text(
                             // ignore: lines_longer_than_80_chars
-                            program.programDate,
+                            program.info2,
                             style: AppTextStyle.bodySmall(context)
                                 .secondary(context)
                                 .copyWith(height: 1.3),

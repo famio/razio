@@ -3,10 +3,12 @@ import 'package:flutter/rendering.dart';
 import 'package:fudiko/app_text_style.dart';
 import 'package:fudiko/router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 
 void main() async {
   debugPaintSizeEnabled = false;
+  await initializeDateFormatting('ja_JP');
   await JustAudioBackground.init(
     androidNotificationChannelId: 'dev.famio.fudiko.channel.audio',
     androidNotificationChannelName: 'Audio playback',

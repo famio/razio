@@ -8,21 +8,20 @@ part 'main_page_list_item.freezed.dart';
 @freezed
 class MainPageListItem with _$MainPageListItem {
   factory MainPageListItem({
-    required String stationName,
     required String imageUrl,
     required String title,
-    required String programDate,
+    required String info1,
+    required String info2,
   }) = _MainPageListItem;
 
-  factory MainPageListItem.fromElement({
-    required String stationName,
+  factory MainPageListItem.fromProgram({
     required Program program,
   }) {
     return MainPageListItem(
-      stationName: stationName,
       imageUrl: program.img,
       title: program.title,
-      programDate:
+      info1: program.stationName,
+      info2:
           '${dateFormat.format(program.startDate)} ~ ${dateFormat.format(program.endDate)}',
     );
   }
@@ -31,15 +30,13 @@ class MainPageListItem with _$MainPageListItem {
     required SearchProgram program,
   }) {
     return MainPageListItem(
-      stationName: program.stationId,
       imageUrl: program.img.toString(),
       title: program.title,
-      programDate:
-          '${searchResultFormat.format(program.startTime)} ~ ${dateFormat.format(program.endTime)}',
+      info1: DateFormat.MEd('ja').format(program.startTime),
+      info2:
+          '${dateFormat.format(program.startTime)} ~ ${dateFormat.format(program.endTime)}',
     );
   }
 
   static final dateFormat = DateFormat.Hm();
-
-  static final searchResultFormat = DateFormat.Md().add_Hm();
 }

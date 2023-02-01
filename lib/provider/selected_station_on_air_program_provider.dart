@@ -9,8 +9,10 @@ final selectedStationOnAirProgramProvider = Provider<Program?>((ref) {
     return null;
   }
   final programs = ref.watch(nowOnAirProgramListProvider);
+
   final program = programs.whenOrNull(
-    data: (data) => data[selectedStationId],
+    data: (data) =>
+        data.firstWhere((element) => element.stationId == selectedStationId),
   );
   return program;
 });

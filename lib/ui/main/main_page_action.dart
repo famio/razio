@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fudiko/logger.dart';
+import 'package:fudiko/provider/editing_search_text_provider.dart';
 import 'package:fudiko/provider/main_page_list_mode_provider.dart';
 import 'package:fudiko/provider/now_on_air_program_list.dart';
 import 'package:fudiko/provider/search_bar_controller_provider.dart';
@@ -39,7 +40,7 @@ class MainPageAction extends StateNotifier<void> {
             return;
           }
           _ref.read(selectedStationIdProvider.notifier).state =
-              programList.keys.toList()[index];
+              programList[index].stationId;
           break;
         case MainPageListMode.search:
           break;
@@ -66,6 +67,7 @@ class MainPageAction extends StateNotifier<void> {
     primaryFocus?.unfocus();
     _ref.read(mainPageListModeProvider.notifier).state = MainPageListMode.live;
     _ref.read(searchKeywordProvider.notifier).state = '';
+    _ref.read(editingSearchTextProvider.notifier).state = '';
     _ref.read(searchBarControllerProvider).clear();
   }
 }

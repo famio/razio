@@ -13,7 +13,6 @@ import 'package:fudiko/provider/main_page_list_mode_provider.dart';
 import 'package:fudiko/provider/safearea_provider.dart';
 import 'package:fudiko/provider/search_bar_controller_provider.dart';
 import 'package:fudiko/provider/search_editing_provider.dart';
-import 'package:fudiko/provider/station_list_provider.dart';
 import 'package:fudiko/ui/component/bouncing.dart';
 import 'package:fudiko/ui/main/main_page_action.dart';
 import 'package:fudiko/util.dart';

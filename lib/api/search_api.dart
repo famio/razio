@@ -5,14 +5,24 @@ import 'package:crypto/crypto.dart';
 import 'package:fudiko/entity/search.dart';
 import 'package:http/http.dart' as http;
 
+enum SearchFilter {
+  past('past'),
+  future('future'),
+  ;
+
+  const SearchFilter(this.value);
+  final String value;
+}
+
 class SearchApi {
   Future<Search> fetch({
     required String keyword,
     required String areaId,
+    SearchFilter? filter,
   }) async {
     final queryParams = <String, dynamic>{
       'key': keyword,
-      'filter': '',
+      'filter': filter == null ? '' : filter.value,
       'start_day': '',
       'end_day': '',
       'area_id': areaId,

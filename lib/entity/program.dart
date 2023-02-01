@@ -1,10 +1,24 @@
 import 'package:xml/xml.dart';
 
 class Program {
-  Program._(this.id, this.startTime, this.endTime, this.title, this.img);
+  Program._(
+    this.stationId,
+    this.stationName,
+    this.id,
+    this.startTime,
+    this.endTime,
+    this.title,
+    this.img,
+  );
 
-  factory Program.fromElement(XmlElement programElement) {
+  factory Program.from({
+    required String stationId,
+    required String stationName,
+    required XmlElement programElement,
+  }) {
     return Program._(
+      stationId,
+      stationName,
       programElement.attributes
           .firstWhere((p0) => p0.name == XmlName('id'))
           .value,
@@ -18,6 +32,9 @@ class Program {
       programElement.findElements('img').first.text,
     );
   }
+
+  String stationId;
+  String stationName;
   String id;
   String startTime;
   String endTime;
