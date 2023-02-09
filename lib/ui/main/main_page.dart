@@ -46,22 +46,26 @@ class MainPage extends HookConsumerWidget {
           Column(
             children: [
               Expanded(
-                child: Stack(
-                  children: [
-                    const Center(
-                      child: _HighlightBar(height: itemHeight),
-                    ),
-                    itemList.when(
-                      data: (v) => _ProgramList(
-                        programs: v,
-                        itemHeight: itemHeight,
-                      ),
-                      loading: () => const Text(''),
-                      error: (error, stack) => Center(
-                        child: Text(error.toString()),
-                      ),
-                    )
-                  ],
+                child: itemList.when(
+                  data: (v) => v.isEmpty
+                      ? const Center(
+                          child: Text('Program not found'),
+                        )
+                      : Stack(
+                          children: [
+                            const Center(
+                              child: _HighlightBar(height: itemHeight),
+                            ),
+                            _ProgramList(
+                              programs: v,
+                              itemHeight: itemHeight,
+                            ),
+                          ],
+                        ),
+                  loading: () => const Text(''),
+                  error: (error, stack) => Center(
+                    child: Text(error.toString()),
+                  ),
                 ),
               ),
               const Divider(
