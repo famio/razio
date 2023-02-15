@@ -57,6 +57,9 @@ class MainPage extends HookConsumerWidget {
                               child: _HighlightBar(height: itemHeight),
                             ),
                             _ProgramList(
+                              shouldShowEmptyItem:
+                                  ref.read(mainPageListModeProvider) ==
+                                      MainPageListMode.search,
                               programs: v,
                               itemHeight: itemHeight,
                             ),
