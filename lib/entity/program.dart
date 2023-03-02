@@ -19,15 +19,9 @@ class Program {
     return Program._(
       stationId,
       stationName,
-      programElement.attributes
-          .firstWhere((p0) => p0.name == XmlName('id'))
-          .value,
-      programElement.attributes
-          .firstWhere((p0) => p0.name == XmlName('ft'))
-          .value,
-      programElement.attributes
-          .firstWhere((p0) => p0.name == XmlName('to'))
-          .value,
+      programElement.getAttribute('id')!,
+      programElement.getAttribute('ft')!,
+      programElement.getAttribute('to')!,
       programElement.findElements('title').first.text,
       programElement.findElements('img').first.text,
     );

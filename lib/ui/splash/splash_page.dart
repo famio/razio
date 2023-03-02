@@ -17,7 +17,7 @@ class SplashPage extends ConsumerWidget {
                 WidgetsBinding.instance.addPostFrameCallback((_) {
                   ref.read(nativeSafeAreaProvider.notifier).state =
                       MediaQuery.of(context).padding;
-                  context.replaceNamed(MainPage.routeName);
+                  context.pushReplacementNamed(MainPage.routeName);
                 });
                 return const Text('');
               },

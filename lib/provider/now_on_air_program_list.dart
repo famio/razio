@@ -25,8 +25,10 @@ final nowOnAirProgramListProvider = FutureProvider<List<Program>>((ref) async {
   final now = DateTime.now();
   final result = <Program>[];
   root.findElements('station').forEach((element) {
-    final stationId =
-        element.attributes.firstWhere((p0) => p0.name == XmlName('id')).value;
+    final stationId = element.getAttribute('id');
+    if (stationId == null) {
+      return;
+    }
     final stationName = element.findElements('name').first.text;
 
     final programs = element
