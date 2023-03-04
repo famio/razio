@@ -22,7 +22,7 @@ class MainPageListItem with _$MainPageListItem {
       title: program.title,
       info1: program.stationName,
       info2:
-          '${dateFormat.format(program.startDate)} ~ ${dateFormat.format(program.endDate)}',
+          '${dateFormat.format(program.startDate)} ~ ${dateFormat.format(program.endDate)}', // ignore: lines_longer_than_80_chars
     );
   }
 
@@ -34,7 +34,7 @@ class MainPageListItem with _$MainPageListItem {
       title: program.title,
       info1: DateFormat.MEd('ja').format(program.startTime),
       info2:
-          '${dateFormat.format(program.startTime)} ~ ${dateFormat.format(program.endTime)}',
+          '${dateFormat.format(program.startTime)} ~ ${dateFormat.format(program.endTime)}', // ignore: lines_longer_than_80_chars
     );
   }
 
