@@ -11,6 +11,9 @@ class _ProgramList extends ConsumerWidget {
   final List<MainPageListItem> programs;
   final double itemHeight;
 
+  int get _itemCount =>
+      shouldShowEmptyItem ? programs.length + 1 : programs.length;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final scrollController = FixedExtentScrollController();
@@ -29,7 +32,7 @@ class _ProgramList extends ConsumerWidget {
         key: pageStorageKey(ref.read(mainPageListModeProvider)),
         scrollController: scrollController,
         itemHeight: itemHeight,
-        itemCount: shouldShowEmptyItem ? programs.length + 1 : programs.length,
+        itemCount: _itemCount,
         onItemTapCallback: (index) {
           ref.read(mainPageActionProvider.notifier).onItemTapCallback(index);
         },
@@ -54,7 +57,7 @@ class _ProgramList extends ConsumerWidget {
                 return _ProgramListItem(item: program);
               }
             },
-            childCount: programs.length,
+            childCount: _itemCount,
           ),
         ),
       ),
@@ -109,7 +112,6 @@ class _ProgramListItem extends ConsumerWidget {
                   maxLines: 1,
                 ),
                 Text(
-                  // ignore: lines_longer_than_80_chars
                   item.info2,
                   style: AppTextStyle.bodySmall(context)
                       .secondary(context)
