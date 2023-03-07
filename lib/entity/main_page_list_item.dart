@@ -38,5 +38,7 @@ class MainPageListItem with _$MainPageListItem {
     );
   }
 
+  String get key => title + info1 + info2;
+
   static final dateFormat = DateFormat.Hm();
 }

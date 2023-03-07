@@ -76,7 +76,7 @@ class _ProgramListItem extends ConsumerWidget {
     return Padding(
       padding: const EdgeInsets.all(itemInnerPadding),
       child: Row(
-        // key: ValueKey(program.id),
+        key: ValueKey(item.key),
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ClipRRect(
