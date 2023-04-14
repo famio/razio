@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:fudiko/const.dart';
 import 'package:fudiko/entity/auth2.dart';
 import 'package:http/http.dart' as http;
 
@@ -19,7 +20,7 @@ class Auth2Api {
     final auth2Request = http.Request('get', auth2Url);
     final auth2Header = {
       'content-type': 'application/json',
-      'X-Radiko-AuthToken': authToken,
+      HeaderKey.authtoken.value: authToken,
       'X-Radiko-PartialKey': partialKey,
       'X-Radiko-User': 'dummy_user',
       'X-Radiko-Device': 'pc'

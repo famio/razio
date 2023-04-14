@@ -1,3 +1,4 @@
+import 'package:fudiko/const.dart';
 import 'package:fudiko/provider/auth_provider.dart';
 import 'package:fudiko/provider/selected_station_id_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -18,7 +19,7 @@ final selectedStationStreamUrlProvider = FutureProvider<String?>((ref) async {
   );
   final request = http.Request('get', url);
   final header = {
-    'X-Radiko-AuthToken': authinfoData.value.authToken,
+    HeaderKey.authtoken.value: authinfoData.value.authToken,
   };
   request.headers.clear();
   request.headers.addAll(header);

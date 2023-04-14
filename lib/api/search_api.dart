@@ -1,8 +1,7 @@
 import 'dart:convert';
-import 'dart:math' as math;
 
-import 'package:crypto/crypto.dart';
 import 'package:fudiko/entity/search.dart';
+import 'package:fudiko/util.dart';
 import 'package:http/http.dart' as http;
 
 enum SearchFilter {
@@ -52,13 +51,5 @@ class SearchApi {
     final body = await response.stream.bytesToString();
     final json = jsonDecode(body) as Map<String, dynamic>;
     return Search.fromJson(json);
-  }
-
-  String generateUid() {
-    final random = math.Random().nextDouble() * 1000000000;
-    final diff = DateTime.now().difference(DateTime.utc(1970)).inSeconds * 1000;
-    return md5
-        .convert(utf8.encode((random.toInt() + diff).toString()))
-        .toString();
   }
 }
