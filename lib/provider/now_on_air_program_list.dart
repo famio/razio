@@ -53,8 +53,9 @@ final nowOnAirProgramListProvider = FutureProvider<List<Program>>((ref) async {
     }
   });
 
-  if (ref.read(selectedStationIdProvider.notifier).state == null) {
-    ref.read(selectedStationIdProvider.notifier).state = result.first.stationId;
+  if (ref.read(selectedLiveStationIdProvider.notifier).state == null) {
+    ref.read(selectedLiveStationIdProvider.notifier).state =
+        result.first.stationId;
   }
 
   _setRefreshTimer(ref, result.toList());

@@ -13,11 +13,13 @@ class _PlayButton extends ConsumerWidget {
         width: size,
         height: size,
         child: Icon(
-          isPlaying ? Icons.pause : Icons.play_arrow,
+          isPlaying.value == true ? Icons.pause : Icons.play_arrow,
           size: 50,
         ),
       ),
-      onPress: () => ref.read(isPlayingProvider.notifier).state ^= true,
+      onPress: () {
+        ref.read(mainPageActionProvider.notifier).onPlayButton();
+      },
     );
   }
 }

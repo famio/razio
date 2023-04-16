@@ -3,12 +3,14 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fudiko/logger.dart';
+import 'package:fudiko/provider/audio_player_provider.dart';
 import 'package:fudiko/provider/editing_search_text_provider.dart';
 import 'package:fudiko/provider/main_page_list_mode_provider.dart';
 import 'package:fudiko/provider/now_on_air_program_list.dart';
 import 'package:fudiko/provider/search_bar_controller_provider.dart';
 import 'package:fudiko/provider/search_keyword_provider.dart';
 import 'package:fudiko/provider/search_result_list_provider.dart';
+import 'package:fudiko/provider/selected_search_program_provider.dart';
 import 'package:fudiko/provider/selected_station_id_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -39,13 +41,42 @@ class MainPageAction extends StateNotifier<void> {
           if (programList == null) {
             return;
           }
-          _ref.read(selectedStationIdProvider.notifier).state =
-              programList[index].stationId;
+          final stationId = programList[index].stationId;
+          _ref.read(selectedLiveStationIdProvider.notifier).state = stationId;
           break;
         case MainPageListMode.search:
+          if (index == 0) {
+            // TODO: ライブ放送側で選択している番組を再生
+            return;
+          } else {
+            final fixedIndex = index - 1;
+            final program = _ref
+                .read(searchResultListProvider)
+                .whenData((value) => value[fixedIndex])
+                .value;
+            if (program == null) {
+              return;
+            }
+            _ref.read(selectedSearchProgramProvider.notifier).state = program;
+          }
           break;
       }
     });
+  }
+
+  Future<void> onPlayButton() async {
+    if (audioPlayer.playing) {
+      switch (_ref.read(mainPageListModeProvider.notifier).state) {
+        case MainPageListMode.live:
+          await audioPlayer.stop();
+          break;
+        case MainPageListMode.search:
+          await audioPlayer.pause();
+          break;
+      }
+    } else {
+      await audioPlayer.play();
+    }
   }
 
   /// 各アイテムのタップ時に呼ばれる
