@@ -3,7 +3,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fudiko/logger.dart';
+import 'package:fudiko/provider/app_lifecycle_provider.dart';
 import 'package:fudiko/provider/audio_player_provider.dart';
+import 'package:fudiko/provider/auth_provider.dart';
 import 'package:fudiko/provider/editing_search_text_provider.dart';
 import 'package:fudiko/provider/main_page_list_mode_provider.dart';
 import 'package:fudiko/provider/now_on_air_program_list.dart';
@@ -16,6 +18,22 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final mainPageActionProvider =
     StateNotifierProvider<MainPageAction, void>((ref) {
+  // アプリがForegroundになったら認証情報を更新する
+  ref.listen<AppLifecycleState>(
+    appLifecycleProvider,
+    (previous, next) {
+      switch (next) {
+        case AppLifecycleState.resumed:
+          final _ = ref.refresh(authProvider);
+          break;
+        case AppLifecycleState.inactive:
+        case AppLifecycleState.paused:
+        case AppLifecycleState.detached:
+          break;
+      }
+    },
+  );
+
   return MainPageAction(ref);
 });
 
