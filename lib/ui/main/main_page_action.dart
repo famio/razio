@@ -64,8 +64,12 @@ class MainPageAction extends StateNotifier<void> {
           break;
         case MainPageListMode.search:
           if (index == 0) {
-            // TODO: ライブ放送側で選択している番組を再生
-            return;
+            // selectedLiveStationIdを同じ値で更新することで、Live放送側の番組を再生する
+            final selectedLiveStationId =
+                _ref.read(selectedLiveStationIdProvider.notifier).state;
+            _ref.read(selectedLiveStationIdProvider.notifier).state = null;
+            _ref.read(selectedLiveStationIdProvider.notifier).state =
+                selectedLiveStationId;
           } else {
             final fixedIndex = index - 1;
             final program = _ref
