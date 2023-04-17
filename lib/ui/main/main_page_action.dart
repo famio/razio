@@ -70,6 +70,8 @@ class MainPageAction extends StateNotifier<void> {
             _ref.read(selectedLiveStationIdProvider.notifier).state = null;
             _ref.read(selectedLiveStationIdProvider.notifier).state =
                 selectedLiveStationId;
+            // Live放送側の番組を再生するため、selectedSearchProgramをnullにする
+            _ref.read(selectedSearchProgramProvider.notifier).state = null;
           } else {
             final fixedIndex = index - 1;
             final program = _ref

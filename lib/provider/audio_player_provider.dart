@@ -35,6 +35,10 @@ final audioPlayerProvier = Provider((ref) {
       // SearchモードからLiveモードに帰ってきた時に、選択していたStationを再度再生する
       if (previous == MainPageListMode.search &&
           next == MainPageListMode.live) {
+        // selectedSearchProgramProviderがnull = すでにLive放送を再生中
+        if (ref.read(selectedSearchProgramProvider.notifier).state == null) {
+          return;
+        }
         final stationId = ref.read(selectedLiveStationIdProvider);
         if (stationId == null) {
           return;
