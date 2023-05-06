@@ -8,18 +8,17 @@ class _PlayButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isPlaying = ref.watch(isPlayingProvider);
+    final icon = isPlaying.value == true
+        ? Assets.images.iconPause
+        : Assets.images.iconPlay;
     return Bouncing(
-      child: SizedBox(
-        width: size,
-        height: size,
-        child: Icon(
-          isPlaying.value == true ? Icons.pause : Icons.play_arrow,
-          size: 50,
+      child: icon.svg(
+        colorFilter: ColorFilter.mode(
+          AppColor.icon(context),
+          BlendMode.srcIn,
         ),
       ),
-      onPress: () {
-        ref.read(mainPageActionProvider.notifier).onPlayButton();
-      },
+      onPress: () => ref.read(mainPageActionProvider.notifier).onPlayButton(),
     );
   }
 }
