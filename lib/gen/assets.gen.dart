@@ -3,25 +3,33 @@
 ///  FlutterGen
 /// *****************************************************
 
-import 'package:flutter/services.dart';
 // coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: directives_ordering,unnecessary_import,implicit_dynamic_list_literal,deprecated_member_use
 
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter/services.dart';
 
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/icon_pause.svg
+  SvgGenImage get iconPause =>
+      const SvgGenImage('assets/images/icon_pause.svg');
+
   /// File path: assets/images/icon_play.svg
   SvgGenImage get iconPlay => const SvgGenImage('assets/images/icon_play.svg');
+
+  /// File path: assets/images/icon_play_old.svg
+  SvgGenImage get iconPlayOld =>
+      const SvgGenImage('assets/images/icon_play_old.svg');
 
   /// File path: assets/images/icon_stop.svg
   SvgGenImage get iconStop => const SvgGenImage('assets/images/icon_stop.svg');
 
   /// List of all assets
-  List<SvgGenImage> get values => [iconPlay, iconStop];
+  List<SvgGenImage> get values => [iconPause, iconPlay, iconPlayOld, iconStop];
 }
 
 class Assets {
@@ -88,7 +96,16 @@ class AssetGenImage {
     );
   }
 
-  ImageProvider provider() => AssetImage(_assetName);
+  ImageProvider provider({
+    AssetBundle? bundle,
+    String? package,
+  }) {
+    return AssetImage(
+      _assetName,
+      bundle: bundle,
+      package: package,
+    );
+  }
 
   String get path => _assetName;
 
@@ -115,9 +132,9 @@ class SvgGenImage {
     bool excludeFromSemantics = false,
     SvgTheme theme = const SvgTheme(),
     ColorFilter? colorFilter,
+    Clip clipBehavior = Clip.hardEdge,
     @deprecated Color? color,
     @deprecated BlendMode colorBlendMode = BlendMode.srcIn,
-    @deprecated Clip? clipBehavior,
     @deprecated bool cacheColorFilter = false,
   }) {
     return SvgPicture.asset(
@@ -138,7 +155,7 @@ class SvgGenImage {
       colorFilter: colorFilter,
       color: color,
       colorBlendMode: colorBlendMode,
-      clipBehavior: clipBehavior!,
+      clipBehavior: clipBehavior,
       cacheColorFilter: cacheColorFilter,
     );
   }
