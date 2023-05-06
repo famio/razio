@@ -105,17 +105,12 @@ class _ProgramListItem extends ConsumerWidget {
               children: [
                 Text(
                   item.info1,
-                  style: AppTextStyle.bodySmall(context)
-                      .secondary(context)
-                      .regular
-                      .copyWith(height: 1.3),
+                  style: AppTextStyle.bodySmall(context).copyWith(height: 1.3),
                   maxLines: 1,
                 ),
                 Text(
                   item.info2,
-                  style: AppTextStyle.bodySmall(context)
-                      .secondary(context)
-                      .copyWith(height: 1.3),
+                  style: AppTextStyle.bodySmall(context).copyWith(height: 1.3),
                   maxLines: 1,
                 ),
                 const SizedBox(

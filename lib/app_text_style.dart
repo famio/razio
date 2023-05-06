@@ -66,10 +66,6 @@ extension AppTextStyle on TextStyle {
 }
 
 extension TextStyleExtension on TextStyle {
-  TextStyle get regular {
-    return copyWith(fontWeight: FontWeight.w400);
-  }
-
   TextStyle get bold {
     return copyWith(fontWeight: FontWeight.w700);
   }

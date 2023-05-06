@@ -1,10 +1,15 @@
+import 'dart:math';
+
+import 'package:animated_background/animated_background.dart';
 import 'package:blur/blur.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:clickable_list_wheel_view/clickable_list_wheel_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:fudiko/app_color.dart';
 import 'package:fudiko/app_text_style.dart';
 import 'package:fudiko/entity/main_page_list_item.dart';
+import 'package:fudiko/gen/assets.gen.dart';
 import 'package:fudiko/provider/audio_player_provider.dart';
 import 'package:fudiko/provider/editing_search_text_provider.dart';
 import 'package:fudiko/provider/is_playing_provider.dart';
@@ -18,6 +23,7 @@ import 'package:fudiko/ui/main/main_page_action.dart';
 import 'package:fudiko/util.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+part 'background.dart';
 part 'bottom_view.dart';
 part 'highlight_bar.dart';
 part 'play_button.dart';
@@ -42,6 +48,8 @@ class MainPage extends HookConsumerWidget {
       resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
+          // Background
+          const _BackGround(),
           // List, Divider, BottomView
           Column(
             children: [
@@ -73,6 +81,7 @@ class MainPage extends HookConsumerWidget {
               ),
               const Divider(
                 height: 8,
+                thickness: 1.5,
                 indent: 8,
                 endIndent: 8,
               ),

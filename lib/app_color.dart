@@ -4,12 +4,6 @@ import 'package:fudiko/util.dart';
 extension AppColor on Color {
   static const accent = Color(0xffFF6D25);
 
-  static const _borderLight = Color(0xffBEBEBE);
-  static const _borderDark = Color(0xff222222);
-  static Color border(BuildContext context) {
-    return isLightMode(context) ? AppColor._borderLight : AppColor._borderDark;
-  }
-
   static const backgroundLight = Color(0xffFFFFFF);
   static const backgroundDark = Color(0xff000000);
   static Color background(BuildContext context) {
@@ -19,10 +13,13 @@ extension AppColor on Color {
   }
 
   static const dividerLight = Color(0xff000000);
-  static const dividerDark = Color(0xff626262);
+  static const dividerDark = Color(0x66FFFFFF);
+  static Color divider(BuildContext context) {
+    return isLightMode(context) ? AppColor.dividerLight : AppColor.dividerDark;
+  }
 
   static const textPrimaryLight = Color(0xff4E4E4E);
-  static const textPrimaryDark = Color(0xffDCDCDC);
+  static const textPrimaryDark = Color(0xffFFFFFF);
   static Color textPrimary(BuildContext context) {
     return isLightMode(context)
         ? AppColor.textPrimaryLight
