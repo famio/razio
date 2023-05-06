@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg stroke-miterlimit="10" style="fill-rule:nonzero;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;" version="1.1" viewBox="0 0 52 52" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<defs/>
-<g id="path">
-<path d="M26 0C11.6406 0 1.73458e-07 11.6406 0 26C0 40.3594 11.6406 52 26 52C40.3594 52 52 40.3594 52 26C52 11.6406 40.3594 1.73458e-07 26 0ZM20.5 15.125C20.7992 14.9591 21.1982 14.9481 21.5312 15.1562L37.5312 25.1562C38.1579 25.5479 38.1579 26.4521 37.5312 26.8438C36.5312 27.4688 21.5312 36.8438 21.5312 36.8438C20.8652 37.26 20 36.7854 20 36L20 16C20 15.6073 20.2008 15.2909 20.5 15.125Z" fill="#ff6d25" fill-rule="nonzero" opacity="1" stroke="none"/>
+<!-- Created with Vectornator (http://vectornator.io/) -->
+<svg height="100%" stroke-miterlimit="10" style="fill-rule:nonzero;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;" version="1.1" viewBox="0 0 50 50" width="100%" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+<path d="M35.331 29.0166L22.4437 37.0498C18.8849 39.2682 16 37.4699 16 33.0332L16 16.9668C16 12.5301 18.8849 10.7318 22.4437 12.9502L35.331 20.9834C38.8897 23.2017 38.8897 26.7983 35.331 29.0166Z" id="Fill"/>
+</defs>
+<g id="icon_play">
+<g opacity="1">
+<mask height="30" id="StrokeMask" maskUnits="userSpaceOnUse" width="26" x="14" y="10">
+<rect fill="#ffffff" height="30" stroke="none" width="26" x="14" y="10"/>
+<use fill="#000000" fill-rule="evenodd" stroke="none" xlink:href="#Fill"/>
+</mask>
+<use fill="none" mask="url(#StrokeMask)" stroke="#000000" stroke-linecap="butt" stroke-linejoin="round" stroke-width="4" xlink:href="#Fill"/>
+</g>
 </g>
 </svg>
