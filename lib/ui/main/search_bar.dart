@@ -26,7 +26,7 @@ class _SearchBarState extends ConsumerState<_SearchBar> {
   @override
   Widget build(BuildContext context) {
     final border = OutlineInputBorder(
-      borderSide: const BorderSide(color: Colors.transparent),
+      borderSide: BorderSide(color: AppColor.divider(context)),
       borderRadius: BorderRadius.circular(8),
     );
 
@@ -34,13 +34,15 @@ class _SearchBarState extends ConsumerState<_SearchBar> {
 
     return Stack(
       children: [
-        Container(
-          height: 48,
-        ).frosted(
+        Blur(
           blur: 4,
-          frostOpacity: 0.4,
-          frostColor: AppColor.frost(context),
+          blurColor: AppColor.background(context),
+          colorOpacity: 0.2,
           borderRadius: border.borderRadius,
+          child: const SizedBox(
+            width: double.infinity,
+            height: 48,
+          ),
         ),
         Theme(
           data: Theme.of(context).copyWith(
