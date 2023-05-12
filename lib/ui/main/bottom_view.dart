@@ -8,12 +8,12 @@ class _BottomView extends ConsumerWidget {
     const iconSize = 50.0;
     return Column(
       children: [
-        SizedBox(
+        const SizedBox(
           width: double.infinity,
           height: 56,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: const [
+            children: [
               _PlayButton(size: iconSize),
             ],
           ),
