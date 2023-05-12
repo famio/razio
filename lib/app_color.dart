@@ -27,7 +27,7 @@ extension AppColor on Color {
   }
 
   static const _textSecondaryLight = Color(0xff515151);
-  static const _textSecondaryDark = Color(0xffA0A0A0);
+  static const _textSecondaryDark = Color(0xffDDDDDD);
   static Color textSecondary(BuildContext context) {
     return isLightMode(context)
         ? AppColor._textSecondaryLight
