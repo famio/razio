@@ -4,7 +4,8 @@ import 'package:fudiko/provider/now_on_air_program_list.dart';
 import 'package:fudiko/provider/search_result_list_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final mainPageListItemProvider = FutureProvider<List<MainPageListItem>>((ref) {
+final _mainPageListItemWrapperProvider =
+    FutureProvider<List<MainPageListItem>>((ref) {
   switch (ref.watch(mainPageListModeProvider)) {
     case MainPageListMode.live:
       return ref.watch(nowOnAirProgramListProvider.future).then(
@@ -21,4 +22,15 @@ final mainPageListItemProvider = FutureProvider<List<MainPageListItem>>((ref) {
                 .toList(),
           );
   }
+});
+
+final mainPageListItemProvider = Provider<List<MainPageListItem>>((ref) {
+  ref.listen(_mainPageListItemWrapperProvider, (previous, next) {
+    next.whenData((value) {
+      if (previous?.value != value) {
+        ref.state = value;
+      }
+    });
+  });
+  return [];
 });

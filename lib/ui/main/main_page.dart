@@ -15,6 +15,7 @@ import 'package:fudiko/provider/editing_search_text_provider.dart';
 import 'package:fudiko/provider/is_playing_provider.dart';
 import 'package:fudiko/provider/main_page_list_item_provider.dart';
 import 'package:fudiko/provider/main_page_list_mode_provider.dart';
+import 'package:fudiko/provider/main_page_state_provider.dart';
 import 'package:fudiko/provider/safearea_provider.dart';
 import 'package:fudiko/provider/search_bar_controller_provider.dart';
 import 'package:fudiko/provider/search_editing_provider.dart';
@@ -41,7 +42,7 @@ class MainPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     const itemHeight = 100.0;
 
-    final itemList = ref.watch(mainPageListItemProvider);
+    final state = ref.watch(mainPageStateProvider);
     ref.watch(audioPlayerProvier);
 
     return Scaffold(
@@ -54,30 +55,31 @@ class MainPage extends HookConsumerWidget {
           Column(
             children: [
               Expanded(
-                child: itemList.when(
-                  data: (v) => v.isEmpty
-                      ? const Center(
-                          child: Text('Program not found'),
-                        )
-                      : Stack(
-                          children: [
-                            const Center(
-                              child: _HighlightBar(height: itemHeight),
-                            ),
-                            _ProgramList(
-                              shouldShowEmptyItem:
-                                  ref.read(mainPageListModeProvider) ==
-                                      MainPageListMode.search,
-                              programs: v,
-                              itemHeight: itemHeight,
-                            ),
-                          ],
-                        ),
-                  loading: () => const Text(''),
-                  error: (error, stack) => Center(
-                    child: Text(error.toString()),
-                  ),
-                ),
+                child: (() {
+                  switch (state) {
+                    case MainPageState.loading:
+                      return const Text('');
+                    case MainPageState.error:
+                      return const Center(
+                        child: Text('Error :<'),
+                      );
+                    case MainPageState.list:
+                      return ref.watch(mainPageListItemProvider).isEmpty
+                          ? const Center(
+                              child: Text('Program not found'),
+                            )
+                          : const Stack(
+                              children: [
+                                Center(
+                                  child: _HighlightBar(height: itemHeight),
+                                ),
+                                _ProgramList(
+                                  itemHeight: itemHeight,
+                                ),
+                              ],
+                            );
+                  }
+                })(),
               ),
               const Divider(
                 height: 8,

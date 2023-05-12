@@ -13,37 +13,43 @@ class _BackGroundState extends State<_BackGround>
     with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
-    return OverflowClipping(
-      minWidth:
-          MediaQuery.of(context).size.width + _BackGround._spawnMaxRadius * 2,
-      minHeight:
-          MediaQuery.of(context).size.height + _BackGround._spawnMaxRadius * 2,
-      child: Transform.translate(
-        offset: const Offset(
-          -_BackGround._spawnMaxRadius,
-          -_BackGround._spawnMaxRadius,
-        ),
-        child: AnimatedBackground(
-          behaviour: RandomParticleBehaviour(
-            options: const ParticleOptions(
-              baseColor: Colors.white,
-              spawnMinSpeed: 10,
-              spawnMaxSpeed: 20,
-              spawnMinRadius: 50,
-              spawnMaxRadius: _BackGround._spawnMaxRadius,
-              minOpacity: 0.2,
-              opacityChangeRate: 0.1,
-              particleCount: 8,
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        final screenWidth = constraints.maxWidth;
+        final screenHeight = constraints.maxHeight;
+        return OverflowClipping(
+          key: GlobalKey(),
+          minWidth: screenWidth + _BackGround._spawnMaxRadius * 2,
+          minHeight: screenHeight + _BackGround._spawnMaxRadius * 2,
+          child: Transform.translate(
+            offset: const Offset(
+              -_BackGround._spawnMaxRadius,
+              -_BackGround._spawnMaxRadius,
+            ),
+            child: AnimatedBackground(
+              key: GlobalKey(),
+              behaviour: RandomParticleBehaviour(
+                options: const ParticleOptions(
+                  baseColor: Colors.white,
+                  spawnMinSpeed: 10,
+                  spawnMaxSpeed: 20,
+                  spawnMinRadius: 50,
+                  spawnMaxRadius: _BackGround._spawnMaxRadius,
+                  minOpacity: 0.2,
+                  opacityChangeRate: 0.1,
+                  particleCount: 8,
+                ),
+              ),
+              vsync: this,
+              child: const Blur(
+                blur: 30,
+                colorOpacity: 0,
+                child: SizedBox(),
+              ),
             ),
           ),
-          vsync: this,
-          child: const Blur(
-            blur: 30,
-            colorOpacity: 0,
-            child: SizedBox(),
-          ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

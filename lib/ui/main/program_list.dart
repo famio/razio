@@ -2,21 +2,19 @@ part of 'main_page.dart';
 
 class _ProgramList extends ConsumerWidget {
   const _ProgramList({
-    required this.shouldShowEmptyItem,
-    required this.programs,
     required this.itemHeight,
   });
 
-  final bool shouldShowEmptyItem;
-  final List<MainPageListItem> programs;
   final double itemHeight;
-
-  int get _itemCount =>
-      shouldShowEmptyItem ? programs.length + 1 : programs.length;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final scrollController = FixedExtentScrollController();
+    final programs = ref.watch(mainPageListItemProvider);
+    final listMode = ref.watch(mainPageListModeProvider);
+    final shouldShowEmptyItem = listMode == MainPageListMode.search;
+    final itemCount =
+        shouldShowEmptyItem ? programs.length + 1 : programs.length;
 
     PageStorageKey<String>? pageStorageKey(MainPageListMode listMode) {
       switch (listMode) {
@@ -32,7 +30,7 @@ class _ProgramList extends ConsumerWidget {
         key: pageStorageKey(ref.read(mainPageListModeProvider)),
         scrollController: scrollController,
         itemHeight: itemHeight,
-        itemCount: _itemCount,
+        itemCount: itemCount,
         onItemTapCallback: (index) {
           ref.read(mainPageActionProvider.notifier).onItemTapCallback(index);
         },
@@ -57,7 +55,7 @@ class _ProgramList extends ConsumerWidget {
                 return _ProgramListItem(item: program);
               }
             },
-            childCount: _itemCount,
+            childCount: itemCount,
           ),
         ),
       ),
