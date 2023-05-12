@@ -6,18 +6,14 @@
       "request": "launch",
       "type": "dart",
       "flutterMode": "debug",
-      "args": [
-        "--enable-impeller",
-      ]
+      "args": []
     },
     {
       "name": "release",
       "request": "launch",
       "type": "dart",
       "flutterMode": "release",
-      "args": [
-        "--enable-impeller",
-      ]
+      "args": []
     },
   ]
 }
