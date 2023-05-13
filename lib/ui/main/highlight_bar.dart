@@ -8,34 +8,9 @@ class _HighlightBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        border: Border.symmetric(
-          horizontal: BorderSide(color: AppColor.divider(context)),
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.2),
-            spreadRadius: 1,
-            blurRadius: blur,
-            offset: const Offset(-5, -5),
-          ),
-          BoxShadow(
-            color: Colors.black.withOpacity(0.2),
-            spreadRadius: 1,
-            blurRadius: blur,
-            offset: const Offset(5, 5),
-          ),
-        ],
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            Colors.black87.withOpacity(0.4),
-            Colors.black87.withOpacity(0.2),
-          ],
-        ),
-      ),
+    return Blur(
+      colorOpacity: 0.13,
+      borderRadius: BorderRadius.circular(16),
       child: SizedBox(
         width: double.infinity,
         height: height,
