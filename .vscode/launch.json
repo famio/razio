@@ -15,5 +15,12 @@
       "flutterMode": "release",
       "args": []
     },
+    {
+      "name": "profile",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "profile",
+      "args": []
+    },
   ]
 }
