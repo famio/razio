@@ -81,11 +81,14 @@ class MainPage extends HookConsumerWidget {
                   }
                 })(),
               ),
-              const Divider(
-                height: 8,
-                thickness: 1.5,
-                indent: 8,
-                endIndent: 8,
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 9),
+                child: Blur(
+                  blur: 4,
+                  colorOpacity: 0.3,
+                  borderRadius: BorderRadius.all(Radius.circular(1.5)),
+                  child: SizedBox(height: 3, width: double.infinity),
+                ),
               ),
               const _BottomView(),
             ],

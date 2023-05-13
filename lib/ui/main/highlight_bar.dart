@@ -4,13 +4,13 @@ class _HighlightBar extends StatelessWidget {
   const _HighlightBar({required this.height});
 
   final double height;
-  double get blur => 20;
 
   @override
   Widget build(BuildContext context) {
     return Blur(
+      blur: 4,
       colorOpacity: 0.13,
-      borderRadius: BorderRadius.circular(16),
+      borderRadius: const BorderRadius.all(Radius.circular(16)),
       child: SizedBox(
         width: double.infinity,
         height: height,

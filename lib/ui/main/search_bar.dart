@@ -25,9 +25,9 @@ class _SearchBarState extends ConsumerState<_SearchBar> {
 
   @override
   Widget build(BuildContext context) {
-    final border = OutlineInputBorder(
-      borderSide: BorderSide(color: AppColor.divider(context)),
-      borderRadius: BorderRadius.circular(8),
+    const border = OutlineInputBorder(
+      borderSide: BorderSide(color: Colors.transparent),
+      borderRadius: BorderRadius.all(Radius.circular(8)),
     );
 
     final editingSearchText = ref.watch(editingSearchTextProvider);
@@ -36,8 +36,7 @@ class _SearchBarState extends ConsumerState<_SearchBar> {
       children: [
         Blur(
           blur: 4,
-          blurColor: AppColor.background(context),
-          colorOpacity: 0.2,
+          colorOpacity: 0.13,
           borderRadius: border.borderRadius,
           child: const SizedBox(
             width: double.infinity,
