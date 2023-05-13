@@ -64,20 +64,16 @@ class MainPage extends HookConsumerWidget {
                         child: Text('Error :<'),
                       );
                     case MainPageState.list:
-                      return ref.watch(mainPageListItemProvider).isEmpty
-                          ? const Center(
-                              child: Text('Program not found'),
-                            )
-                          : const Stack(
-                              children: [
-                                Center(
-                                  child: _HighlightBar(height: itemHeight),
-                                ),
-                                _ProgramList(
-                                  itemHeight: itemHeight,
-                                ),
-                              ],
-                            );
+                      return const Stack(
+                        children: [
+                          Center(
+                            child: _HighlightBar(height: itemHeight),
+                          ),
+                          _ProgramList(
+                            itemHeight: itemHeight,
+                          ),
+                        ],
+                      );
                   }
                 })(),
               ),

@@ -12,9 +12,7 @@ class _ProgramList extends ConsumerWidget {
     final scrollController = FixedExtentScrollController();
     final programs = ref.watch(mainPageListItemProvider);
     final listMode = ref.watch(mainPageListModeProvider);
-    final shouldShowEmptyItem = listMode == MainPageListMode.search;
-    final itemCount =
-        shouldShowEmptyItem ? programs.length + 1 : programs.length;
+    final itemCount = programs.length;
 
     PageStorageKey<String>? pageStorageKey(MainPageListMode listMode) {
       switch (listMode) {
@@ -38,7 +36,6 @@ class _ProgramList extends ConsumerWidget {
           controller: scrollController,
           itemExtent: itemHeight,
           physics: const FixedExtentScrollPhysics(),
-          // overAndUnderCenterOpacity: 0.8,
           diameterRatio: 100,
           onSelectedItemChanged: (value) {
             ref
@@ -47,13 +44,13 @@ class _ProgramList extends ConsumerWidget {
           },
           childDelegate: ListWheelChildBuilderDelegate(
             builder: (context, index) {
-              if (index == 0 && shouldShowEmptyItem) {
-                return const SizedBox();
-              } else {
-                final fixedIndex = shouldShowEmptyItem ? index - 1 : index;
-                final program = programs[fixedIndex];
-                return _ProgramListItem(item: program);
-              }
+              final program = programs[index];
+              final opacity =
+                  listMode == MainPageListMode.search && index == 0 ? 0.5 : 1.0;
+              return Opacity(
+                opacity: opacity,
+                child: _ProgramListItem(item: program),
+              );
             },
             childCount: itemCount,
           ),
