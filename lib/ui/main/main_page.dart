@@ -29,6 +29,7 @@ part 'bottom_view.dart';
 part 'highlight_bar.dart';
 part 'play_button.dart';
 part 'program_list.dart';
+part 'search_background.dart';
 part 'search_bar.dart';
 
 class MainPage extends HookConsumerWidget {
@@ -89,6 +90,8 @@ class MainPage extends HookConsumerWidget {
               const _BottomView(),
             ],
           ),
+          // SearchBackground
+          const _SearchBackground(),
           // SearchBar
           SafeArea(
             left: false,
