@@ -21,15 +21,8 @@ class $AssetsImagesGen {
   /// File path: assets/images/icon_play.svg
   SvgGenImage get iconPlay => const SvgGenImage('assets/images/icon_play.svg');
 
-  /// File path: assets/images/icon_play_old.svg
-  SvgGenImage get iconPlayOld =>
-      const SvgGenImage('assets/images/icon_play_old.svg');
-
-  /// File path: assets/images/icon_stop.svg
-  SvgGenImage get iconStop => const SvgGenImage('assets/images/icon_stop.svg');
-
   /// List of all assets
-  List<SvgGenImage> get values => [iconPause, iconPlay, iconPlayOld, iconStop];
+  List<SvgGenImage> get values => [iconPause, iconPlay];
 }
 
 class Assets {

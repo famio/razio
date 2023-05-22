@@ -1,13 +1,13 @@
+import 'dart:async';
 import 'dart:math';
 
-import 'package:animated_background/animated_background.dart';
 import 'package:blur/blur.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:clickable_list_wheel_view/clickable_list_wheel_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:fudiko/app_color.dart';
 import 'package:fudiko/app_text_style.dart';
+import 'package:fudiko/entity/background_circle_parameters.dart';
 import 'package:fudiko/entity/main_page_list_item.dart';
 import 'package:fudiko/gen/assets.gen.dart';
 import 'package:fudiko/provider/audio_player_provider.dart';

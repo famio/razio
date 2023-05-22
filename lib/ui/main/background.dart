@@ -1,51 +1,24 @@
 part of 'main_page.dart';
 
-class _BackGround extends StatefulWidget {
+class _BackGround extends ConsumerWidget {
   const _BackGround();
-
-  static const double _spawnMaxRadius = 150;
-
   @override
-  _BackGroundState createState() => _BackGroundState();
-}
-
-class _BackGroundState extends State<_BackGround>
-    with TickerProviderStateMixin {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
-        final screenWidth = constraints.maxWidth;
-        final screenHeight = constraints.maxHeight;
-        return OverflowClipping(
-          key: GlobalKey(),
-          minWidth: screenWidth + _BackGround._spawnMaxRadius * 2,
-          minHeight: screenHeight + _BackGround._spawnMaxRadius * 2,
-          child: Transform.translate(
-            offset: const Offset(
-              -_BackGround._spawnMaxRadius,
-              -_BackGround._spawnMaxRadius,
-            ),
-            child: AnimatedBackground(
-              key: GlobalKey(),
-              behaviour: RandomParticleBehaviour(
-                options: const ParticleOptions(
-                  baseColor: Colors.white,
-                  spawnMinSpeed: 10,
-                  spawnMaxSpeed: 20,
-                  spawnMinRadius: 50,
-                  spawnMaxRadius: _BackGround._spawnMaxRadius,
-                  minOpacity: 0.2,
-                  opacityChangeRate: 0.1,
-                  particleCount: 8,
-                ),
-              ),
-              vsync: this,
-              child: const Blur(
-                blur: 30,
-                colorOpacity: 0,
-                child: SizedBox(),
-              ),
+        final baseWidth = constraints.maxWidth;
+        final baseHeight = constraints.maxHeight;
+        return SizedBox.expand(
+          child: Blur(
+            blur: 30,
+            colorOpacity: 0,
+            child: Stack(
+              children: [
+                _BackgroundCircle(baseWidth, baseHeight, 0),
+                _BackgroundCircle(baseWidth, baseHeight, 1),
+                _BackgroundCircle(baseWidth, baseHeight, 2),
+                _BackgroundCircle(baseWidth, baseHeight, 3),
+              ],
             ),
           ),
         );
@@ -54,93 +27,68 @@ class _BackGroundState extends State<_BackGround>
   }
 }
 
-@immutable
-class OverflowClipping extends SingleChildRenderObjectWidget {
-  const OverflowClipping({
-    required Widget super.child,
-    this.minWidth = 240,
-    this.minHeight = 240,
-    super.key,
-  });
+class _BackgroundCircle extends ConsumerWidget {
+  const _BackgroundCircle(this.baseWidth, this.baseHeight, this.index);
 
-  final double minWidth;
-  final double minHeight;
+  final double baseWidth;
+  final double baseHeight;
+  final int index;
   @override
-  RenderObject createRenderObject(BuildContext context) {
-    return RenderOverflowClipping(
-      minWidth: minWidth,
-      minHeight: minHeight,
+  Widget build(BuildContext context, WidgetRef ref) {
+    const circleSize = 180.0;
+    const circleHalfSize = circleSize / 2;
+    final parameters = ref.watch(_animationProvider(index));
+    return Positioned(
+      top: parameters.position.dy * baseHeight - circleHalfSize,
+      left: parameters.position.dx * baseWidth - circleHalfSize,
+      child: RepaintBoundary(
+        child: AnimatedOpacity(
+          opacity: parameters.opacity,
+          duration: const Duration(seconds: 2),
+          child: const SizedBox.square(
+            dimension: circleSize,
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Color(0x6BFFFFFF),
+              ),
+            ),
+          ),
+        ),
+      ),
     );
-  }
-
-  @override
-  void updateRenderObject(
-    BuildContext context,
-    RenderOverflowClipping renderObject,
-  ) {
-    renderObject
-      ..minWidth = minWidth
-      ..minHeight = minHeight;
   }
 }
 
-class RenderOverflowClipping extends RenderProxyBox {
-  RenderOverflowClipping({
-    required double minWidth,
-    required double minHeight,
-  })  : _minWidth = minWidth,
-        _minHeight = minHeight;
-
-  double _minWidth;
-  double get minWidth => _minWidth;
-  set minWidth(double newValue) {
-    if (_minWidth == newValue) {
-      return;
-    }
-    _minWidth = newValue;
-    markNeedsLayout();
-  }
-
-  double _minHeight;
-  double get minHeight => _minHeight;
-  set minHeight(double newValue) {
-    if (_minHeight == newValue) {
-      return;
-    }
-    _minHeight = newValue;
-    markNeedsLayout();
-  }
-
-  @override
-  void performLayout() {
-    final child = this.child;
-    if (child == null) {
-      return super.performLayout();
-    }
-
-    size = constraints.biggest;
-
-    child.layout(
-      BoxConstraints.tightFor(
-        width: max(minWidth, constraints.maxWidth),
-        height: max(minHeight, constraints.maxHeight),
+final _animationProvider =
+    Provider.family<BackgroundCircleParameters, int>((ref, index) {
+  void changePosition() {
+    ref.state = ref.state.copyWith(
+      position: Offset(
+        Random().nextDouble(),
+        Random().nextDouble(),
       ),
     );
   }
 
-  final _clipRectLayer = LayerHandle<ClipRectLayer>();
-
-  @override
-  void paint(PaintingContext context, Offset offset) {
-    final child = this.child;
-    if (child != null) {
-      _clipRectLayer.layer = context.pushClipRect(
-        needsCompositing,
-        offset,
-        Offset.zero & size,
-        super.paint,
-        oldLayer: _clipRectLayer.layer,
-      );
-    }
+  void changeOpacity() {
+    ref.state = ref.state.copyWith(opacity: 1);
+    Timer(Duration(seconds: 10 + Random().nextInt(5)), () {
+      ref.state = ref.state.copyWith(opacity: 0);
+      Timer(const Duration(seconds: 3), () {
+        changePosition();
+        changeOpacity();
+      });
+    });
   }
-}
+
+  Timer(const Duration(milliseconds: 1000), changeOpacity);
+
+  return BackgroundCircleParameters(
+    opacity: 0,
+    position: Offset(
+      Random().nextDouble(),
+      Random().nextDouble(),
+    ),
+  );
+});
