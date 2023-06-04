@@ -62,6 +62,8 @@ class _BackgroundCircle extends ConsumerWidget {
 
 final _animationProvider =
     Provider.family<BackgroundCircleParameters, int>((ref, index) {
+  const maxOpacity = 0.6;
+
   void changePosition() {
     ref.state = ref.state.copyWith(
       position: Offset(
@@ -72,7 +74,7 @@ final _animationProvider =
   }
 
   void changeOpacity() {
-    ref.state = ref.state.copyWith(opacity: 1);
+    ref.state = ref.state.copyWith(opacity: maxOpacity);
     Timer(Duration(seconds: 10 + Random().nextInt(5)), () {
       ref.state = ref.state.copyWith(opacity: 0);
       Timer(const Duration(seconds: 3), () {
