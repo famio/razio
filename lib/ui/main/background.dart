@@ -2,6 +2,7 @@ part of 'main_page.dart';
 
 class _BackGround extends ConsumerWidget {
   const _BackGround();
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return LayoutBuilder(
@@ -28,11 +29,16 @@ class _BackGround extends ConsumerWidget {
 }
 
 class _BackgroundCircle extends ConsumerWidget {
-  const _BackgroundCircle(this.baseWidth, this.baseHeight, this.index);
+  const _BackgroundCircle(
+    this.baseWidth,
+    this.baseHeight,
+    this.index,
+  );
 
   final double baseWidth;
   final double baseHeight;
   final int index;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     const circleSize = 180.0;
