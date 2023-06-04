@@ -2,19 +2,21 @@ part of 'main_page.dart';
 
 class _ProgramList extends ConsumerWidget {
   const _ProgramList({
+    required this.programs,
+    required this.listMode,
     required this.itemHeight,
   });
 
+  final List<MainPageListItem> programs;
+  final MainPageListMode listMode;
   final double itemHeight;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final scrollController = FixedExtentScrollController();
-    final programs = ref.watch(mainPageListItemProvider);
-    final listMode = ref.watch(mainPageListModeProvider);
     final itemCount = programs.length;
 
-    PageStorageKey<String>? pageStorageKey(MainPageListMode listMode) {
+    PageStorageKey<String>? pageStorageKey() {
       switch (listMode) {
         case MainPageListMode.live:
           return const PageStorageKey('live_program_list');
@@ -25,7 +27,7 @@ class _ProgramList extends ConsumerWidget {
 
     return NotificationListener<ScrollNotification>(
       child: ClickableListWheelScrollView(
-        key: pageStorageKey(ref.read(mainPageListModeProvider)),
+        key: pageStorageKey(),
         scrollController: scrollController,
         itemHeight: itemHeight,
         itemCount: itemCount,

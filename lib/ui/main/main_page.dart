@@ -65,13 +65,29 @@ class MainPage extends HookConsumerWidget {
                         child: Text('Error :<'),
                       );
                     case MainPageState.list:
-                      return const Stack(
+                      return Stack(
                         children: [
-                          Center(
+                          const Center(
                             child: _HighlightBar(height: itemHeight),
                           ),
-                          _ProgramList(
-                            itemHeight: itemHeight,
+                          Visibility(
+                            visible: ref.watch(mainPageListModeProvider) ==
+                                MainPageListMode.live,
+                            child: _ProgramList(
+                              programs: ref.watch(mainPageLiveListItemProvider),
+                              listMode: MainPageListMode.live,
+                              itemHeight: itemHeight,
+                            ),
+                          ),
+                          Visibility(
+                            visible: ref.watch(mainPageListModeProvider) ==
+                                MainPageListMode.search,
+                            child: _ProgramList(
+                              programs:
+                                  ref.watch(mainPageSearchListItemProvider),
+                              listMode: MainPageListMode.search,
+                              itemHeight: itemHeight,
+                            ),
                           ),
                         ],
                       );
