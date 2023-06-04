@@ -29,7 +29,7 @@ final nowOnAirProgramListProvider = FutureProvider<List<Program>>((ref) async {
     if (stationId == null) {
       return;
     }
-    final stationName = element.findElements('name').first.text;
+    final stationName = element.findElements('name').first.innerText;
 
     final programs = element
         .findElements('progs')

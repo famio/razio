@@ -22,8 +22,8 @@ class Program {
       programElement.getAttribute('id')!,
       programElement.getAttribute('ft')!,
       programElement.getAttribute('to')!,
-      programElement.findElements('title').first.text,
-      programElement.findElements('img').first.text,
+      programElement.findElements('title').first.innerText,
+      programElement.findElements('img').first.innerText,
     );
   }
 

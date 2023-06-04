@@ -1,12 +1,12 @@
 # This is a generated file; do not edit or check into version control.
-audio_service=/Users/famio/.pub-cache/hosted/pub.dev/audio_service-0.18.9/
+audio_service=/Users/famio/.pub-cache/hosted/pub.dev/audio_service-0.18.10/
 audio_service_web=/Users/famio/.pub-cache/hosted/pub.dev/audio_service_web-0.1.1/
-audio_session=/Users/famio/.pub-cache/hosted/pub.dev/audio_session-0.1.13/
-just_audio=/Users/famio/.pub-cache/hosted/pub.dev/just_audio-0.9.32/
-just_audio_web=/Users/famio/.pub-cache/hosted/pub.dev/just_audio_web-0.4.7/
-path_provider=/Users/famio/.pub-cache/hosted/pub.dev/path_provider-2.0.14/
+audio_session=/Users/famio/.pub-cache/hosted/pub.dev/audio_session-0.1.15/
+just_audio=/Users/famio/.pub-cache/hosted/pub.dev/just_audio-0.9.34/
+just_audio_web=/Users/famio/.pub-cache/hosted/pub.dev/just_audio_web-0.4.8/
+path_provider=/Users/famio/.pub-cache/hosted/pub.dev/path_provider-2.0.15/
 path_provider_android=/Users/famio/.pub-cache/hosted/pub.dev/path_provider_android-2.0.27/
-path_provider_foundation=/Users/famio/.pub-cache/hosted/pub.dev/path_provider_foundation-2.2.2/
-path_provider_linux=/Users/famio/.pub-cache/hosted/pub.dev/path_provider_linux-2.1.10/
+path_provider_foundation=/Users/famio/.pub-cache/hosted/pub.dev/path_provider_foundation-2.2.3/
+path_provider_linux=/Users/famio/.pub-cache/hosted/pub.dev/path_provider_linux-2.1.11/
 path_provider_windows=/Users/famio/.pub-cache/hosted/pub.dev/path_provider_windows-2.1.6/
-sqflite=/Users/famio/.pub-cache/hosted/pub.dev/sqflite-2.2.8+1/
+sqflite=/Users/famio/.pub-cache/hosted/pub.dev/sqflite-2.2.8+4/

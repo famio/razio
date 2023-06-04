@@ -25,7 +25,6 @@ final mainPageActionProvider =
       switch (next) {
         case AppLifecycleState.resumed:
           final _ = ref.refresh(authProvider);
-          break;
         case AppLifecycleState.inactive:
         case AppLifecycleState.paused:
         case AppLifecycleState.detached:
@@ -61,7 +60,6 @@ class MainPageAction extends StateNotifier<void> {
           }
           final stationId = programList[index].stationId;
           _ref.read(selectedLiveStationIdProvider.notifier).state = stationId;
-          break;
         case MainPageListMode.search:
           if (index == 0) {
             // selectedLiveStationIdを同じ値で更新することで、Live放送側の番組を再生する
@@ -83,7 +81,6 @@ class MainPageAction extends StateNotifier<void> {
             }
             _ref.read(selectedSearchProgramProvider.notifier).state = program;
           }
-          break;
       }
     });
   }
@@ -93,10 +90,8 @@ class MainPageAction extends StateNotifier<void> {
       switch (_ref.read(mainPageListModeProvider.notifier).state) {
         case MainPageListMode.live:
           await audioPlayer.stop();
-          break;
         case MainPageListMode.search:
           await audioPlayer.pause();
-          break;
       }
     } else {
       await audioPlayer.play();

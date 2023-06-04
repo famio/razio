@@ -8,8 +8,8 @@ class Station {
 
   factory Station.fromElement(XmlElement stationElement) {
     return Station._(
-      stationElement.findElements('id').first.text,
-      stationElement.findElements('name').first.text,
+      stationElement.findElements('id').first.innerText,
+      stationElement.findElements('name').first.innerText,
     );
   }
   String id;
