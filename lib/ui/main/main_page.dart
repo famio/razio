@@ -51,7 +51,8 @@ class MainPage extends HookConsumerWidget {
       body: Stack(
         children: [
           // Background
-          const _BackGround(),
+          // アニメーションがCPUを食うのでコメントアウト
+          // const _BackGround(),
           // List, Divider, BottomView
           Column(
             children: [
