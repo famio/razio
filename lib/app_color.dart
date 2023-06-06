@@ -12,8 +12,8 @@ extension AppColor on Color {
         : AppColor.backgroundDark;
   }
 
-  static const dividerLight = Color(0xff000000);
-  static const dividerDark = Color(0x66FFFFFF);
+  static const dividerLight = Color(0xFFE9EAF3);
+  static const dividerDark = Color(0xFF212121);
   static Color divider(BuildContext context) {
     return isLightMode(context) ? AppColor.dividerLight : AppColor.dividerDark;
   }
@@ -34,8 +34,8 @@ extension AppColor on Color {
         : AppColor._textSecondaryDark;
   }
 
-  static const _highlightBarLight = Color(0xffDDDDDD);
-  static const _highlightBarDark = Color(0xff222222);
+  static const _highlightBarLight = Color(0xFF5465A9);
+  static const _highlightBarDark = Color(0xFFFFFFFF);
   static Color highlightBar(BuildContext context) {
     return isLightMode(context) ? _highlightBarLight : _highlightBarDark;
   }

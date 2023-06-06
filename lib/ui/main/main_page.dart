@@ -25,6 +25,7 @@ import 'package:fudiko/util.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 part 'background.dart';
+part 'bottom_divider.dart';
 part 'bottom_view.dart';
 part 'highlight_bar.dart';
 part 'play_button.dart';
@@ -53,7 +54,7 @@ class MainPage extends HookConsumerWidget {
           // Background
           // アニメーションがCPUを食うのでコメントアウト
           // const _BackGround(),
-          // List, Divider, BottomView
+          // List
           Column(
             children: [
               Expanded(
@@ -95,15 +96,13 @@ class MainPage extends HookConsumerWidget {
                   }
                 })(),
               ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 9),
-                child: Blur(
-                  blur: 4,
-                  colorOpacity: 0.3,
-                  borderRadius: BorderRadius.all(Radius.circular(1.5)),
-                  child: SizedBox(height: 3, width: double.infinity),
-                ),
+              // Divider
+              const _BottomDivider(),
+              const SizedBox(
+                height: 12,
               ),
+
+              // BottomView
               const _BottomView(),
             ],
           ),
