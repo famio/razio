@@ -10,7 +10,7 @@ void main() async {
   debugPaintSizeEnabled = false;
   await initializeDateFormatting('ja_JP');
   await JustAudioBackground.init(
-    androidNotificationChannelId: 'dev.famio.fudiko.channel.audio',
+    androidNotificationChannelId: 'dev.famio.razio.channel.audio',
     androidNotificationChannelName: 'Audio playback',
     androidNotificationOngoing: true,
   );
