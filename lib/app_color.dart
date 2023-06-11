@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fudiko/util.dart';
+import 'package:razio/util.dart';
 
 extension AppColor on Color {
   static const accent = Color(0xffFF6D25);

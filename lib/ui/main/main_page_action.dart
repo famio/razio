@@ -2,19 +2,19 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fudiko/logger.dart';
-import 'package:fudiko/provider/app_lifecycle_provider.dart';
-import 'package:fudiko/provider/audio_player_provider.dart';
-import 'package:fudiko/provider/auth_provider.dart';
-import 'package:fudiko/provider/editing_search_text_provider.dart';
-import 'package:fudiko/provider/main_page_list_mode_provider.dart';
-import 'package:fudiko/provider/now_on_air_program_list.dart';
-import 'package:fudiko/provider/search_bar_controller_provider.dart';
-import 'package:fudiko/provider/search_keyword_provider.dart';
-import 'package:fudiko/provider/search_result_list_provider.dart';
-import 'package:fudiko/provider/selected_search_program_provider.dart';
-import 'package:fudiko/provider/selected_station_id_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:razio/logger.dart';
+import 'package:razio/provider/app_lifecycle_provider.dart';
+import 'package:razio/provider/audio_player_provider.dart';
+import 'package:razio/provider/auth_provider.dart';
+import 'package:razio/provider/editing_search_text_provider.dart';
+import 'package:razio/provider/main_page_list_mode_provider.dart';
+import 'package:razio/provider/now_on_air_program_list.dart';
+import 'package:razio/provider/search_bar_controller_provider.dart';
+import 'package:razio/provider/search_keyword_provider.dart';
+import 'package:razio/provider/search_result_list_provider.dart';
+import 'package:razio/provider/selected_search_program_provider.dart';
+import 'package:razio/provider/selected_station_id_provider.dart';
 
 final mainPageActionProvider =
     StateNotifierProvider<MainPageAction, void>((ref) {

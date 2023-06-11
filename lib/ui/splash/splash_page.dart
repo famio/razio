@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:fudiko/provider/auth_provider.dart';
-import 'package:fudiko/provider/safearea_provider.dart';
-import 'package:fudiko/ui/main/main_page.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:razio/provider/auth_provider.dart';
+import 'package:razio/provider/safearea_provider.dart';
+import 'package:razio/ui/main/main_page.dart';
 
 class SplashPage extends ConsumerWidget {
   const SplashPage({super.key});

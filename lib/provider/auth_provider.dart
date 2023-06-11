@@ -1,7 +1,7 @@
-import 'package:fudiko/api/auth1_api.dart';
-import 'package:fudiko/api/auth2_api.dart';
-import 'package:fudiko/entity/auth_info.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:razio/api/auth1_api.dart';
+import 'package:razio/api/auth2_api.dart';
+import 'package:razio/entity/auth_info.dart';
 
 final authProvider = FutureProvider<AuthInfo>((ref) async {
   final auth1 = await Auth1Api().fetch();

@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:fudiko/entity/search.dart';
-import 'package:fudiko/util.dart';
 import 'package:http/http.dart' as http;
+import 'package:razio/entity/search.dart';
+import 'package:razio/util.dart';
 
 enum SearchFilter {
   past('past'),

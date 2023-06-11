@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:fudiko/entity/program.dart';
-import 'package:fudiko/entity/search.dart';
 import 'package:intl/intl.dart';
+import 'package:razio/entity/program.dart';
+import 'package:razio/entity/search.dart';
 
 part 'main_page_list_item.freezed.dart';
 

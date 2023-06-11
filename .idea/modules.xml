@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/fudiko.iml" filepath="$PROJECT_DIR$/fudiko.iml" />
+      <module fileurl="file://$PROJECT_DIR$/razio.iml" filepath="$PROJECT_DIR$/razio.iml" />
     </modules>
   </component>
 </project>

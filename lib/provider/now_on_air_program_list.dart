@@ -1,11 +1,11 @@
 import 'dart:async';
 
 import 'package:collection/collection.dart';
-import 'package:fudiko/entity/program.dart';
-import 'package:fudiko/provider/auth_provider.dart';
-import 'package:fudiko/provider/selected_station_id_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:http/http.dart' as http;
+import 'package:razio/entity/program.dart';
+import 'package:razio/provider/auth_provider.dart';
+import 'package:razio/provider/selected_station_id_provider.dart';
 import 'package:xml/xml.dart';
 
 Timer? _timer;

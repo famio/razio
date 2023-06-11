@@ -1,9 +1,9 @@
 import 'package:collection/collection.dart';
-import 'package:fudiko/api/search_api.dart';
-import 'package:fudiko/entity/search.dart';
-import 'package:fudiko/provider/auth_provider.dart';
-import 'package:fudiko/provider/search_keyword_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:razio/api/search_api.dart';
+import 'package:razio/entity/search.dart';
+import 'package:razio/provider/auth_provider.dart';
+import 'package:razio/provider/search_keyword_provider.dart';
 
 final searchResultListProvider =
     FutureProvider<List<SearchProgram>>((ref) async {

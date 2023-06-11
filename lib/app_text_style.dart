@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:fudiko/app_color.dart';
-import 'package:fudiko/gen/fonts.gen.dart';
+import 'package:razio/app_color.dart';
+import 'package:razio/gen/fonts.gen.dart';
 
 extension AppThemeData on ThemeData {
   static ThemeData light() {

@@ -1,8 +1,8 @@
-import 'package:fudiko/entity/main_page_list_item.dart';
-import 'package:fudiko/provider/now_on_air_program_list.dart';
-import 'package:fudiko/provider/search_result_list_provider.dart';
-import 'package:fudiko/provider/selected_station_id_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:razio/entity/main_page_list_item.dart';
+import 'package:razio/provider/now_on_air_program_list.dart';
+import 'package:razio/provider/search_result_list_provider.dart';
+import 'package:razio/provider/selected_station_id_provider.dart';
 
 final mainPageLiveListItemProvider = Provider<List<MainPageListItem>>((ref) {
   final programs = ref.watch(nowOnAirProgramListProvider).valueOrNull ?? [];

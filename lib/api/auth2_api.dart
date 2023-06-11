@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:fudiko/const.dart';
-import 'package:fudiko/entity/auth2.dart';
 import 'package:http/http.dart' as http;
+import 'package:razio/const.dart';
+import 'package:razio/entity/auth2.dart';
 
 class Auth2Api {
   Future<Auth2> fetch(

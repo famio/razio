@@ -1,5 +1,5 @@
-import 'package:fudiko/provider/now_on_air_program_list.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:razio/provider/now_on_air_program_list.dart';
 
 enum MainPageState {
   loading,

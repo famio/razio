@@ -1,16 +1,16 @@
 import 'package:audio_service/audio_service.dart';
-import 'package:fudiko/const.dart';
-import 'package:fudiko/entity/search.dart';
-import 'package:fudiko/provider/auth_provider.dart';
-import 'package:fudiko/provider/main_page_list_mode_provider.dart';
-import 'package:fudiko/provider/now_on_air_program_list.dart';
-import 'package:fudiko/provider/selected_search_program_provider.dart';
-import 'package:fudiko/provider/selected_station_id_provider.dart';
-import 'package:fudiko/util.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:razio/const.dart';
+import 'package:razio/entity/search.dart';
+import 'package:razio/provider/auth_provider.dart';
+import 'package:razio/provider/main_page_list_mode_provider.dart';
+import 'package:razio/provider/now_on_air_program_list.dart';
+import 'package:razio/provider/selected_search_program_provider.dart';
+import 'package:razio/provider/selected_station_id_provider.dart';
+import 'package:razio/util.dart';
 
 final audioPlayer = AudioPlayer();
 

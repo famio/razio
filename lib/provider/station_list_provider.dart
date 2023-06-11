@@ -1,7 +1,7 @@
-import 'package:fudiko/entity/station.dart';
-import 'package:fudiko/provider/auth_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:http/http.dart' as http;
+import 'package:razio/entity/station.dart';
+import 'package:razio/provider/auth_provider.dart';
 import 'package:xml/xml.dart';
 
 final stationListProvider = FutureProvider<List<Station>>((ref) async {

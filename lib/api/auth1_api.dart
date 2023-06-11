@@ -1,5 +1,5 @@
-import 'package:fudiko/entity/auth1.dart';
 import 'package:http/http.dart' as http;
+import 'package:razio/entity/auth1.dart';
 
 class Auth1Api {
   Future<Auth1> fetch() async {
