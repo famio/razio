@@ -1,4 +1,4 @@
-package com.example.razio
+package dev.famio.razio
 
 import io.flutter.embedding.android.FlutterActivity
 
