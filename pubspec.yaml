@@ -7,7 +7,7 @@ version: 1.0.0+1
 
 environment:
   sdk: ^3.0.0
-  flutter: 3.10.3
+  flutter: 3.10.6
 dependencies:
   animated_background: ^2.0.0
   audio_service: ^0.18.7
