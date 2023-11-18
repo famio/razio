@@ -112,7 +112,7 @@ final audioSourceFromSearchProgramProvider =
       'to': endAt,
       'l': '15',
       'lsid': generateUid(),
-      'type': 'b'
+      'type': 'b',
     },
   );
   return AudioSource.uri(

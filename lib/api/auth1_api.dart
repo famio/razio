@@ -10,7 +10,7 @@ class Auth1Api {
       'X-Radiko-App': 'pc_html5',
       'X-Radiko-App-Version': '0.0.1',
       'X-Radiko-User': 'dummy_user',
-      'X-Radiko-Device': 'pc'
+      'X-Radiko-Device': 'pc',
     };
     request.headers.clear();
     request.headers.addAll(header);

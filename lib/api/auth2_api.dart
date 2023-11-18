@@ -23,7 +23,7 @@ class Auth2Api {
       HeaderKey.authtoken.value: authToken,
       'X-Radiko-PartialKey': partialKey,
       'X-Radiko-User': 'dummy_user',
-      'X-Radiko-Device': 'pc'
+      'X-Radiko-Device': 'pc',
     };
 
     auth2Request.headers.clear();

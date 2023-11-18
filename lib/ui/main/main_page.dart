@@ -142,7 +142,7 @@ class MainPage extends HookConsumerWidget {
                         ),
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),

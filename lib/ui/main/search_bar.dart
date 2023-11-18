@@ -92,7 +92,7 @@ class _SearchBarState extends ConsumerState<_SearchBar> {
               isDense: true,
             ),
           ),
-        )
+        ),
       ],
     );
   }
