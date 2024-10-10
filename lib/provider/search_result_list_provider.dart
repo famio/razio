@@ -9,6 +9,9 @@ final searchResultListProvider =
     FutureProvider<List<SearchProgram>>((ref) async {
   final authInfo = await ref.read(authProvider.future);
   final keyword = ref.read(searchKeywordProvider);
+  if (keyword.isEmpty) {
+    return [];
+  }
   final searchResult = await SearchApi().fetch(
     keyword: keyword,
     areaId: authInfo.areaId,

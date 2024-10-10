@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:collection/collection.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:http/http.dart' as http;
@@ -7,8 +5,6 @@ import 'package:razio/entity/program.dart';
 import 'package:razio/provider/auth_provider.dart';
 import 'package:razio/provider/selected_station_id_provider.dart';
 import 'package:xml/xml.dart';
-
-Timer? _timer;
 
 final nowOnAirProgramListProvider = FutureProvider<List<Program>>((ref) async {
   final authInfo = await ref.watch(authProvider.future);
@@ -58,21 +54,5 @@ final nowOnAirProgramListProvider = FutureProvider<List<Program>>((ref) async {
         result.first.stationId;
   }
 
-  _setRefreshTimer(ref, result.toList());
-
   return result;
 });
-
-void _setRefreshTimer(Ref ref, List<Program> programs) {
-  final now = DateTime.now();
-  final program = programs.sortedBy((element) => element.endTime).first;
-  if (program.endDate.isAfter(now)) {
-    final diff = program.endDate.difference(now);
-    if (_timer != null && _timer!.isActive) {
-      _timer!.cancel();
-    }
-    _timer = Timer(diff, () => ref.refresh(nowOnAirProgramListProvider));
-  } else {
-    ref.invalidate(nowOnAirProgramListProvider);
-  }
-}

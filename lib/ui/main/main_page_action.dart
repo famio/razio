@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -15,6 +16,8 @@ import 'package:razio/provider/search_keyword_provider.dart';
 import 'package:razio/provider/search_result_list_provider.dart';
 import 'package:razio/provider/selected_search_program_provider.dart';
 import 'package:razio/provider/selected_station_id_provider.dart';
+
+Timer? _timer;
 
 final mainPageActionProvider =
     StateNotifierProvider<MainPageAction, void>((ref) {
@@ -33,6 +36,20 @@ final mainPageActionProvider =
       }
     },
   );
+
+  ref.watch(nowOnAirProgramListProvider).whenData((programs) {
+    final now = DateTime.now();
+    final program = programs.sortedBy((element) => element.endTime).first;
+    if (program.endDate.isAfter(now)) {
+      final diff = program.endDate.difference(now);
+      if (_timer != null && _timer!.isActive) {
+        _timer!.cancel();
+      }
+      _timer = Timer(diff, () => ref.refresh(nowOnAirProgramListProvider));
+    } else {
+      ref.invalidate(nowOnAirProgramListProvider);
+    }
+  });
 
   return MainPageAction(ref);
 });

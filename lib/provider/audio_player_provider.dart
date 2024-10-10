@@ -52,8 +52,15 @@ final audioPlayerProvier = Provider((ref) {
 
 final audioSourceFromStationIdProvider = FutureProvider.autoDispose
     .family<AudioSource, String>((ref, stationId) async {
-  final requestUrl = Uri.parse(
-    'http://f-radiko.smartstream.ne.jp/$stationId/_definst_/simul-stream.stream/playlist.m3u8',
+  final requestUrl = Uri.https(
+    'si-f-radiko.smartstream.ne.jp',
+    '/so/playlist.m3u8',
+    <String, dynamic>{
+      'station_id': stationId,
+      'l': '15',
+      'lsid': generateUid(),
+      'type': 'b',
+    },
   );
   final authInfo = ref.read(authProvider).value;
   if (authInfo == null) {
@@ -61,6 +68,7 @@ final audioSourceFromStationIdProvider = FutureProvider.autoDispose
   }
   final header = <String, String>{
     HeaderKey.authtoken.value: authInfo.authToken,
+    HeaderKey.areaId.value: authInfo.areaId,
   };
   final request = http.Request('get', requestUrl);
   request.headers.clear();
@@ -70,16 +78,17 @@ final audioSourceFromStationIdProvider = FutureProvider.autoDispose
     throw Exception('Failed to StreamUrlRequest');
   }
   final body = await response.stream.bytesToString();
-  final reg = RegExp(r'^https?://.+m3u8$', multiLine: true);
-  final streamUrl = reg.firstMatch(body)!.group(0);
+  final reg = RegExp(r'^https?://.*medialist.*$', multiLine: true);
+  final streamUrl = reg.firstMatch(body)!.group(0)!;
+  final addedUnixTimeStreamUrl =
+      '$streamUrl&_=${DateTime.now().millisecondsSinceEpoch}';
 
   final programlist = await ref.read(nowOnAirProgramListProvider.future);
   final program =
       programlist.firstWhere((element) => element.stationId == stationId);
 
   return AudioSource.uri(
-    Uri.parse(streamUrl!),
-    headers: header,
+    Uri.parse(addedUnixTimeStreamUrl),
     tag: MediaItem(
       id: program.title + program.startTime,
       album: program.stationId,
