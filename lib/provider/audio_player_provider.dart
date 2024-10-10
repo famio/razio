@@ -86,12 +86,12 @@ final audioSourceFromStationIdProvider = FutureProvider.autoDispose
   final programlist = await ref.read(nowOnAirProgramListProvider.future);
   final program =
       programlist.firstWhere((element) => element.stationId == stationId);
-
+  final stationName = program.stationName;
   return AudioSource.uri(
     Uri.parse(addedUnixTimeStreamUrl),
     tag: MediaItem(
       id: program.title + program.startTime,
-      album: program.stationId,
+      artist: stationName,
       title: program.title,
       artUri: Uri.parse(program.img),
     ),
@@ -129,7 +129,7 @@ final audioSourceFromSearchProgramProvider =
     headers: header,
     tag: MediaItem(
       id: program.title + program.startTime.toString(),
-      album: program.stationId,
+      artist: DateFormat.yMEd('ja').format(program.startTime),
       title: program.title,
       artUri: program.img,
     ),
