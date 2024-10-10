@@ -48,6 +48,35 @@ class MainPage extends HookConsumerWidget {
     ref.watch(audioPlayerProvier);
 
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: AppColor.background(context),
+        scrolledUnderElevation: 0,
+        title: const _SearchBar(),
+        actions: [
+          if (ref.watch(searchEditingProvider) ||
+              ref.watch(mainPageListModeProvider) ==
+                  MainPageListMode.search) ...[
+            GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onTap: () => ref
+                  .read(mainPageActionProvider.notifier)
+                  .onSearchCancelButton(),
+              child: const SizedBox(
+                height: _SearchBar.height,
+                child: Center(
+                  child: Text('Cancel'),
+                ),
+              ),
+            ),
+            const SizedBox(width: 16, height: 8),
+          ],
+        ],
+        bottom: const PreferredSize(
+          preferredSize: Size.fromHeight(16),
+          child: SizedBox(),
+        ),
+        toolbarHeight: _SearchBar.height,
+      ),
       resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
@@ -108,45 +137,6 @@ class MainPage extends HookConsumerWidget {
           ),
           // SearchBackground
           const _SearchBackground(),
-          // SearchBar
-          SafeArea(
-            left: false,
-            bottom: false,
-            right: false,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Row(
-                children: [
-                  const Flexible(child: _SearchBar()),
-                  SizedBox(
-                    width: ref.watch(searchEditingProvider) ||
-                            ref.watch(mainPageListModeProvider) ==
-                                MainPageListMode.search
-                        ? 8
-                        : 0,
-                  ),
-                  GestureDetector(
-                    behavior: HitTestBehavior.opaque,
-                    onTap: () => ref
-                        .read(mainPageActionProvider.notifier)
-                        .onSearchCancelButton(),
-                    child: SizedBox(
-                      height: 48,
-                      child: Center(
-                        child: Text(
-                          ref.watch(searchEditingProvider) ||
-                                  ref.watch(mainPageListModeProvider) ==
-                                      MainPageListMode.search
-                              ? 'Cancel'
-                              : '',
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
         ],
       ),
     );

@@ -3,6 +3,8 @@ part of 'main_page.dart';
 class _SearchBar extends ConsumerStatefulWidget {
   const _SearchBar();
 
+  static const height = 48.0;
+
   @override
   _SearchBarState createState() => _SearchBarState();
 }
@@ -36,11 +38,12 @@ class _SearchBarState extends ConsumerState<_SearchBar> {
       children: [
         Blur(
           blur: 4,
-          colorOpacity: 0.13,
+          blurColor: AppColor.highlightBar(context),
+          colorOpacity: 0.1,
           borderRadius: border.borderRadius,
           child: const SizedBox(
             width: double.infinity,
-            height: 48,
+            height: _SearchBar.height,
           ),
         ),
         Theme(
