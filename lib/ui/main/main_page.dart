@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:math';
+import 'dart:ui' show ImageFilter;
 
 import 'package:blur/blur.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -52,9 +53,15 @@ class MainPage extends HookConsumerWidget {
     ref.watch(audioPlayerProvier);
 
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
-        backgroundColor: AppColor.background(context),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
         scrolledUnderElevation: 0,
+        systemOverlayStyle: isLightMode(context)
+            ? SystemUiOverlayStyle.dark
+            : SystemUiOverlayStyle.light,
+        flexibleSpace: const _GlassBackground(),
         title: const _SearchBar(),
         actions: [
           if (ref.watch(searchEditingProvider) ||
@@ -83,65 +90,94 @@ class MainPage extends HookConsumerWidget {
       ),
       resizeToAvoidBottomInset: false,
       body: Stack(
+        fit: StackFit.expand,
         children: [
           // Background
           // アニメーションがCPUを食うのでコメントアウト
           // const _BackGround(),
           // List
-          Column(
-            children: [
-              Expanded(
-                child: (() {
-                  switch (state) {
-                    case MainPageState.loading:
-                      return const Text('');
-                    case MainPageState.error:
-                      return const Center(
-                        child: Text('Error :<'),
-                      );
-                    case MainPageState.list:
-                      return Stack(
-                        children: [
-                          const Center(
-                            child: _HighlightBar(height: itemHeight),
-                          ),
-                          Visibility(
-                            visible: ref.watch(mainPageListModeProvider) ==
-                                MainPageListMode.live,
-                            child: _ProgramList(
-                              programs: ref.watch(mainPageLiveListItemProvider),
-                              listMode: MainPageListMode.live,
-                              itemHeight: itemHeight,
-                            ),
-                          ),
-                          Visibility(
-                            visible: ref.watch(mainPageListModeProvider) ==
-                                MainPageListMode.search,
-                            child: _ProgramList(
-                              programs:
-                                  ref.watch(mainPageSearchListItemProvider),
-                              listMode: MainPageListMode.search,
-                              itemHeight: itemHeight,
-                            ),
-                          ),
-                        ],
-                      );
-                  }
-                })(),
-              ),
-              // Divider & SeekBar
-              const _BottomDivider(),
-              const SizedBox(
-                height: 2,
-              ),
-
-              // BottomView
-              const _BottomView(),
-            ],
+          Positioned.fill(
+            child: (() {
+              switch (state) {
+                case MainPageState.loading:
+                  return const Text('');
+                case MainPageState.error:
+                  return const Center(
+                    child: Text('Error :<'),
+                  );
+                case MainPageState.list:
+                  return Stack(
+                    children: [
+                      const Center(
+                        child: _HighlightBar(height: itemHeight),
+                      ),
+                      Visibility(
+                        visible: ref.watch(mainPageListModeProvider) ==
+                            MainPageListMode.live,
+                        child: _ProgramList(
+                          programs: ref.watch(mainPageLiveListItemProvider),
+                          listMode: MainPageListMode.live,
+                          itemHeight: itemHeight,
+                        ),
+                      ),
+                      Visibility(
+                        visible: ref.watch(mainPageListModeProvider) ==
+                            MainPageListMode.search,
+                        child: _ProgramList(
+                          programs: ref.watch(mainPageSearchListItemProvider),
+                          listMode: MainPageListMode.search,
+                          itemHeight: itemHeight,
+                        ),
+                      ),
+                    ],
+                  );
+              }
+            })(),
+          ),
+          // Divider & SeekBar & BottomView
+          const Positioned(
+            left: 0,
+            right: 0,
+            bottom: 0,
+            // シークバーのポップアップがはみ出して表示されるよう、切り取らない
+            child: Stack(
+              clipBehavior: Clip.none,
+              children: [
+                Positioned.fill(child: _GlassBackground()),
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    _BottomDivider(),
+                    SizedBox(
+                      height: 2,
+                    ),
+                    _BottomView(),
+                  ],
+                ),
+              ],
+            ),
           ),
           // SearchBackground
           const _SearchBackground(),
         ],
+      ),
+    );
+  }
+}
+
+/// リストの上に重ねるすりガラス状の背景
+class _GlassBackground extends StatelessWidget {
+  const _GlassBackground();
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipRect(
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 16, sigmaY: 16),
+        child: ColoredBox(
+          color: AppColor.background(context).withValues(alpha: 0.6),
+          child: const SizedBox.expand(),
+        ),
       ),
     );
   }

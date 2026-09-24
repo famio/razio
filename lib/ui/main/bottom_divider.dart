@@ -320,20 +320,30 @@ class _SeekLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-      decoration: BoxDecoration(
-        color: isLive ? AppColor.accent : AppColor.frost(context),
-        borderRadius: const BorderRadius.all(Radius.circular(12)),
-      ),
-      child: Text(
-        text,
-        style: AppTextStyle.bodySmall(context).bold.copyWith(
-          color: isLive ? Colors.white : null,
-          // 数字の幅が変わってシーク中にラベルががたつかないよう等幅フォントにする
-          // iOSはMenlo、Androidはmonospaceが使われる
-          fontFamily: 'Menlo',
-          fontFamilyFallback: const ['monospace'],
+    const borderRadius = BorderRadius.all(Radius.circular(12));
+    // 裏のリストが透けて見えるすりガラスにする
+    return ClipRRect(
+      borderRadius: borderRadius,
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+          decoration: BoxDecoration(
+            color: isLive
+                ? AppColor.accent.withValues(alpha: 0.8)
+                : AppColor.frost(context).withValues(alpha: 0.6),
+            borderRadius: borderRadius,
+          ),
+          child: Text(
+            text,
+            style: AppTextStyle.bodySmall(context).bold.copyWith(
+              color: isLive ? Colors.white : null,
+              // 数字の幅が変わってシーク中にラベルががたつかないよう等幅フォントにする
+              // iOSはMenlo、Androidはmonospaceが使われる
+              fontFamily: 'Menlo',
+              fontFamilyFallback: const ['monospace'],
+            ),
+          ),
         ),
       ),
     );
