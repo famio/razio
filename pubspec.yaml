@@ -10,7 +10,7 @@ environment:
 
 dependencies:
   animated_background: ^2.0.0
-  audio_service: ^0.18.7
+  audio_service: ^0.18.19
   blur: ^4.0.0
   build_runner: ^2.3.2
   cached_network_image: ^3.2.3
@@ -29,8 +29,8 @@ dependencies:
   intl: ^0.19.0
   json_annotation: ^4.8.0
   json_serializable: ^6.5.4
-  just_audio: ^0.9.30
-  just_audio_background: ^0.0.1-beta.8
+  just_audio: ^0.10.6
+  just_audio_background: ^0.0.1-beta.17
   pedantic_mono: ^1.20.0
   simple_logger: ^1.9.0+1
   simple_shadow: ^0.3.0
