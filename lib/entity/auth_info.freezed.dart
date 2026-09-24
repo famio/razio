@@ -12,7 +12,7 @@ part of 'auth_info.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$AuthInfo {
@@ -62,21 +62,22 @@ class _$AuthInfoCopyWithImpl<$Res, $Val extends AuthInfo>
 }
 
 /// @nodoc
-abstract class _$$_AuthInfoCopyWith<$Res> implements $AuthInfoCopyWith<$Res> {
-  factory _$$_AuthInfoCopyWith(
-          _$_AuthInfo value, $Res Function(_$_AuthInfo) then) =
-      __$$_AuthInfoCopyWithImpl<$Res>;
+abstract class _$$AuthInfoImplCopyWith<$Res>
+    implements $AuthInfoCopyWith<$Res> {
+  factory _$$AuthInfoImplCopyWith(
+          _$AuthInfoImpl value, $Res Function(_$AuthInfoImpl) then) =
+      __$$AuthInfoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String authToken, String areaId});
 }
 
 /// @nodoc
-class __$$_AuthInfoCopyWithImpl<$Res>
-    extends _$AuthInfoCopyWithImpl<$Res, _$_AuthInfo>
-    implements _$$_AuthInfoCopyWith<$Res> {
-  __$$_AuthInfoCopyWithImpl(
-      _$_AuthInfo _value, $Res Function(_$_AuthInfo) _then)
+class __$$AuthInfoImplCopyWithImpl<$Res>
+    extends _$AuthInfoCopyWithImpl<$Res, _$AuthInfoImpl>
+    implements _$$AuthInfoImplCopyWith<$Res> {
+  __$$AuthInfoImplCopyWithImpl(
+      _$AuthInfoImpl _value, $Res Function(_$AuthInfoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -85,7 +86,7 @@ class __$$_AuthInfoCopyWithImpl<$Res>
     Object? authToken = null,
     Object? areaId = null,
   }) {
-    return _then(_$_AuthInfo(
+    return _then(_$AuthInfoImpl(
       authToken: null == authToken
           ? _value.authToken
           : authToken // ignore: cast_nullable_to_non_nullable
@@ -100,8 +101,8 @@ class __$$_AuthInfoCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AuthInfo implements _AuthInfo {
-  _$_AuthInfo({required this.authToken, required this.areaId});
+class _$AuthInfoImpl implements _AuthInfo {
+  _$AuthInfoImpl({required this.authToken, required this.areaId});
 
   @override
   final String authToken;
@@ -114,10 +115,10 @@ class _$_AuthInfo implements _AuthInfo {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AuthInfo &&
+            other is _$AuthInfoImpl &&
             (identical(other.authToken, authToken) ||
                 other.authToken == authToken) &&
             (identical(other.areaId, areaId) || other.areaId == areaId));
@@ -129,14 +130,14 @@ class _$_AuthInfo implements _AuthInfo {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AuthInfoCopyWith<_$_AuthInfo> get copyWith =>
-      __$$_AuthInfoCopyWithImpl<_$_AuthInfo>(this, _$identity);
+  _$$AuthInfoImplCopyWith<_$AuthInfoImpl> get copyWith =>
+      __$$AuthInfoImplCopyWithImpl<_$AuthInfoImpl>(this, _$identity);
 }
 
 abstract class _AuthInfo implements AuthInfo {
   factory _AuthInfo(
       {required final String authToken,
-      required final String areaId}) = _$_AuthInfo;
+      required final String areaId}) = _$AuthInfoImpl;
 
   @override
   String get authToken;
@@ -144,6 +145,6 @@ abstract class _AuthInfo implements AuthInfo {
   String get areaId;
   @override
   @JsonKey(ignore: true)
-  _$$_AuthInfoCopyWith<_$_AuthInfo> get copyWith =>
+  _$$AuthInfoImplCopyWith<_$AuthInfoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

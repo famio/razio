@@ -12,7 +12,7 @@ part of 'main_page_list_item.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$MainPageListItem {
@@ -75,22 +75,22 @@ class _$MainPageListItemCopyWithImpl<$Res, $Val extends MainPageListItem>
 }
 
 /// @nodoc
-abstract class _$$_MainPageListItemCopyWith<$Res>
+abstract class _$$MainPageListItemImplCopyWith<$Res>
     implements $MainPageListItemCopyWith<$Res> {
-  factory _$$_MainPageListItemCopyWith(
-          _$_MainPageListItem value, $Res Function(_$_MainPageListItem) then) =
-      __$$_MainPageListItemCopyWithImpl<$Res>;
+  factory _$$MainPageListItemImplCopyWith(_$MainPageListItemImpl value,
+          $Res Function(_$MainPageListItemImpl) then) =
+      __$$MainPageListItemImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String imageUrl, String title, String info1, String info2});
 }
 
 /// @nodoc
-class __$$_MainPageListItemCopyWithImpl<$Res>
-    extends _$MainPageListItemCopyWithImpl<$Res, _$_MainPageListItem>
-    implements _$$_MainPageListItemCopyWith<$Res> {
-  __$$_MainPageListItemCopyWithImpl(
-      _$_MainPageListItem _value, $Res Function(_$_MainPageListItem) _then)
+class __$$MainPageListItemImplCopyWithImpl<$Res>
+    extends _$MainPageListItemCopyWithImpl<$Res, _$MainPageListItemImpl>
+    implements _$$MainPageListItemImplCopyWith<$Res> {
+  __$$MainPageListItemImplCopyWithImpl(_$MainPageListItemImpl _value,
+      $Res Function(_$MainPageListItemImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -101,7 +101,7 @@ class __$$_MainPageListItemCopyWithImpl<$Res>
     Object? info1 = null,
     Object? info2 = null,
   }) {
-    return _then(_$_MainPageListItem(
+    return _then(_$MainPageListItemImpl(
       imageUrl: null == imageUrl
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
@@ -124,8 +124,8 @@ class __$$_MainPageListItemCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_MainPageListItem implements _MainPageListItem {
-  _$_MainPageListItem(
+class _$MainPageListItemImpl implements _MainPageListItem {
+  _$MainPageListItemImpl(
       {required this.imageUrl,
       required this.title,
       required this.info1,
@@ -146,10 +146,10 @@ class _$_MainPageListItem implements _MainPageListItem {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MainPageListItem &&
+            other is _$MainPageListItemImpl &&
             (identical(other.imageUrl, imageUrl) ||
                 other.imageUrl == imageUrl) &&
             (identical(other.title, title) || other.title == title) &&
@@ -163,8 +163,9 @@ class _$_MainPageListItem implements _MainPageListItem {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MainPageListItemCopyWith<_$_MainPageListItem> get copyWith =>
-      __$$_MainPageListItemCopyWithImpl<_$_MainPageListItem>(this, _$identity);
+  _$$MainPageListItemImplCopyWith<_$MainPageListItemImpl> get copyWith =>
+      __$$MainPageListItemImplCopyWithImpl<_$MainPageListItemImpl>(
+          this, _$identity);
 }
 
 abstract class _MainPageListItem implements MainPageListItem {
@@ -172,7 +173,7 @@ abstract class _MainPageListItem implements MainPageListItem {
       {required final String imageUrl,
       required final String title,
       required final String info1,
-      required final String info2}) = _$_MainPageListItem;
+      required final String info2}) = _$MainPageListItemImpl;
 
   @override
   String get imageUrl;
@@ -184,6 +185,6 @@ abstract class _MainPageListItem implements MainPageListItem {
   String get info2;
   @override
   @JsonKey(ignore: true)
-  _$$_MainPageListItemCopyWith<_$_MainPageListItem> get copyWith =>
+  _$$MainPageListItemImplCopyWith<_$MainPageListItemImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

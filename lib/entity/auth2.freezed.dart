@@ -12,7 +12,7 @@ part of 'auth2.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$Auth2 {
@@ -55,18 +55,21 @@ class _$Auth2CopyWithImpl<$Res, $Val extends Auth2>
 }
 
 /// @nodoc
-abstract class _$$_Auth2CopyWith<$Res> implements $Auth2CopyWith<$Res> {
-  factory _$$_Auth2CopyWith(_$_Auth2 value, $Res Function(_$_Auth2) then) =
-      __$$_Auth2CopyWithImpl<$Res>;
+abstract class _$$Auth2ImplCopyWith<$Res> implements $Auth2CopyWith<$Res> {
+  factory _$$Auth2ImplCopyWith(
+          _$Auth2Impl value, $Res Function(_$Auth2Impl) then) =
+      __$$Auth2ImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String areaId});
 }
 
 /// @nodoc
-class __$$_Auth2CopyWithImpl<$Res> extends _$Auth2CopyWithImpl<$Res, _$_Auth2>
-    implements _$$_Auth2CopyWith<$Res> {
-  __$$_Auth2CopyWithImpl(_$_Auth2 _value, $Res Function(_$_Auth2) _then)
+class __$$Auth2ImplCopyWithImpl<$Res>
+    extends _$Auth2CopyWithImpl<$Res, _$Auth2Impl>
+    implements _$$Auth2ImplCopyWith<$Res> {
+  __$$Auth2ImplCopyWithImpl(
+      _$Auth2Impl _value, $Res Function(_$Auth2Impl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -74,7 +77,7 @@ class __$$_Auth2CopyWithImpl<$Res> extends _$Auth2CopyWithImpl<$Res, _$_Auth2>
   $Res call({
     Object? areaId = null,
   }) {
-    return _then(_$_Auth2(
+    return _then(_$Auth2Impl(
       areaId: null == areaId
           ? _value.areaId
           : areaId // ignore: cast_nullable_to_non_nullable
@@ -85,8 +88,8 @@ class __$$_Auth2CopyWithImpl<$Res> extends _$Auth2CopyWithImpl<$Res, _$_Auth2>
 
 /// @nodoc
 
-class _$_Auth2 implements _Auth2 {
-  _$_Auth2({required this.areaId});
+class _$Auth2Impl implements _Auth2 {
+  _$Auth2Impl({required this.areaId});
 
   @override
   final String areaId;
@@ -97,10 +100,10 @@ class _$_Auth2 implements _Auth2 {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Auth2 &&
+            other is _$Auth2Impl &&
             (identical(other.areaId, areaId) || other.areaId == areaId));
   }
 
@@ -110,17 +113,17 @@ class _$_Auth2 implements _Auth2 {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_Auth2CopyWith<_$_Auth2> get copyWith =>
-      __$$_Auth2CopyWithImpl<_$_Auth2>(this, _$identity);
+  _$$Auth2ImplCopyWith<_$Auth2Impl> get copyWith =>
+      __$$Auth2ImplCopyWithImpl<_$Auth2Impl>(this, _$identity);
 }
 
 abstract class _Auth2 implements Auth2 {
-  factory _Auth2({required final String areaId}) = _$_Auth2;
+  factory _Auth2({required final String areaId}) = _$Auth2Impl;
 
   @override
   String get areaId;
   @override
   @JsonKey(ignore: true)
-  _$$_Auth2CopyWith<_$_Auth2> get copyWith =>
+  _$$Auth2ImplCopyWith<_$Auth2Impl> get copyWith =>
       throw _privateConstructorUsedError;
 }

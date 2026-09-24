@@ -6,11 +6,11 @@ part of 'search.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Search _$$_SearchFromJson(Map<String, dynamic> json) => $checkedCreate(
-      r'_$_Search',
+_$SearchImpl _$$SearchImplFromJson(Map<String, dynamic> json) => $checkedCreate(
+      r'_$SearchImpl',
       json,
       ($checkedConvert) {
-        final val = _$_Search(
+        final val = _$SearchImpl(
           data: $checkedConvert(
               'data',
               (v) => (v as List<dynamic>)
@@ -21,24 +21,25 @@ _$_Search _$$_SearchFromJson(Map<String, dynamic> json) => $checkedCreate(
       },
     );
 
-Map<String, dynamic> _$$_SearchToJson(_$_Search instance) => <String, dynamic>{
+Map<String, dynamic> _$$SearchImplToJson(_$SearchImpl instance) =>
+    <String, dynamic>{
       'data': instance.data,
     };
 
-_$_SearchProgram _$$_SearchProgramFromJson(Map<String, dynamic> json) =>
+_$SearchProgramImpl _$$SearchProgramImplFromJson(Map<String, dynamic> json) =>
     $checkedCreate(
-      r'_$_SearchProgram',
+      r'_$SearchProgramImpl',
       json,
       ($checkedConvert) {
-        final val = _$_SearchProgram(
-          tsInNg: $checkedConvert('ts_in_ng', (v) => v as int),
+        final val = _$SearchProgramImpl(
+          tsInNg: $checkedConvert('ts_in_ng', (v) => (v as num).toInt()),
           metas: $checkedConvert(
               'metas',
               (v) => (v as List<dynamic>)
                   .map((e) =>
                       SearchProgramMeta.fromJson(e as Map<String, dynamic>))
                   .toList()),
-          tsOutNg: $checkedConvert('ts_out_ng', (v) => v as int),
+          tsOutNg: $checkedConvert('ts_out_ng', (v) => (v as num).toInt()),
           stationId: $checkedConvert('station_id', (v) => v as String),
           programUrl:
               $checkedConvert('program_url', (v) => Uri.parse(v as String)),
@@ -73,7 +74,7 @@ _$_SearchProgram _$$_SearchProgramFromJson(Map<String, dynamic> json) =>
       },
     );
 
-Map<String, dynamic> _$$_SearchProgramToJson(_$_SearchProgram instance) =>
+Map<String, dynamic> _$$SearchProgramImplToJson(_$SearchProgramImpl instance) =>
     <String, dynamic>{
       'ts_in_ng': instance.tsInNg,
       'metas': instance.metas,
@@ -94,12 +95,13 @@ Map<String, dynamic> _$$_SearchProgramToJson(_$_SearchProgram instance) =>
       'description': instance.description,
     };
 
-_$_SearchProgramMeta _$$_SearchProgramMetaFromJson(Map<String, dynamic> json) =>
+_$SearchProgramMetaImpl _$$SearchProgramMetaImplFromJson(
+        Map<String, dynamic> json) =>
     $checkedCreate(
-      r'_$_SearchProgramMeta',
+      r'_$SearchProgramMetaImpl',
       json,
       ($checkedConvert) {
-        final val = _$_SearchProgramMeta(
+        final val = _$SearchProgramMetaImpl(
           name: $checkedConvert('name', (v) => v as String),
           value: $checkedConvert('value', (v) => v as String),
         );
@@ -107,20 +109,20 @@ _$_SearchProgramMeta _$$_SearchProgramMetaFromJson(Map<String, dynamic> json) =>
       },
     );
 
-Map<String, dynamic> _$$_SearchProgramMetaToJson(
-        _$_SearchProgramMeta instance) =>
+Map<String, dynamic> _$$SearchProgramMetaImplToJson(
+        _$SearchProgramMetaImpl instance) =>
     <String, dynamic>{
       'name': instance.name,
       'value': instance.value,
     };
 
-_$_SearchProgramGenre _$$_SearchProgramGenreFromJson(
+_$SearchProgramGenreImpl _$$SearchProgramGenreImplFromJson(
         Map<String, dynamic> json) =>
     $checkedCreate(
-      r'_$_SearchProgramGenre',
+      r'_$SearchProgramGenreImpl',
       json,
       ($checkedConvert) {
-        final val = _$_SearchProgramGenre(
+        final val = _$SearchProgramGenreImpl(
           personality: $checkedConvert(
               'personality',
               (v) => v == null
@@ -136,20 +138,20 @@ _$_SearchProgramGenre _$$_SearchProgramGenreFromJson(
       },
     );
 
-Map<String, dynamic> _$$_SearchProgramGenreToJson(
-        _$_SearchProgramGenre instance) =>
+Map<String, dynamic> _$$SearchProgramGenreImplToJson(
+        _$SearchProgramGenreImpl instance) =>
     <String, dynamic>{
       'personality': instance.personality,
       'program': instance.program,
     };
 
-_$_SearchProgramGenreData _$$_SearchProgramGenreDataFromJson(
+_$SearchProgramGenreDataImpl _$$SearchProgramGenreDataImplFromJson(
         Map<String, dynamic> json) =>
     $checkedCreate(
-      r'_$_SearchProgramGenreData',
+      r'_$SearchProgramGenreDataImpl',
       json,
       ($checkedConvert) {
-        final val = _$_SearchProgramGenreData(
+        final val = _$SearchProgramGenreDataImpl(
           id: $checkedConvert('id', (v) => v as String),
           name: $checkedConvert('name', (v) => v as String),
         );
@@ -157,8 +159,8 @@ _$_SearchProgramGenreData _$$_SearchProgramGenreDataFromJson(
       },
     );
 
-Map<String, dynamic> _$$_SearchProgramGenreDataToJson(
-        _$_SearchProgramGenreData instance) =>
+Map<String, dynamic> _$$SearchProgramGenreDataImplToJson(
+        _$SearchProgramGenreDataImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,

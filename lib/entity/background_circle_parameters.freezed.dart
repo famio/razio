@@ -12,7 +12,7 @@ part of 'background_circle_parameters.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$BackgroundCircleParameters {
@@ -65,25 +65,25 @@ class _$BackgroundCircleParametersCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_BackgroundCircleParametersCopyWith<$Res>
+abstract class _$$BackgroundCircleParametersImplCopyWith<$Res>
     implements $BackgroundCircleParametersCopyWith<$Res> {
-  factory _$$_BackgroundCircleParametersCopyWith(
-          _$_BackgroundCircleParameters value,
-          $Res Function(_$_BackgroundCircleParameters) then) =
-      __$$_BackgroundCircleParametersCopyWithImpl<$Res>;
+  factory _$$BackgroundCircleParametersImplCopyWith(
+          _$BackgroundCircleParametersImpl value,
+          $Res Function(_$BackgroundCircleParametersImpl) then) =
+      __$$BackgroundCircleParametersImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({double opacity, Offset position});
 }
 
 /// @nodoc
-class __$$_BackgroundCircleParametersCopyWithImpl<$Res>
+class __$$BackgroundCircleParametersImplCopyWithImpl<$Res>
     extends _$BackgroundCircleParametersCopyWithImpl<$Res,
-        _$_BackgroundCircleParameters>
-    implements _$$_BackgroundCircleParametersCopyWith<$Res> {
-  __$$_BackgroundCircleParametersCopyWithImpl(
-      _$_BackgroundCircleParameters _value,
-      $Res Function(_$_BackgroundCircleParameters) _then)
+        _$BackgroundCircleParametersImpl>
+    implements _$$BackgroundCircleParametersImplCopyWith<$Res> {
+  __$$BackgroundCircleParametersImplCopyWithImpl(
+      _$BackgroundCircleParametersImpl _value,
+      $Res Function(_$BackgroundCircleParametersImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -92,7 +92,7 @@ class __$$_BackgroundCircleParametersCopyWithImpl<$Res>
     Object? opacity = null,
     Object? position = null,
   }) {
-    return _then(_$_BackgroundCircleParameters(
+    return _then(_$BackgroundCircleParametersImpl(
       opacity: null == opacity
           ? _value.opacity
           : opacity // ignore: cast_nullable_to_non_nullable
@@ -107,8 +107,8 @@ class __$$_BackgroundCircleParametersCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_BackgroundCircleParameters implements _BackgroundCircleParameters {
-  const _$_BackgroundCircleParameters(
+class _$BackgroundCircleParametersImpl implements _BackgroundCircleParameters {
+  const _$BackgroundCircleParametersImpl(
       {required this.opacity, required this.position});
 
   @override
@@ -122,10 +122,10 @@ class _$_BackgroundCircleParameters implements _BackgroundCircleParameters {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_BackgroundCircleParameters &&
+            other is _$BackgroundCircleParametersImpl &&
             (identical(other.opacity, opacity) || other.opacity == opacity) &&
             (identical(other.position, position) ||
                 other.position == position));
@@ -137,16 +137,16 @@ class _$_BackgroundCircleParameters implements _BackgroundCircleParameters {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_BackgroundCircleParametersCopyWith<_$_BackgroundCircleParameters>
-      get copyWith => __$$_BackgroundCircleParametersCopyWithImpl<
-          _$_BackgroundCircleParameters>(this, _$identity);
+  _$$BackgroundCircleParametersImplCopyWith<_$BackgroundCircleParametersImpl>
+      get copyWith => __$$BackgroundCircleParametersImplCopyWithImpl<
+          _$BackgroundCircleParametersImpl>(this, _$identity);
 }
 
 abstract class _BackgroundCircleParameters
     implements BackgroundCircleParameters {
   const factory _BackgroundCircleParameters(
       {required final double opacity,
-      required final Offset position}) = _$_BackgroundCircleParameters;
+      required final Offset position}) = _$BackgroundCircleParametersImpl;
 
   @override
   double get opacity;
@@ -154,6 +154,6 @@ abstract class _BackgroundCircleParameters
   Offset get position;
   @override
   @JsonKey(ignore: true)
-  _$$_BackgroundCircleParametersCopyWith<_$_BackgroundCircleParameters>
+  _$$BackgroundCircleParametersImplCopyWith<_$BackgroundCircleParametersImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

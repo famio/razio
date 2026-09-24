@@ -12,7 +12,7 @@ part of 'auth1.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$Auth1 {
@@ -67,18 +67,21 @@ class _$Auth1CopyWithImpl<$Res, $Val extends Auth1>
 }
 
 /// @nodoc
-abstract class _$$_Auth1CopyWith<$Res> implements $Auth1CopyWith<$Res> {
-  factory _$$_Auth1CopyWith(_$_Auth1 value, $Res Function(_$_Auth1) then) =
-      __$$_Auth1CopyWithImpl<$Res>;
+abstract class _$$Auth1ImplCopyWith<$Res> implements $Auth1CopyWith<$Res> {
+  factory _$$Auth1ImplCopyWith(
+          _$Auth1Impl value, $Res Function(_$Auth1Impl) then) =
+      __$$Auth1ImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String authToken, int keyOffset, int keyLength});
 }
 
 /// @nodoc
-class __$$_Auth1CopyWithImpl<$Res> extends _$Auth1CopyWithImpl<$Res, _$_Auth1>
-    implements _$$_Auth1CopyWith<$Res> {
-  __$$_Auth1CopyWithImpl(_$_Auth1 _value, $Res Function(_$_Auth1) _then)
+class __$$Auth1ImplCopyWithImpl<$Res>
+    extends _$Auth1CopyWithImpl<$Res, _$Auth1Impl>
+    implements _$$Auth1ImplCopyWith<$Res> {
+  __$$Auth1ImplCopyWithImpl(
+      _$Auth1Impl _value, $Res Function(_$Auth1Impl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -88,7 +91,7 @@ class __$$_Auth1CopyWithImpl<$Res> extends _$Auth1CopyWithImpl<$Res, _$_Auth1>
     Object? keyOffset = null,
     Object? keyLength = null,
   }) {
-    return _then(_$_Auth1(
+    return _then(_$Auth1Impl(
       authToken: null == authToken
           ? _value.authToken
           : authToken // ignore: cast_nullable_to_non_nullable
@@ -107,8 +110,8 @@ class __$$_Auth1CopyWithImpl<$Res> extends _$Auth1CopyWithImpl<$Res, _$_Auth1>
 
 /// @nodoc
 
-class _$_Auth1 implements _Auth1 {
-  _$_Auth1(
+class _$Auth1Impl implements _Auth1 {
+  _$Auth1Impl(
       {required this.authToken,
       required this.keyOffset,
       required this.keyLength});
@@ -126,10 +129,10 @@ class _$_Auth1 implements _Auth1 {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Auth1 &&
+            other is _$Auth1Impl &&
             (identical(other.authToken, authToken) ||
                 other.authToken == authToken) &&
             (identical(other.keyOffset, keyOffset) ||
@@ -144,15 +147,15 @@ class _$_Auth1 implements _Auth1 {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_Auth1CopyWith<_$_Auth1> get copyWith =>
-      __$$_Auth1CopyWithImpl<_$_Auth1>(this, _$identity);
+  _$$Auth1ImplCopyWith<_$Auth1Impl> get copyWith =>
+      __$$Auth1ImplCopyWithImpl<_$Auth1Impl>(this, _$identity);
 }
 
 abstract class _Auth1 implements Auth1 {
   factory _Auth1(
       {required final String authToken,
       required final int keyOffset,
-      required final int keyLength}) = _$_Auth1;
+      required final int keyLength}) = _$Auth1Impl;
 
   @override
   String get authToken;
@@ -162,6 +165,6 @@ abstract class _Auth1 implements Auth1 {
   int get keyLength;
   @override
   @JsonKey(ignore: true)
-  _$$_Auth1CopyWith<_$_Auth1> get copyWith =>
+  _$$Auth1ImplCopyWith<_$Auth1Impl> get copyWith =>
       throw _privateConstructorUsedError;
 }

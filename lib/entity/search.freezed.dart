@@ -12,7 +12,7 @@ part of 'search.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 Search _$SearchFromJson(Map<String, dynamic> json) {
   return _Search.fromJson(json);
@@ -60,19 +60,21 @@ class _$SearchCopyWithImpl<$Res, $Val extends Search>
 }
 
 /// @nodoc
-abstract class _$$_SearchCopyWith<$Res> implements $SearchCopyWith<$Res> {
-  factory _$$_SearchCopyWith(_$_Search value, $Res Function(_$_Search) then) =
-      __$$_SearchCopyWithImpl<$Res>;
+abstract class _$$SearchImplCopyWith<$Res> implements $SearchCopyWith<$Res> {
+  factory _$$SearchImplCopyWith(
+          _$SearchImpl value, $Res Function(_$SearchImpl) then) =
+      __$$SearchImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({List<SearchProgram> data});
 }
 
 /// @nodoc
-class __$$_SearchCopyWithImpl<$Res>
-    extends _$SearchCopyWithImpl<$Res, _$_Search>
-    implements _$$_SearchCopyWith<$Res> {
-  __$$_SearchCopyWithImpl(_$_Search _value, $Res Function(_$_Search) _then)
+class __$$SearchImplCopyWithImpl<$Res>
+    extends _$SearchCopyWithImpl<$Res, _$SearchImpl>
+    implements _$$SearchImplCopyWith<$Res> {
+  __$$SearchImplCopyWithImpl(
+      _$SearchImpl _value, $Res Function(_$SearchImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -80,7 +82,7 @@ class __$$_SearchCopyWithImpl<$Res>
   $Res call({
     Object? data = null,
   }) {
-    return _then(_$_Search(
+    return _then(_$SearchImpl(
       data: null == data
           ? _value._data
           : data // ignore: cast_nullable_to_non_nullable
@@ -91,11 +93,11 @@ class __$$_SearchCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Search implements _Search {
-  _$_Search({required final List<SearchProgram> data}) : _data = data;
+class _$SearchImpl implements _Search {
+  _$SearchImpl({required final List<SearchProgram> data}) : _data = data;
 
-  factory _$_Search.fromJson(Map<String, dynamic> json) =>
-      _$$_SearchFromJson(json);
+  factory _$SearchImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SearchImplFromJson(json);
 
   final List<SearchProgram> _data;
   @override
@@ -111,10 +113,10 @@ class _$_Search implements _Search {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Search &&
+            other is _$SearchImpl &&
             const DeepCollectionEquality().equals(other._data, _data));
   }
 
@@ -126,27 +128,27 @@ class _$_Search implements _Search {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SearchCopyWith<_$_Search> get copyWith =>
-      __$$_SearchCopyWithImpl<_$_Search>(this, _$identity);
+  _$$SearchImplCopyWith<_$SearchImpl> get copyWith =>
+      __$$SearchImplCopyWithImpl<_$SearchImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SearchToJson(
+    return _$$SearchImplToJson(
       this,
     );
   }
 }
 
 abstract class _Search implements Search {
-  factory _Search({required final List<SearchProgram> data}) = _$_Search;
+  factory _Search({required final List<SearchProgram> data}) = _$SearchImpl;
 
-  factory _Search.fromJson(Map<String, dynamic> json) = _$_Search.fromJson;
+  factory _Search.fromJson(Map<String, dynamic> json) = _$SearchImpl.fromJson;
 
   @override
   List<SearchProgram> get data;
   @override
   @JsonKey(ignore: true)
-  _$$_SearchCopyWith<_$_Search> get copyWith =>
+  _$$SearchImplCopyWith<_$SearchImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -321,11 +323,11 @@ class _$SearchProgramCopyWithImpl<$Res, $Val extends SearchProgram>
 }
 
 /// @nodoc
-abstract class _$$_SearchProgramCopyWith<$Res>
+abstract class _$$SearchProgramImplCopyWith<$Res>
     implements $SearchProgramCopyWith<$Res> {
-  factory _$$_SearchProgramCopyWith(
-          _$_SearchProgram value, $Res Function(_$_SearchProgram) then) =
-      __$$_SearchProgramCopyWithImpl<$Res>;
+  factory _$$SearchProgramImplCopyWith(
+          _$SearchProgramImpl value, $Res Function(_$SearchProgramImpl) then) =
+      __$$SearchProgramImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -352,11 +354,11 @@ abstract class _$$_SearchProgramCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_SearchProgramCopyWithImpl<$Res>
-    extends _$SearchProgramCopyWithImpl<$Res, _$_SearchProgram>
-    implements _$$_SearchProgramCopyWith<$Res> {
-  __$$_SearchProgramCopyWithImpl(
-      _$_SearchProgram _value, $Res Function(_$_SearchProgram) _then)
+class __$$SearchProgramImplCopyWithImpl<$Res>
+    extends _$SearchProgramCopyWithImpl<$Res, _$SearchProgramImpl>
+    implements _$$SearchProgramImplCopyWith<$Res> {
+  __$$SearchProgramImplCopyWithImpl(
+      _$SearchProgramImpl _value, $Res Function(_$SearchProgramImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -380,7 +382,7 @@ class __$$_SearchProgramCopyWithImpl<$Res>
     Object? img = null,
     Object? description = null,
   }) {
-    return _then(_$_SearchProgram(
+    return _then(_$SearchProgramImpl(
       tsInNg: null == tsInNg
           ? _value.tsInNg
           : tsInNg // ignore: cast_nullable_to_non_nullable
@@ -455,8 +457,8 @@ class __$$_SearchProgramCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_SearchProgram implements _SearchProgram {
-  _$_SearchProgram(
+class _$SearchProgramImpl implements _SearchProgram {
+  _$SearchProgramImpl(
       {required this.tsInNg,
       required final List<SearchProgramMeta> metas,
       required this.tsOutNg,
@@ -476,8 +478,8 @@ class _$_SearchProgram implements _SearchProgram {
       required this.description})
       : _metas = metas;
 
-  factory _$_SearchProgram.fromJson(Map<String, dynamic> json) =>
-      _$$_SearchProgramFromJson(json);
+  factory _$SearchProgramImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SearchProgramImplFromJson(json);
 
   @override
   final int tsInNg;
@@ -526,10 +528,10 @@ class _$_SearchProgram implements _SearchProgram {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SearchProgram &&
+            other is _$SearchProgramImpl &&
             (identical(other.tsInNg, tsInNg) || other.tsInNg == tsInNg) &&
             const DeepCollectionEquality().equals(other._metas, _metas) &&
             (identical(other.tsOutNg, tsOutNg) || other.tsOutNg == tsOutNg) &&
@@ -582,12 +584,12 @@ class _$_SearchProgram implements _SearchProgram {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SearchProgramCopyWith<_$_SearchProgram> get copyWith =>
-      __$$_SearchProgramCopyWithImpl<_$_SearchProgram>(this, _$identity);
+  _$$SearchProgramImplCopyWith<_$SearchProgramImpl> get copyWith =>
+      __$$SearchProgramImplCopyWithImpl<_$SearchProgramImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SearchProgramToJson(
+    return _$$SearchProgramImplToJson(
       this,
     );
   }
@@ -611,10 +613,10 @@ abstract class _SearchProgram implements SearchProgram {
       required final String programDate,
       required final String info,
       required final Uri img,
-      required final String description}) = _$_SearchProgram;
+      required final String description}) = _$SearchProgramImpl;
 
   factory _SearchProgram.fromJson(Map<String, dynamic> json) =
-      _$_SearchProgram.fromJson;
+      _$SearchProgramImpl.fromJson;
 
   @override
   int get tsInNg;
@@ -652,7 +654,7 @@ abstract class _SearchProgram implements SearchProgram {
   String get description;
   @override
   @JsonKey(ignore: true)
-  _$$_SearchProgramCopyWith<_$_SearchProgram> get copyWith =>
+  _$$SearchProgramImplCopyWith<_$SearchProgramImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -710,22 +712,22 @@ class _$SearchProgramMetaCopyWithImpl<$Res, $Val extends SearchProgramMeta>
 }
 
 /// @nodoc
-abstract class _$$_SearchProgramMetaCopyWith<$Res>
+abstract class _$$SearchProgramMetaImplCopyWith<$Res>
     implements $SearchProgramMetaCopyWith<$Res> {
-  factory _$$_SearchProgramMetaCopyWith(_$_SearchProgramMeta value,
-          $Res Function(_$_SearchProgramMeta) then) =
-      __$$_SearchProgramMetaCopyWithImpl<$Res>;
+  factory _$$SearchProgramMetaImplCopyWith(_$SearchProgramMetaImpl value,
+          $Res Function(_$SearchProgramMetaImpl) then) =
+      __$$SearchProgramMetaImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String name, String value});
 }
 
 /// @nodoc
-class __$$_SearchProgramMetaCopyWithImpl<$Res>
-    extends _$SearchProgramMetaCopyWithImpl<$Res, _$_SearchProgramMeta>
-    implements _$$_SearchProgramMetaCopyWith<$Res> {
-  __$$_SearchProgramMetaCopyWithImpl(
-      _$_SearchProgramMeta _value, $Res Function(_$_SearchProgramMeta) _then)
+class __$$SearchProgramMetaImplCopyWithImpl<$Res>
+    extends _$SearchProgramMetaCopyWithImpl<$Res, _$SearchProgramMetaImpl>
+    implements _$$SearchProgramMetaImplCopyWith<$Res> {
+  __$$SearchProgramMetaImplCopyWithImpl(_$SearchProgramMetaImpl _value,
+      $Res Function(_$SearchProgramMetaImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -734,7 +736,7 @@ class __$$_SearchProgramMetaCopyWithImpl<$Res>
     Object? name = null,
     Object? value = null,
   }) {
-    return _then(_$_SearchProgramMeta(
+    return _then(_$SearchProgramMetaImpl(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -749,11 +751,11 @@ class __$$_SearchProgramMetaCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_SearchProgramMeta implements _SearchProgramMeta {
-  _$_SearchProgramMeta({required this.name, required this.value});
+class _$SearchProgramMetaImpl implements _SearchProgramMeta {
+  _$SearchProgramMetaImpl({required this.name, required this.value});
 
-  factory _$_SearchProgramMeta.fromJson(Map<String, dynamic> json) =>
-      _$$_SearchProgramMetaFromJson(json);
+  factory _$SearchProgramMetaImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SearchProgramMetaImplFromJson(json);
 
   @override
   final String name;
@@ -766,10 +768,10 @@ class _$_SearchProgramMeta implements _SearchProgramMeta {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SearchProgramMeta &&
+            other is _$SearchProgramMetaImpl &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.value, value) || other.value == value));
   }
@@ -781,13 +783,13 @@ class _$_SearchProgramMeta implements _SearchProgramMeta {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SearchProgramMetaCopyWith<_$_SearchProgramMeta> get copyWith =>
-      __$$_SearchProgramMetaCopyWithImpl<_$_SearchProgramMeta>(
+  _$$SearchProgramMetaImplCopyWith<_$SearchProgramMetaImpl> get copyWith =>
+      __$$SearchProgramMetaImplCopyWithImpl<_$SearchProgramMetaImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SearchProgramMetaToJson(
+    return _$$SearchProgramMetaImplToJson(
       this,
     );
   }
@@ -796,10 +798,10 @@ class _$_SearchProgramMeta implements _SearchProgramMeta {
 abstract class _SearchProgramMeta implements SearchProgramMeta {
   factory _SearchProgramMeta(
       {required final String name,
-      required final String value}) = _$_SearchProgramMeta;
+      required final String value}) = _$SearchProgramMetaImpl;
 
   factory _SearchProgramMeta.fromJson(Map<String, dynamic> json) =
-      _$_SearchProgramMeta.fromJson;
+      _$SearchProgramMetaImpl.fromJson;
 
   @override
   String get name;
@@ -807,7 +809,7 @@ abstract class _SearchProgramMeta implements SearchProgramMeta {
   String get value;
   @override
   @JsonKey(ignore: true)
-  _$$_SearchProgramMetaCopyWith<_$_SearchProgramMeta> get copyWith =>
+  _$$SearchProgramMetaImplCopyWith<_$SearchProgramMetaImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -893,11 +895,11 @@ class _$SearchProgramGenreCopyWithImpl<$Res, $Val extends SearchProgramGenre>
 }
 
 /// @nodoc
-abstract class _$$_SearchProgramGenreCopyWith<$Res>
+abstract class _$$SearchProgramGenreImplCopyWith<$Res>
     implements $SearchProgramGenreCopyWith<$Res> {
-  factory _$$_SearchProgramGenreCopyWith(_$_SearchProgramGenre value,
-          $Res Function(_$_SearchProgramGenre) then) =
-      __$$_SearchProgramGenreCopyWithImpl<$Res>;
+  factory _$$SearchProgramGenreImplCopyWith(_$SearchProgramGenreImpl value,
+          $Res Function(_$SearchProgramGenreImpl) then) =
+      __$$SearchProgramGenreImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -910,11 +912,11 @@ abstract class _$$_SearchProgramGenreCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_SearchProgramGenreCopyWithImpl<$Res>
-    extends _$SearchProgramGenreCopyWithImpl<$Res, _$_SearchProgramGenre>
-    implements _$$_SearchProgramGenreCopyWith<$Res> {
-  __$$_SearchProgramGenreCopyWithImpl(
-      _$_SearchProgramGenre _value, $Res Function(_$_SearchProgramGenre) _then)
+class __$$SearchProgramGenreImplCopyWithImpl<$Res>
+    extends _$SearchProgramGenreCopyWithImpl<$Res, _$SearchProgramGenreImpl>
+    implements _$$SearchProgramGenreImplCopyWith<$Res> {
+  __$$SearchProgramGenreImplCopyWithImpl(_$SearchProgramGenreImpl _value,
+      $Res Function(_$SearchProgramGenreImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -923,7 +925,7 @@ class __$$_SearchProgramGenreCopyWithImpl<$Res>
     Object? personality = freezed,
     Object? program = freezed,
   }) {
-    return _then(_$_SearchProgramGenre(
+    return _then(_$SearchProgramGenreImpl(
       personality: freezed == personality
           ? _value.personality
           : personality // ignore: cast_nullable_to_non_nullable
@@ -938,11 +940,11 @@ class __$$_SearchProgramGenreCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_SearchProgramGenre implements _SearchProgramGenre {
-  _$_SearchProgramGenre({this.personality, this.program});
+class _$SearchProgramGenreImpl implements _SearchProgramGenre {
+  _$SearchProgramGenreImpl({this.personality, this.program});
 
-  factory _$_SearchProgramGenre.fromJson(Map<String, dynamic> json) =>
-      _$$_SearchProgramGenreFromJson(json);
+  factory _$SearchProgramGenreImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SearchProgramGenreImplFromJson(json);
 
   @override
   final SearchProgramGenreData? personality;
@@ -955,10 +957,10 @@ class _$_SearchProgramGenre implements _SearchProgramGenre {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SearchProgramGenre &&
+            other is _$SearchProgramGenreImpl &&
             (identical(other.personality, personality) ||
                 other.personality == personality) &&
             (identical(other.program, program) || other.program == program));
@@ -971,13 +973,13 @@ class _$_SearchProgramGenre implements _SearchProgramGenre {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SearchProgramGenreCopyWith<_$_SearchProgramGenre> get copyWith =>
-      __$$_SearchProgramGenreCopyWithImpl<_$_SearchProgramGenre>(
+  _$$SearchProgramGenreImplCopyWith<_$SearchProgramGenreImpl> get copyWith =>
+      __$$SearchProgramGenreImplCopyWithImpl<_$SearchProgramGenreImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SearchProgramGenreToJson(
+    return _$$SearchProgramGenreImplToJson(
       this,
     );
   }
@@ -986,10 +988,10 @@ class _$_SearchProgramGenre implements _SearchProgramGenre {
 abstract class _SearchProgramGenre implements SearchProgramGenre {
   factory _SearchProgramGenre(
       {final SearchProgramGenreData? personality,
-      final SearchProgramGenreData? program}) = _$_SearchProgramGenre;
+      final SearchProgramGenreData? program}) = _$SearchProgramGenreImpl;
 
   factory _SearchProgramGenre.fromJson(Map<String, dynamic> json) =
-      _$_SearchProgramGenre.fromJson;
+      _$SearchProgramGenreImpl.fromJson;
 
   @override
   SearchProgramGenreData? get personality;
@@ -997,7 +999,7 @@ abstract class _SearchProgramGenre implements SearchProgramGenre {
   SearchProgramGenreData? get program;
   @override
   @JsonKey(ignore: true)
-  _$$_SearchProgramGenreCopyWith<_$_SearchProgramGenre> get copyWith =>
+  _$$SearchProgramGenreImplCopyWith<_$SearchProgramGenreImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1057,23 +1059,25 @@ class _$SearchProgramGenreDataCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_SearchProgramGenreDataCopyWith<$Res>
+abstract class _$$SearchProgramGenreDataImplCopyWith<$Res>
     implements $SearchProgramGenreDataCopyWith<$Res> {
-  factory _$$_SearchProgramGenreDataCopyWith(_$_SearchProgramGenreData value,
-          $Res Function(_$_SearchProgramGenreData) then) =
-      __$$_SearchProgramGenreDataCopyWithImpl<$Res>;
+  factory _$$SearchProgramGenreDataImplCopyWith(
+          _$SearchProgramGenreDataImpl value,
+          $Res Function(_$SearchProgramGenreDataImpl) then) =
+      __$$SearchProgramGenreDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String id, String name});
 }
 
 /// @nodoc
-class __$$_SearchProgramGenreDataCopyWithImpl<$Res>
+class __$$SearchProgramGenreDataImplCopyWithImpl<$Res>
     extends _$SearchProgramGenreDataCopyWithImpl<$Res,
-        _$_SearchProgramGenreData>
-    implements _$$_SearchProgramGenreDataCopyWith<$Res> {
-  __$$_SearchProgramGenreDataCopyWithImpl(_$_SearchProgramGenreData _value,
-      $Res Function(_$_SearchProgramGenreData) _then)
+        _$SearchProgramGenreDataImpl>
+    implements _$$SearchProgramGenreDataImplCopyWith<$Res> {
+  __$$SearchProgramGenreDataImplCopyWithImpl(
+      _$SearchProgramGenreDataImpl _value,
+      $Res Function(_$SearchProgramGenreDataImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1082,7 +1086,7 @@ class __$$_SearchProgramGenreDataCopyWithImpl<$Res>
     Object? id = null,
     Object? name = null,
   }) {
-    return _then(_$_SearchProgramGenreData(
+    return _then(_$SearchProgramGenreDataImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -1097,11 +1101,11 @@ class __$$_SearchProgramGenreDataCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_SearchProgramGenreData implements _SearchProgramGenreData {
-  _$_SearchProgramGenreData({required this.id, required this.name});
+class _$SearchProgramGenreDataImpl implements _SearchProgramGenreData {
+  _$SearchProgramGenreDataImpl({required this.id, required this.name});
 
-  factory _$_SearchProgramGenreData.fromJson(Map<String, dynamic> json) =>
-      _$$_SearchProgramGenreDataFromJson(json);
+  factory _$SearchProgramGenreDataImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SearchProgramGenreDataImplFromJson(json);
 
   @override
   final String id;
@@ -1114,10 +1118,10 @@ class _$_SearchProgramGenreData implements _SearchProgramGenreData {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SearchProgramGenreData &&
+            other is _$SearchProgramGenreDataImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name));
   }
@@ -1129,13 +1133,13 @@ class _$_SearchProgramGenreData implements _SearchProgramGenreData {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SearchProgramGenreDataCopyWith<_$_SearchProgramGenreData> get copyWith =>
-      __$$_SearchProgramGenreDataCopyWithImpl<_$_SearchProgramGenreData>(
-          this, _$identity);
+  _$$SearchProgramGenreDataImplCopyWith<_$SearchProgramGenreDataImpl>
+      get copyWith => __$$SearchProgramGenreDataImplCopyWithImpl<
+          _$SearchProgramGenreDataImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SearchProgramGenreDataToJson(
+    return _$$SearchProgramGenreDataImplToJson(
       this,
     );
   }
@@ -1144,10 +1148,10 @@ class _$_SearchProgramGenreData implements _SearchProgramGenreData {
 abstract class _SearchProgramGenreData implements SearchProgramGenreData {
   factory _SearchProgramGenreData(
       {required final String id,
-      required final String name}) = _$_SearchProgramGenreData;
+      required final String name}) = _$SearchProgramGenreDataImpl;
 
   factory _SearchProgramGenreData.fromJson(Map<String, dynamic> json) =
-      _$_SearchProgramGenreData.fromJson;
+      _$SearchProgramGenreDataImpl.fromJson;
 
   @override
   String get id;
@@ -1155,6 +1159,6 @@ abstract class _SearchProgramGenreData implements SearchProgramGenreData {
   String get name;
   @override
   @JsonKey(ignore: true)
-  _$$_SearchProgramGenreDataCopyWith<_$_SearchProgramGenreData> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$SearchProgramGenreDataImplCopyWith<_$SearchProgramGenreDataImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
