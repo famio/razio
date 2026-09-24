@@ -6,30 +6,30 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=3.4.4 <4.0.0"
+  sdk: ^3.8.0
 
 dependencies:
   animated_background: ^2.0.0
   audio_service: ^0.18.19
   blur: ^4.0.2
-  build_runner: ^2.5.4
+  build_runner: ^2.15.1
   cached_network_image: ^3.4.1
   clickable_list_wheel_view: ^0.2.0
   collection: ^1.19.1
   crypto: ^3.0.7
   flutter:
     sdk: flutter
-  flutter_gen_runner: ^5.14.0
+  flutter_gen_runner: ^5.15.0
   flutter_hooks: ^0.20.5
   flutter_local_notifications: ^22.3.1
   flutter_svg: ^2.3.0
-  freezed_annotation: ^2.4.4
+  freezed_annotation: ^3.1.0
   go_router: ^14.8.1
   hooks_riverpod: ^2.6.1
   http: ^1.6.0
   intl: ^0.19.0
-  json_annotation: ^4.9.0
-  json_serializable: ^6.9.5
+  json_annotation: ^4.12.0
+  json_serializable: ^6.14.1
   just_audio: ^0.10.6
   just_audio_background: ^0.0.1-beta.17
   pedantic_mono: ^1.33.0
@@ -43,7 +43,7 @@ dev_dependencies:
   flutter_lints: ^5.0.0
   flutter_test:
     sdk: flutter
-  freezed: ^2.5.8
+  freezed: ^3.2.0
 
 flutter_gen:
   integrations:

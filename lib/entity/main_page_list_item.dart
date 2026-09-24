@@ -6,7 +6,7 @@ import 'package:razio/entity/search.dart';
 part 'main_page_list_item.freezed.dart';
 
 @freezed
-class MainPageListItem with _$MainPageListItem {
+abstract class MainPageListItem with _$MainPageListItem {
   factory MainPageListItem({
     required String stationId,
     required String imageUrl,

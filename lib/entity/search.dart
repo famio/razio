@@ -4,7 +4,7 @@ part 'search.freezed.dart';
 part 'search.g.dart';
 
 @freezed
-class Search with _$Search {
+abstract class Search with _$Search {
   factory Search({
     required List<SearchProgram> data,
   }) = _Search;
@@ -13,7 +13,7 @@ class Search with _$Search {
 }
 
 @freezed
-class SearchProgram with _$SearchProgram {
+abstract class SearchProgram with _$SearchProgram {
   factory SearchProgram({
     required int tsInNg,
     required List<SearchProgramMeta> metas,
@@ -39,7 +39,7 @@ class SearchProgram with _$SearchProgram {
 }
 
 @freezed
-class SearchProgramMeta with _$SearchProgramMeta {
+abstract class SearchProgramMeta with _$SearchProgramMeta {
   factory SearchProgramMeta({
     required String name,
     required String value,
@@ -50,7 +50,7 @@ class SearchProgramMeta with _$SearchProgramMeta {
 }
 
 @freezed
-class SearchProgramGenre with _$SearchProgramGenre {
+abstract class SearchProgramGenre with _$SearchProgramGenre {
   factory SearchProgramGenre({
     SearchProgramGenreData? personality,
     SearchProgramGenreData? program,
@@ -61,7 +61,7 @@ class SearchProgramGenre with _$SearchProgramGenre {
 }
 
 @freezed
-class SearchProgramGenreData with _$SearchProgramGenreData {
+abstract class SearchProgramGenreData with _$SearchProgramGenreData {
   factory SearchProgramGenreData({
     required String id,
     required String name,

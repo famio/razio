@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,121 +9,263 @@ part of 'auth2.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
 /// @nodoc
 mixin _$Auth2 {
-  String get areaId => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
-  $Auth2CopyWith<Auth2> get copyWith => throw _privateConstructorUsedError;
+ String get areaId;
+/// Create a copy of Auth2
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$Auth2CopyWith<Auth2> get copyWith => _$Auth2CopyWithImpl<Auth2>(this as Auth2, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Auth2&&(identical(other.areaId, areaId) || other.areaId == areaId));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,areaId);
+
+@override
+String toString() {
+  return 'Auth2(areaId: $areaId)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $Auth2CopyWith<$Res> {
-  factory $Auth2CopyWith(Auth2 value, $Res Function(Auth2) then) =
-      _$Auth2CopyWithImpl<$Res, Auth2>;
-  @useResult
-  $Res call({String areaId});
-}
+abstract mixin class $Auth2CopyWith<$Res>  {
+  factory $Auth2CopyWith(Auth2 value, $Res Function(Auth2) _then) = _$Auth2CopyWithImpl;
+@useResult
+$Res call({
+ String areaId
+});
 
+
+
+
+}
 /// @nodoc
-class _$Auth2CopyWithImpl<$Res, $Val extends Auth2>
+class _$Auth2CopyWithImpl<$Res>
     implements $Auth2CopyWith<$Res> {
-  _$Auth2CopyWithImpl(this._value, this._then);
+  _$Auth2CopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final Auth2 _self;
+  final $Res Function(Auth2) _then;
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? areaId = null,
-  }) {
-    return _then(_value.copyWith(
-      areaId: null == areaId
-          ? _value.areaId
-          : areaId // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
+/// Create a copy of Auth2
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? areaId = null,}) {
+  return _then(_self.copyWith(
+areaId: null == areaId ? _self.areaId : areaId // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [Auth2].
+extension Auth2Patterns on Auth2 {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _Auth2 value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _Auth2() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _Auth2 value)  $default,){
+final _that = this;
+switch (_that) {
+case _Auth2():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _Auth2 value)?  $default,){
+final _that = this;
+switch (_that) {
+case _Auth2() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String areaId)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _Auth2() when $default != null:
+return $default(_that.areaId);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String areaId)  $default,) {final _that = this;
+switch (_that) {
+case _Auth2():
+return $default(_that.areaId);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String areaId)?  $default,) {final _that = this;
+switch (_that) {
+case _Auth2() when $default != null:
+return $default(_that.areaId);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
-abstract class _$$Auth2ImplCopyWith<$Res> implements $Auth2CopyWith<$Res> {
-  factory _$$Auth2ImplCopyWith(
-          _$Auth2Impl value, $Res Function(_$Auth2Impl) then) =
-      __$$Auth2ImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String areaId});
+
+
+class _Auth2 implements Auth2 {
+   _Auth2({required this.areaId});
+  
+
+@override final  String areaId;
+
+/// Create a copy of Auth2
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$Auth2CopyWith<_Auth2> get copyWith => __$Auth2CopyWithImpl<_Auth2>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Auth2&&(identical(other.areaId, areaId) || other.areaId == areaId));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,areaId);
+
+@override
+String toString() {
+  return 'Auth2(areaId: $areaId)';
+}
+
+
 }
 
 /// @nodoc
-class __$$Auth2ImplCopyWithImpl<$Res>
-    extends _$Auth2CopyWithImpl<$Res, _$Auth2Impl>
-    implements _$$Auth2ImplCopyWith<$Res> {
-  __$$Auth2ImplCopyWithImpl(
-      _$Auth2Impl _value, $Res Function(_$Auth2Impl) _then)
-      : super(_value, _then);
+abstract mixin class _$Auth2CopyWith<$Res> implements $Auth2CopyWith<$Res> {
+  factory _$Auth2CopyWith(_Auth2 value, $Res Function(_Auth2) _then) = __$Auth2CopyWithImpl;
+@override @useResult
+$Res call({
+ String areaId
+});
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? areaId = null,
-  }) {
-    return _then(_$Auth2Impl(
-      areaId: null == areaId
-          ? _value.areaId
-          : areaId // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
+
+
+
 }
-
 /// @nodoc
+class __$Auth2CopyWithImpl<$Res>
+    implements _$Auth2CopyWith<$Res> {
+  __$Auth2CopyWithImpl(this._self, this._then);
 
-class _$Auth2Impl implements _Auth2 {
-  _$Auth2Impl({required this.areaId});
+  final _Auth2 _self;
+  final $Res Function(_Auth2) _then;
 
-  @override
-  final String areaId;
-
-  @override
-  String toString() {
-    return 'Auth2(areaId: $areaId)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$Auth2Impl &&
-            (identical(other.areaId, areaId) || other.areaId == areaId));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, areaId);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$Auth2ImplCopyWith<_$Auth2Impl> get copyWith =>
-      __$$Auth2ImplCopyWithImpl<_$Auth2Impl>(this, _$identity);
+/// Create a copy of Auth2
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? areaId = null,}) {
+  return _then(_Auth2(
+areaId: null == areaId ? _self.areaId : areaId // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
 }
 
-abstract class _Auth2 implements Auth2 {
-  factory _Auth2({required final String areaId}) = _$Auth2Impl;
 
-  @override
-  String get areaId;
-  @override
-  @JsonKey(ignore: true)
-  _$$Auth2ImplCopyWith<_$Auth2Impl> get copyWith =>
-      throw _privateConstructorUsedError;
 }
+
+// dart format on
