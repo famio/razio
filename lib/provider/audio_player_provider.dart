@@ -1,13 +1,13 @@
 import 'package:audio_service/audio_service.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:http/http.dart' as http;
-import 'package:intl/intl.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:razio/const.dart';
 import 'package:razio/entity/search.dart';
 import 'package:razio/provider/auth_provider.dart';
 import 'package:razio/provider/main_page_list_mode_provider.dart';
 import 'package:razio/provider/now_on_air_program_list.dart';
+import 'package:razio/provider/playback_timeline_provider.dart';
 import 'package:razio/provider/selected_search_program_provider.dart';
 import 'package:razio/provider/selected_station_id_provider.dart';
 import 'package:razio/util.dart';
@@ -20,16 +20,13 @@ final audioPlayerProvier = Provider((ref) {
       if (next == null) {
         return;
       }
-      ref
-          .read(audioSourceFromStationIdProvider(next).future)
-          .then(audioPlayer.setAudioSource);
+      ref.read(playbackTimelineProvider.notifier).loadLive(next);
     })
     ..listen<SearchProgram?>(selectedSearchProgramProvider, (previous, next) {
       if (next == null) {
         return;
       }
-      final audioSource = ref.read(audioSourceFromSearchProgramProvider(next));
-      audioPlayer.setAudioSource(audioSource);
+      ref.read(playbackTimelineProvider.notifier).loadSearchProgram(next);
     })
     ..listen(mainPageListModeProvider, (previous, next) {
       // SearchモードからLiveモードに帰ってきた時に、選択していたStationを再度再生する
@@ -43,21 +40,25 @@ final audioPlayerProvier = Provider((ref) {
         if (stationId == null) {
           return;
         }
-        ref
-            .read(audioSourceFromStationIdProvider(stationId).future)
-            .then(audioPlayer.setAudioSource);
+        ref.read(playbackTimelineProvider.notifier).loadLive(stationId);
       }
     });
 });
 
-final audioSourceFromStationIdProvider = FutureProvider.autoDispose
-    .family<AudioSource, String>((ref, stationId) async {
+/// Live放送のAudioSource
+/// windowSecondsを指定すると、その秒数だけ遡った位置から再生される(15〜300秒)
+final AutoDisposeFutureProviderFamily<AudioSource,
+        ({String stationId, int windowSeconds})>
+    audioSourceFromStationIdProvider = FutureProvider.autoDispose
+        .family<AudioSource, ({String stationId, int windowSeconds})>(
+            (ref, arg) async {
+  final (:stationId, :windowSeconds) = arg;
   final requestUrl = Uri.https(
     'si-f-radiko.smartstream.ne.jp',
     '/so/playlist.m3u8',
     <String, dynamic>{
       'station_id': stationId,
-      'l': '15',
+      'l': windowSeconds.toString(),
       'lsid': generateUid(),
       'type': 'b',
     },
@@ -94,44 +95,6 @@ final audioSourceFromStationIdProvider = FutureProvider.autoDispose
       artist: stationName,
       title: program.title,
       artUri: Uri.parse(program.img),
-    ),
-  );
-});
-
-final audioSourceFromSearchProgramProvider =
-    Provider.autoDispose.family<AudioSource, SearchProgram>((ref, program) {
-  final authInfo = ref.read(authProvider).value;
-  if (authInfo == null) {
-    throw Exception('authInfo is null');
-  }
-  final header = <String, String>{
-    HeaderKey.authtoken.value: authInfo.authToken,
-  };
-  final outputFormat = DateFormat('yyyyMMddHHmmss');
-  final startAt = outputFormat.format(program.startTime);
-  final endAt = outputFormat.format(program.endTime);
-  final url = Uri.https(
-    'tf-f-rpaa-radiko.smartstream.ne.jp',
-    '/tf/playlist.m3u8',
-    <String, dynamic>{
-      'station_id': program.stationId,
-      'start_at': startAt,
-      'ft': startAt,
-      'end_at': endAt,
-      'to': endAt,
-      'l': '15',
-      'lsid': generateUid(),
-      'type': 'b',
-    },
-  );
-  return AudioSource.uri(
-    url,
-    headers: header,
-    tag: MediaItem(
-      id: program.title + program.startTime.toString(),
-      artist: DateFormat.yMEd('ja').format(program.startTime),
-      title: program.title,
-      artUri: program.img,
     ),
   );
 });

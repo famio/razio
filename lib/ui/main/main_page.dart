@@ -5,7 +5,10 @@ import 'package:blur/blur.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:clickable_list_wheel_view/clickable_list_wheel_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:razio/app_color.dart';
 import 'package:razio/app_text_style.dart';
 import 'package:razio/entity/background_circle_parameters.dart';
@@ -17,6 +20,7 @@ import 'package:razio/provider/is_playing_provider.dart';
 import 'package:razio/provider/main_page_list_item_provider.dart';
 import 'package:razio/provider/main_page_list_mode_provider.dart';
 import 'package:razio/provider/main_page_state_provider.dart';
+import 'package:razio/provider/playback_timeline_provider.dart';
 import 'package:razio/provider/safearea_provider.dart';
 import 'package:razio/provider/search_bar_controller_provider.dart';
 import 'package:razio/provider/search_editing_provider.dart';
@@ -125,10 +129,10 @@ class MainPage extends HookConsumerWidget {
                   }
                 })(),
               ),
-              // Divider
+              // Divider & SeekBar
               const _BottomDivider(),
               const SizedBox(
-                height: 12,
+                height: 2,
               ),
 
               // BottomView

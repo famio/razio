@@ -11,6 +11,7 @@ import 'package:razio/provider/auth_provider.dart';
 import 'package:razio/provider/editing_search_text_provider.dart';
 import 'package:razio/provider/main_page_list_mode_provider.dart';
 import 'package:razio/provider/now_on_air_program_list.dart';
+import 'package:razio/provider/playback_timeline_provider.dart';
 import 'package:razio/provider/search_bar_controller_provider.dart';
 import 'package:razio/provider/search_keyword_provider.dart';
 import 'package:razio/provider/search_result_list_provider.dart';
@@ -104,16 +105,29 @@ class MainPageAction extends StateNotifier<void> {
   }
 
   Future<void> onPlayButton() async {
+    final timeline = _ref.read(playbackTimelineProvider);
     if (audioPlayer.playing) {
-      switch (_ref.read(mainPageListModeProvider.notifier).state) {
-        case MainPageListMode.live:
-          await audioPlayer.stop();
-        case MainPageListMode.search:
-          await audioPlayer.pause();
+      // Live放送の最新位置を再生中の場合は停止し、再開時に最新位置から再生する
+      if (timeline == null || timeline.isAtLiveEdge) {
+        await audioPlayer.stop();
+      } else {
+        await audioPlayer.pause();
       }
     } else {
-      await audioPlayer.play();
+      await _ref.read(playbackTimelineProvider.notifier).resume();
     }
+  }
+
+  /// シークバーで再生位置が指定された時に呼ばれる
+  Future<void> onSeek(DateTime target) async {
+    unawaited(HapticFeedback.lightImpact());
+    await _ref.read(playbackTimelineProvider.notifier).seek(target);
+  }
+
+  /// シークバーでLive放送に戻す操作をされた時に呼ばれる
+  Future<void> onSeekToLive() async {
+    unawaited(HapticFeedback.lightImpact());
+    await _ref.read(playbackTimelineProvider.notifier).seekToLive();
   }
 
   /// 各アイテムのタップ時に呼ばれる
