@@ -17,6 +17,8 @@ import 'package:razio/entity/main_page_list_item.dart';
 import 'package:razio/gen/assets.gen.dart';
 import 'package:razio/provider/audio_player_provider.dart';
 import 'package:razio/provider/editing_search_text_provider.dart';
+import 'package:razio/provider/favorite_list_provider.dart';
+import 'package:razio/provider/favorite_program_list_provider.dart';
 import 'package:razio/provider/is_playing_provider.dart';
 import 'package:razio/provider/main_page_list_item_provider.dart';
 import 'package:razio/provider/main_page_list_mode_provider.dart';
@@ -25,6 +27,7 @@ import 'package:razio/provider/playback_timeline_provider.dart';
 import 'package:razio/provider/safearea_provider.dart';
 import 'package:razio/provider/search_bar_controller_provider.dart';
 import 'package:razio/provider/search_editing_provider.dart';
+import 'package:razio/provider/selected_station_id_provider.dart';
 import 'package:razio/ui/component/bouncing.dart';
 import 'package:razio/ui/main/main_page_action.dart';
 import 'package:razio/util.dart';
@@ -50,7 +53,10 @@ class MainPage extends HookConsumerWidget {
     const itemHeight = 100.0;
 
     final state = ref.watch(mainPageStateProvider);
-    ref.watch(audioPlayerProvier);
+    ref
+      ..watch(audioPlayerProvier)
+      ..watch(mainPageActionProvider);
+    final listMode = ref.watch(mainPageListModeProvider);
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -65,8 +71,7 @@ class MainPage extends HookConsumerWidget {
         title: const _SearchBar(),
         actions: [
           if (ref.watch(searchEditingProvider) ||
-              ref.watch(mainPageListModeProvider) ==
-                  MainPageListMode.search) ...[
+              listMode != MainPageListMode.live) ...[
             GestureDetector(
               behavior: HitTestBehavior.opaque,
               onTap: () => ref
@@ -112,8 +117,7 @@ class MainPage extends HookConsumerWidget {
                         child: _HighlightBar(height: itemHeight),
                       ),
                       Visibility(
-                        visible: ref.watch(mainPageListModeProvider) ==
-                            MainPageListMode.live,
+                        visible: listMode == MainPageListMode.live,
                         child: _ProgramList(
                           programs: ref.watch(mainPageLiveListItemProvider),
                           listMode: MainPageListMode.live,
@@ -121,14 +125,15 @@ class MainPage extends HookConsumerWidget {
                         ),
                       ),
                       Visibility(
-                        visible: ref.watch(mainPageListModeProvider) ==
-                            MainPageListMode.search,
+                        visible: listMode == MainPageListMode.search,
                         child: _ProgramList(
                           programs: ref.watch(mainPageSearchListItemProvider),
                           listMode: MainPageListMode.search,
                           itemHeight: itemHeight,
                         ),
                       ),
+                      if (listMode == MainPageListMode.favorite)
+                        const _FavoriteProgramList(itemHeight: itemHeight),
                     ],
                   );
               }

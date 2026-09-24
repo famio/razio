@@ -8,6 +8,7 @@ part 'main_page_list_item.freezed.dart';
 @freezed
 class MainPageListItem with _$MainPageListItem {
   factory MainPageListItem({
+    required String stationId,
     required String imageUrl,
     required String title,
     required String info1,
@@ -18,6 +19,7 @@ class MainPageListItem with _$MainPageListItem {
     required Program program,
   }) {
     return MainPageListItem(
+      stationId: program.stationId,
       imageUrl: program.img,
       title: program.title,
       info1: program.stationName,
@@ -30,6 +32,7 @@ class MainPageListItem with _$MainPageListItem {
     required SearchProgram program,
   }) {
     return MainPageListItem(
+      stationId: program.stationId,
       imageUrl: program.img.toString(),
       title: program.title,
       info1: DateFormat.MEd('ja').format(program.startTime),

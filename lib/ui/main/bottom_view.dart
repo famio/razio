@@ -8,13 +8,29 @@ class _BottomView extends ConsumerWidget {
     const iconSize = 50.0;
     return Column(
       children: [
-        const SizedBox(
+        SizedBox(
           width: double.infinity,
           height: 56,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+          child: Stack(
+            alignment: Alignment.center,
             children: [
-              _PlayButton(size: iconSize),
+              const _PlayButton(size: iconSize),
+              Positioned(
+                right: 24,
+                child: IconButton(
+                  onPressed: () => ref
+                      .read(mainPageActionProvider.notifier)
+                      .onFavoriteModeButton(),
+                  icon: Icon(
+                    ref.watch(mainPageListModeProvider) ==
+                            MainPageListMode.favorite
+                        ? Icons.star_rounded
+                        : Icons.star_outline_rounded,
+                    size: 30,
+                    color: AppColor.icon(context),
+                  ),
+                ),
+              ),
             ],
           ),
         ),

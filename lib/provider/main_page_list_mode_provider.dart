@@ -3,6 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 enum MainPageListMode {
   live,
   search,
+  favorite,
 }
 
 final mainPageListModeProvider =

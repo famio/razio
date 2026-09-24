@@ -4,11 +4,16 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:razio/entity/main_page_list_item.dart';
+import 'package:razio/entity/search.dart';
 import 'package:razio/logger.dart';
+import 'package:razio/notification/program_notification_service.dart';
 import 'package:razio/provider/app_lifecycle_provider.dart';
 import 'package:razio/provider/audio_player_provider.dart';
 import 'package:razio/provider/auth_provider.dart';
 import 'package:razio/provider/editing_search_text_provider.dart';
+import 'package:razio/provider/favorite_list_provider.dart';
+import 'package:razio/provider/favorite_program_list_provider.dart';
 import 'package:razio/provider/main_page_list_mode_provider.dart';
 import 'package:razio/provider/now_on_air_program_list.dart';
 import 'package:razio/provider/playback_timeline_provider.dart';
@@ -29,6 +34,8 @@ final mainPageActionProvider =
       switch (next) {
         case AppLifecycleState.resumed:
           final _ = ref.refresh(authProvider);
+          // お気に入り番組の放送予定を取得し直して通知を予約し直す
+          ref.invalidate(favoriteUpcomingProgramListProvider);
         case AppLifecycleState.inactive:
         case AppLifecycleState.paused:
         case AppLifecycleState.detached:
@@ -38,7 +45,39 @@ final mainPageActionProvider =
     },
   );
 
+  // お気に入り番組の放送予定が更新されたら通知を予約し直す
+  ref.listen<AsyncValue<List<SearchProgram>>>(
+    favoriteUpcomingProgramListProvider,
+    (previous, next) => next.whenData(ProgramNotificationService.reschedule),
+  );
+
+  // 放送開始の通知がタップされたら、その局のLive放送を再生する
+  void playTappedStation() {
+    final stationId = ProgramNotificationService.tappedStationId.value;
+    final programs = ref.read(nowOnAirProgramListProvider).valueOrNull;
+    if (stationId == null || programs == null) {
+      return;
+    }
+    ProgramNotificationService.tappedStationId.value = null;
+    if (!programs.any((element) => element.stationId == stationId)) {
+      return;
+    }
+    ref.read(mainPageListModeProvider.notifier).state = MainPageListMode.live;
+    ref.read(selectedSearchProgramProvider.notifier).state = null;
+    ref.read(selectedLiveStationIdProvider.notifier).state = stationId;
+    // 再生状態にしておくと、AudioSourceの読み込み後に再生が始まる
+    unawaited(audioPlayer.play());
+  }
+
+  ProgramNotificationService.tappedStationId.addListener(playTappedStation);
+  ref.onDispose(
+    () => ProgramNotificationService.tappedStationId
+        .removeListener(playTappedStation),
+  );
+
   ref.watch(nowOnAirProgramListProvider).whenData((programs) {
+    // Providerの初期化中は他のProviderを変更できないため、初期化後に処理する
+    scheduleMicrotask(playTappedStation);
     final now = DateTime.now();
     final program = programs.sortedBy((element) => element.endTime).first;
     if (program.endDate.isAfter(now)) {
@@ -79,28 +118,38 @@ class MainPageAction extends StateNotifier<void> {
           final stationId = programList[index].stationId;
           _ref.read(selectedLiveStationIdProvider.notifier).state = stationId;
         case MainPageListMode.search:
-          if (index == 0) {
-            // selectedLiveStationIdを同じ値で更新することで、Live放送側の番組を再生する
-            final selectedLiveStationId =
-                _ref.read(selectedLiveStationIdProvider.notifier).state;
-            _ref.read(selectedLiveStationIdProvider.notifier).state = null;
-            _ref.read(selectedLiveStationIdProvider.notifier).state =
-                selectedLiveStationId;
-            // Live放送側の番組を再生するため、selectedSearchProgramをnullにする
-            _ref.read(selectedSearchProgramProvider.notifier).state = null;
-          } else {
-            final fixedIndex = index - 1;
-            final program = _ref
-                .read(searchResultListProvider)
-                .whenData((value) => value[fixedIndex])
-                .value;
-            if (program == null) {
-              return;
-            }
-            _ref.read(selectedSearchProgramProvider.notifier).state = program;
-          }
+          _selectTimefreeListItem(index, _ref.read(searchResultListProvider));
+        case MainPageListMode.favorite:
+          _selectTimefreeListItem(
+            index,
+            _ref.read(favoriteAvailableProgramListProvider),
+          );
       }
     });
+  }
+
+  /// 検索・お気に入りのリストでアイテムを選択した時の処理
+  /// 先頭(index 0)はLive放送の番組で、それ以降はタイムフリーの番組
+  void _selectTimefreeListItem(
+    int index,
+    AsyncValue<List<SearchProgram>> programs,
+  ) {
+    if (index == 0) {
+      // selectedLiveStationIdを同じ値で更新することで、Live放送側の番組を再生する
+      final selectedLiveStationId =
+          _ref.read(selectedLiveStationIdProvider.notifier).state;
+      _ref.read(selectedLiveStationIdProvider.notifier).state = null;
+      _ref.read(selectedLiveStationIdProvider.notifier).state =
+          selectedLiveStationId;
+      // Live放送側の番組を再生するため、selectedSearchProgramをnullにする
+      _ref.read(selectedSearchProgramProvider.notifier).state = null;
+    } else {
+      final program = programs.valueOrNull?.elementAtOrNull(index - 1);
+      if (program == null) {
+        return;
+      }
+      _ref.read(selectedSearchProgramProvider.notifier).state = program;
+    }
   }
 
   Future<void> onPlayButton() async {
@@ -132,6 +181,26 @@ class MainPageAction extends StateNotifier<void> {
   /// 各アイテムのタップ時に呼ばれる
   void onItemTapCallback(int index) {
     log.info('onItemTapCallback: $index');
+  }
+
+  /// 各アイテムの★ボタンのタップ時に呼ばれる
+  Future<void> onFavoriteButton(MainPageListItem item) async {
+    unawaited(HapticFeedback.lightImpact());
+    await _ref.read(favoriteListProvider.notifier).toggle(item);
+  }
+
+  /// お気に入りリストの表示を切り替える
+  void onFavoriteModeButton() {
+    unawaited(HapticFeedback.selectionClick());
+    if (_ref.read(mainPageListModeProvider) == MainPageListMode.favorite) {
+      _ref.read(mainPageListModeProvider.notifier).state =
+          MainPageListMode.live;
+      return;
+    }
+    onSearchCancelButton();
+    _ref.read(mainPageListModeProvider.notifier).state =
+        MainPageListMode.favorite;
+    final _ = _ref.refresh(favoriteAvailableProgramListProvider);
   }
 
   void onSearchSubmitted(String keyword) {

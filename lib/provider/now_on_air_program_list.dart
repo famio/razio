@@ -2,6 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:razio/entity/program.dart';
+import 'package:razio/notification/program_notification_service.dart';
 import 'package:razio/provider/auth_provider.dart';
 import 'package:razio/provider/selected_station_id_provider.dart';
 import 'package:xml/xml.dart';
@@ -50,8 +51,13 @@ final nowOnAirProgramListProvider = FutureProvider<List<Program>>((ref) async {
   });
 
   if (ref.read(selectedLiveStationIdProvider.notifier).state == null) {
-    ref.read(selectedLiveStationIdProvider.notifier).state =
-        result.first.stationId;
+    // 放送開始の通知のタップで起動した場合は、その局を最初に選択する
+    final tappedStationId = ProgramNotificationService.tappedStationId.value;
+    ref.read(selectedLiveStationIdProvider.notifier).state = result.any(
+      (element) => element.stationId == tappedStationId,
+    )
+        ? tappedStationId
+        : result.first.stationId;
   }
 
   return result;

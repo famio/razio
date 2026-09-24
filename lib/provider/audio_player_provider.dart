@@ -29,9 +29,8 @@ final Provider<Null> audioPlayerProvier = Provider((ref) {
       ref.read(playbackTimelineProvider.notifier).loadSearchProgram(next);
     })
     ..listen(mainPageListModeProvider, (previous, next) {
-      // SearchモードからLiveモードに帰ってきた時に、選択していたStationを再度再生する
-      if (previous == MainPageListMode.search &&
-          next == MainPageListMode.live) {
+      // Search・FavoriteモードからLiveモードに帰ってきた時に、選択していたStationを再度再生する
+      if (previous != MainPageListMode.live && next == MainPageListMode.live) {
         // selectedSearchProgramProviderがnull = すでにLive放送を再生中
         if (ref.read(selectedSearchProgramProvider.notifier).state == null) {
           return;

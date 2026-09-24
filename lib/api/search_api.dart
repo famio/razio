@@ -18,6 +18,7 @@ class SearchApi {
     required String keyword,
     required String areaId,
     SearchFilter? filter,
+    int rowLimit = 12,
   }) async {
     final queryParams = <String, dynamic>{
       'key': keyword,
@@ -28,7 +29,8 @@ class SearchApi {
       'region_id': '',
       'page_idx': '',
       'uid': generateUid(),
-      'row_limit': '12',
+      // 50件より多いとエラーになる
+      'row_limit': rowLimit.toString(),
       'app_id': 'pc',
       'cur_area_id': areaId,
       'action_id': '0',

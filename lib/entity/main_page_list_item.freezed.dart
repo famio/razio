@@ -16,6 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$MainPageListItem {
+  String get stationId => throw _privateConstructorUsedError;
   String get imageUrl => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get info1 => throw _privateConstructorUsedError;
@@ -32,7 +33,12 @@ abstract class $MainPageListItemCopyWith<$Res> {
           MainPageListItem value, $Res Function(MainPageListItem) then) =
       _$MainPageListItemCopyWithImpl<$Res, MainPageListItem>;
   @useResult
-  $Res call({String imageUrl, String title, String info1, String info2});
+  $Res call(
+      {String stationId,
+      String imageUrl,
+      String title,
+      String info1,
+      String info2});
 }
 
 /// @nodoc
@@ -48,12 +54,17 @@ class _$MainPageListItemCopyWithImpl<$Res, $Val extends MainPageListItem>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? stationId = null,
     Object? imageUrl = null,
     Object? title = null,
     Object? info1 = null,
     Object? info2 = null,
   }) {
     return _then(_value.copyWith(
+      stationId: null == stationId
+          ? _value.stationId
+          : stationId // ignore: cast_nullable_to_non_nullable
+              as String,
       imageUrl: null == imageUrl
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
@@ -82,7 +93,12 @@ abstract class _$$MainPageListItemImplCopyWith<$Res>
       __$$MainPageListItemImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String imageUrl, String title, String info1, String info2});
+  $Res call(
+      {String stationId,
+      String imageUrl,
+      String title,
+      String info1,
+      String info2});
 }
 
 /// @nodoc
@@ -96,12 +112,17 @@ class __$$MainPageListItemImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? stationId = null,
     Object? imageUrl = null,
     Object? title = null,
     Object? info1 = null,
     Object? info2 = null,
   }) {
     return _then(_$MainPageListItemImpl(
+      stationId: null == stationId
+          ? _value.stationId
+          : stationId // ignore: cast_nullable_to_non_nullable
+              as String,
       imageUrl: null == imageUrl
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
@@ -126,11 +147,14 @@ class __$$MainPageListItemImplCopyWithImpl<$Res>
 
 class _$MainPageListItemImpl implements _MainPageListItem {
   _$MainPageListItemImpl(
-      {required this.imageUrl,
+      {required this.stationId,
+      required this.imageUrl,
       required this.title,
       required this.info1,
       required this.info2});
 
+  @override
+  final String stationId;
   @override
   final String imageUrl;
   @override
@@ -142,7 +166,7 @@ class _$MainPageListItemImpl implements _MainPageListItem {
 
   @override
   String toString() {
-    return 'MainPageListItem(imageUrl: $imageUrl, title: $title, info1: $info1, info2: $info2)';
+    return 'MainPageListItem(stationId: $stationId, imageUrl: $imageUrl, title: $title, info1: $info1, info2: $info2)';
   }
 
   @override
@@ -150,6 +174,8 @@ class _$MainPageListItemImpl implements _MainPageListItem {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$MainPageListItemImpl &&
+            (identical(other.stationId, stationId) ||
+                other.stationId == stationId) &&
             (identical(other.imageUrl, imageUrl) ||
                 other.imageUrl == imageUrl) &&
             (identical(other.title, title) || other.title == title) &&
@@ -158,7 +184,8 @@ class _$MainPageListItemImpl implements _MainPageListItem {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, imageUrl, title, info1, info2);
+  int get hashCode =>
+      Object.hash(runtimeType, stationId, imageUrl, title, info1, info2);
 
   @JsonKey(ignore: true)
   @override
@@ -170,11 +197,14 @@ class _$MainPageListItemImpl implements _MainPageListItem {
 
 abstract class _MainPageListItem implements MainPageListItem {
   factory _MainPageListItem(
-      {required final String imageUrl,
+      {required final String stationId,
+      required final String imageUrl,
       required final String title,
       required final String info1,
       required final String info2}) = _$MainPageListItemImpl;
 
+  @override
+  String get stationId;
   @override
   String get imageUrl;
   @override
