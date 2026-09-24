@@ -1,46 +1,46 @@
 name: razio
 description: A new Flutter project.
 
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.4.4 <4.0.0'
+  sdk: ">=3.4.4 <4.0.0"
 
 dependencies:
   animated_background: ^2.0.0
   audio_service: ^0.18.19
-  blur: ^4.0.0
-  build_runner: ^2.3.2
-  cached_network_image: ^3.2.3
+  blur: ^4.0.2
+  build_runner: ^2.5.4
+  cached_network_image: ^3.4.1
   clickable_list_wheel_view: ^0.2.0
-  collection: ^1.16.0
-  crypto: ^3.0.2
+  collection: ^1.19.1
+  crypto: ^3.0.7
   flutter:
     sdk: flutter
-  flutter_gen_runner: ^5.1.0+1
+  flutter_gen_runner: ^5.14.0
   flutter_hooks: ^0.20.5
-  flutter_svg: ^2.0.2
-  freezed_annotation: ^2.2.0
-  go_router: ^14.3.0
-  hooks_riverpod: ^2.1.3
-  http: ^1.2.2
+  flutter_svg: ^2.3.0
+  freezed_annotation: ^2.4.4
+  go_router: ^14.8.1
+  hooks_riverpod: ^2.6.1
+  http: ^1.6.0
   intl: ^0.19.0
-  json_annotation: ^4.8.0
-  json_serializable: ^6.5.4
+  json_annotation: ^4.9.0
+  json_serializable: ^6.9.5
   just_audio: ^0.10.6
   just_audio_background: ^0.0.1-beta.17
-  pedantic_mono: ^1.20.0
-  simple_logger: ^1.9.0+1
-  simple_shadow: ^0.3.0
-  xml: ^6.2.2
+  pedantic_mono: ^1.33.0
+  simple_logger: ^1.10.1
+  simple_shadow: ^0.3.1
+  xml: ^6.6.1
 
 dev_dependencies:
   flutter_lints: ^5.0.0
   flutter_test:
     sdk: flutter
-  freezed: ^2.3.1
+  freezed: ^2.5.8
 
 flutter_gen:
   integrations:
