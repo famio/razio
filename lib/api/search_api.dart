@@ -26,7 +26,6 @@ class SearchApi {
       'end_day': '',
       'area_id': areaId,
       'region_id': '',
-      'cul_area_id': areaId,
       'page_idx': '',
       'uid': generateUid(),
       'row_limit': '12',
