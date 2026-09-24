@@ -9,7 +9,7 @@ class _SearchBackground extends ConsumerWidget {
       key: GlobalKey(),
       visible: ref.watch(searchEditingProvider),
       child: ColoredBox(
-        color: AppColor.background(context).withOpacity(0.8),
+        color: AppColor.background(context).withValues(alpha: 0.8),
         child: const SizedBox.expand(),
       ),
     );

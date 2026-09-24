@@ -39,6 +39,6 @@ class Program {
       '${startTime.substring(0, 8)}T${startTime.substring(8)}';
   late String endTimeWithT =
       '${endTime.substring(0, 8)}T${endTime.substring(8)}';
-  late final startDate = DateTime.parse(startTimeWithT);
-  late final endDate = DateTime.parse(endTimeWithT);
+  late final DateTime startDate = DateTime.parse(startTimeWithT);
+  late final DateTime endDate = DateTime.parse(endTimeWithT);
 }

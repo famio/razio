@@ -14,7 +14,7 @@ import 'package:razio/util.dart';
 
 final audioPlayer = AudioPlayer();
 
-final audioPlayerProvier = Provider((ref) {
+final Provider<Null> audioPlayerProvier = Provider((ref) {
   ref
     ..listen<String?>(selectedLiveStationIdProvider, (previous, next) {
       if (next == null) {

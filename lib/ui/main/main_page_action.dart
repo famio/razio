@@ -69,8 +69,7 @@ class MainPageAction extends StateNotifier<void> {
         _selectedItemChangedTimer!.isActive) {
       _selectedItemChangedTimer!.cancel();
     }
-    _selectedItemChangedTimer =
-        Timer(const Duration(milliseconds: 300), () async {
+    _selectedItemChangedTimer = Timer(const Duration(milliseconds: 300), () {
       switch (_ref.read(mainPageListModeProvider)) {
         case MainPageListMode.live:
           final programList = _ref.read(nowOnAirProgramListProvider).value;

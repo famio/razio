@@ -4,7 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:razio/ui/main/main_page.dart';
 import 'package:razio/ui/splash/splash_page.dart';
 
-final routerProvider = Provider(
+final Provider<GoRouter> routerProvider = Provider(
   (ref) => GoRouter(
     routes: [
       GoRoute(

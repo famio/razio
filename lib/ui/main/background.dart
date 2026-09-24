@@ -1,5 +1,7 @@
 part of 'main_page.dart';
 
+// アニメーションがCPUを食うためMainPageでの使用をコメントアウトしている
+// ignore: unused_element
 class _BackGround extends ConsumerWidget {
   const _BackGround();
 
@@ -66,7 +68,7 @@ class _BackgroundCircle extends ConsumerWidget {
   }
 }
 
-final _animationProvider =
+final ProviderFamily<BackgroundCircleParameters, int> _animationProvider =
     Provider.family<BackgroundCircleParameters, int>((ref, index) {
   const maxOpacity = 0.6;
 
