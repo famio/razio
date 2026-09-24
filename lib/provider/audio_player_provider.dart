@@ -46,54 +46,59 @@ final Provider<Null> audioPlayerProvier = Provider((ref) {
 
 /// Live放送のAudioSource
 /// windowSecondsを指定すると、その秒数だけ遡った位置から再生される(15〜300秒)
-final AutoDisposeFutureProviderFamily<AudioSource,
-        ({String stationId, int windowSeconds})>
-    audioSourceFromStationIdProvider = FutureProvider.autoDispose
-        .family<AudioSource, ({String stationId, int windowSeconds})>(
-            (ref, arg) async {
-  final (:stationId, :windowSeconds) = arg;
-  final requestUrl = Uri.https(
-    'si-f-radiko.smartstream.ne.jp',
-    '/so/playlist.m3u8',
-    <String, dynamic>{
-      'station_id': stationId,
-      'l': windowSeconds.toString(),
-      'lsid': generateUid(),
-      'type': 'b',
-    },
-  );
-  final authInfo = ref.read(authProvider).value;
-  if (authInfo == null) {
-    throw Exception('authInfo is null');
-  }
-  final header = <String, String>{
-    HeaderKey.authtoken.value: authInfo.authToken,
-    HeaderKey.areaId.value: authInfo.areaId,
-  };
-  final request = http.Request('get', requestUrl);
-  request.headers.clear();
-  request.headers.addAll(header);
-  final response = await request.send();
-  if (response.statusCode != 200) {
-    throw Exception('Failed to StreamUrlRequest');
-  }
-  final body = await response.stream.bytesToString();
-  final reg = RegExp(r'^https?://.*medialist.*$', multiLine: true);
-  final streamUrl = reg.firstMatch(body)!.group(0)!;
-  final addedUnixTimeStreamUrl =
-      '$streamUrl&_=${DateTime.now().millisecondsSinceEpoch}';
+final AutoDisposeFutureProviderFamily<
+  AudioSource,
+  ({String stationId, int windowSeconds})
+>
+audioSourceFromStationIdProvider = FutureProvider.autoDispose
+    .family<AudioSource, ({String stationId, int windowSeconds})>((
+      ref,
+      arg,
+    ) async {
+      final (:stationId, :windowSeconds) = arg;
+      final requestUrl = Uri.https(
+        'si-f-radiko.smartstream.ne.jp',
+        '/so/playlist.m3u8',
+        <String, dynamic>{
+          'station_id': stationId,
+          'l': windowSeconds.toString(),
+          'lsid': generateUid(),
+          'type': 'b',
+        },
+      );
+      final authInfo = ref.read(authProvider).value;
+      if (authInfo == null) {
+        throw Exception('authInfo is null');
+      }
+      final header = <String, String>{
+        HeaderKey.authtoken.value: authInfo.authToken,
+        HeaderKey.areaId.value: authInfo.areaId,
+      };
+      final request = http.Request('get', requestUrl);
+      request.headers.clear();
+      request.headers.addAll(header);
+      final response = await request.send();
+      if (response.statusCode != 200) {
+        throw Exception('Failed to StreamUrlRequest');
+      }
+      final body = await response.stream.bytesToString();
+      final reg = RegExp(r'^https?://.*medialist.*$', multiLine: true);
+      final streamUrl = reg.firstMatch(body)!.group(0)!;
+      final addedUnixTimeStreamUrl =
+          '$streamUrl&_=${DateTime.now().millisecondsSinceEpoch}';
 
-  final programlist = await ref.read(nowOnAirProgramListProvider.future);
-  final program =
-      programlist.firstWhere((element) => element.stationId == stationId);
-  final stationName = program.stationName;
-  return AudioSource.uri(
-    Uri.parse(addedUnixTimeStreamUrl),
-    tag: MediaItem(
-      id: program.title + program.startTime,
-      artist: stationName,
-      title: program.title,
-      artUri: Uri.parse(program.img),
-    ),
-  );
-});
+      final programlist = await ref.read(nowOnAirProgramListProvider.future);
+      final program = programlist.firstWhere(
+        (element) => element.stationId == stationId,
+      );
+      final stationName = program.stationName;
+      return AudioSource.uri(
+        Uri.parse(addedUnixTimeStreamUrl),
+        tag: MediaItem(
+          id: program.title + program.startTime,
+          artist: stationName,
+          title: program.title,
+          artUri: Uri.parse(program.img),
+        ),
+      );
+    });

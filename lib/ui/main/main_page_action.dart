@@ -25,31 +25,32 @@ import 'package:razio/provider/selected_station_id_provider.dart';
 
 Timer? _timer;
 
-final mainPageActionProvider =
-    StateNotifierProvider<MainPageAction, void>((ref) {
+final mainPageActionProvider = StateNotifierProvider<MainPageAction, void>((
+  ref,
+) {
   // アプリがForegroundになったら認証情報を更新する
-  ref.listen<AppLifecycleState>(
-    appLifecycleProvider,
-    (previous, next) {
-      switch (next) {
-        case AppLifecycleState.resumed:
-          final _ = ref.refresh(authProvider);
-          // お気に入り番組の放送予定を取得し直して通知を予約し直す
-          ref.invalidate(favoriteUpcomingProgramListProvider);
-        case AppLifecycleState.inactive:
-        case AppLifecycleState.paused:
-        case AppLifecycleState.detached:
-        case AppLifecycleState.hidden:
-          break;
-      }
-    },
-  );
-
-  // お気に入り番組の放送予定が更新されたら通知を予約し直す
-  ref.listen<AsyncValue<List<SearchProgram>>>(
-    favoriteUpcomingProgramListProvider,
-    (previous, next) => next.whenData(ProgramNotificationService.reschedule),
-  );
+  ref
+    ..listen<AppLifecycleState>(
+      appLifecycleProvider,
+      (previous, next) {
+        switch (next) {
+          case AppLifecycleState.resumed:
+            final _ = ref.refresh(authProvider);
+            // お気に入り番組の放送予定を取得し直して通知を予約し直す
+            ref.invalidate(favoriteUpcomingProgramListProvider);
+          case AppLifecycleState.inactive:
+          case AppLifecycleState.paused:
+          case AppLifecycleState.detached:
+          case AppLifecycleState.hidden:
+            break;
+        }
+      },
+    )
+    // お気に入り番組の放送予定が更新されたら通知を予約し直す
+    ..listen<AsyncValue<List<SearchProgram>>>(
+      favoriteUpcomingProgramListProvider,
+      (previous, next) => next.whenData(ProgramNotificationService.reschedule),
+    );
 
   // 放送開始の通知がタップされたら、その局のLive放送を再生する
   void playTappedStation() {
@@ -71,8 +72,9 @@ final mainPageActionProvider =
 
   ProgramNotificationService.tappedStationId.addListener(playTappedStation);
   ref.onDispose(
-    () => ProgramNotificationService.tappedStationId
-        .removeListener(playTappedStation),
+    () => ProgramNotificationService.tappedStationId.removeListener(
+      playTappedStation,
+    ),
   );
 
   ref.watch(nowOnAirProgramListProvider).whenData((programs) {
@@ -136,8 +138,9 @@ class MainPageAction extends StateNotifier<void> {
   ) {
     if (index == 0) {
       // selectedLiveStationIdを同じ値で更新することで、Live放送側の番組を再生する
-      final selectedLiveStationId =
-          _ref.read(selectedLiveStationIdProvider.notifier).state;
+      final selectedLiveStationId = _ref
+          .read(selectedLiveStationIdProvider.notifier)
+          .state;
       _ref.read(selectedLiveStationIdProvider.notifier).state = null;
       _ref.read(selectedLiveStationIdProvider.notifier).state =
           selectedLiveStationId;
